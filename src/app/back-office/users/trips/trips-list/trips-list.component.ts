@@ -59,11 +59,11 @@ export class TripsListComponent extends PageListComponent {
         title: { caption: 'Drivers', class: 'font-weight-bold text-center' },
         data: { field: 'driverName', class: 'text-primary font-weight-bold text-center' }
       },
-      {
-        type: 'img',
-        title: { caption: 'Images', class: 'font-weight-bold text-center' },
-        data: { field: 'img', class: 'font-weight-bold text-center', height: 50, width: 30 }
-      },
+      // {
+      //   type: 'img',
+      //   title: { caption: 'Images', class: 'font-weight-bold text-center' },
+      //   data: { field: 'img', class: 'font-weight-bold text-center', height: 50, width: 30 }
+      // },
     ];
 
     super.initialize();

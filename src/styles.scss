@@ -36,7 +36,12 @@ body { margin: 0;
 }
 .btn-group a {
   color: #b48f30 !important;
-
+}
+.page-item.active .page-link {
+  z-index: 1;
+  color: #fff;
+  background-color: #fecd0b !important;
+  border-color: black !important;
 }
 .sidebar .nav-link .nav-icon {
   color: #b48f30 !important;

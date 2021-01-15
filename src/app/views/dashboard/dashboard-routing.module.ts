@@ -9,7 +9,13 @@ const routes: Routes = [
     component: DashboardComponent,
     data: {
       title: 'Dashboard'
-    }
+    },
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('../../back-office/users/trips/trips.module')
+          .then(mod => mod.TripsModule),
+      }]
   }
 ];
 
@@ -17,4 +23,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class DashboardRoutingModule {}
+export class DashboardRoutingModule { }
