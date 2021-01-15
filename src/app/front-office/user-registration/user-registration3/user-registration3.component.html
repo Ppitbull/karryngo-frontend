@@ -1,0 +1,85 @@
+<div class="cont text-center">
+  <div class="row">
+    <p class="col-6 p-style">Which type of service are you interested in ?</p>
+    <ul class="col-3 list-unstyled text-left">
+      <li>
+        <mdb-checkbox [default]="true">Transport of person</mdb-checkbox>
+      </li>
+      <li>
+        <mdb-checkbox [default]="true">Bikes</mdb-checkbox>
+      </li>
+      <li>
+        <mdb-checkbox [default]="true">Trucks</mdb-checkbox>
+      </li>
+    </ul>
+    <ul class="col-3 list-unstyled text-left">
+      <li>
+        <mdb-checkbox [default]="true">Hand 2 Hand</mdb-checkbox>
+      </li>
+      <li>
+        <mdb-checkbox [default]="true">Cars</mdb-checkbox>
+      </li>
+      <li>
+        <mdb-checkbox [default]="true">Freights</mdb-checkbox>
+      </li>
+    </ul>
+  </div>
+
+  <div class="row d2">
+    <p class="col-sm p-style">Which Countries/Cities are you interested in?</p>
+    <div class="col-sm text-right">
+      <mat-accordion>
+        <mat-expansion-panel *ngFor="let country of countries">
+          <mat-expansion-panel-header class="mat-header mb-1">
+            <mat-panel-title>
+              {{country.name}}
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <!--chip list-->
+          <div class="mat-body2">
+            <mat-chip-list #chipList class="mat-chip-list-stacked" aria-orientation="vertical">
+              <mat-chip *ngFor="let city of country.cities" [selectable]="selectable" [removable]="removable"
+                (removed)="removeCity(country,city)">
+                <span class="text-left chip-mag">{{city.name}}</span>
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+              </mat-chip>
+            </mat-chip-list>
+          </div>
+          <!--chip list-->
+          <button type="button" class="btn btn-sm next-button b-add-city" (click)="addCityOfCountry(country)">ADD
+            CITY</button>
+        </mat-expansion-panel>
+      </mat-accordion>
+      <button type="button" class="btn btn-sm next-button b-add-country" (click)="addCountry()" mdbWavesEffect>ADD
+        COUNTRY</button>
+      <!-- Modal -->
+      <div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"
+        aria-labelledby="myBasicModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <!-- Search form -->
+              <div class="form-inline text-center">
+                <input class="form-control mr-2 seach" type="text" placeholder="Search..." aria-label="Search">
+                <i class="fas fa-search" aria-hidden="true"></i>
+              </div>
+              <!-- Search form -->
+              <div class="">
+                <button type="button" class="row btn btn-sm next-button text-right">CLEAR</button>
+              </div>
+            </div>
+            <div class="modal-body">
+              ...
+            </div>
+            <div class="modal-footer">
+              <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close"
+                (click)="basicModal.hide()" mdbWavesEffect>Close</button>
+              <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect>Save!</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Modal -->
+    </div>
+  </div>
+</div>

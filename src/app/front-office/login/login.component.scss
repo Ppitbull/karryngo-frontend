@@ -1,0 +1,38 @@
+.imag{
+    background-image: url('./../../../assets/img/kng2.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-family: 'Numans', sans-serif;
+}
+
+input:focus {
+    outline: 25 25 25 25 !important;
+    box-shadow: 25 25 25 25 !important;
+    border-color: rgb(240, 213, 60);
+
+}
+
+a{
+color: rgb(240, 213, 60)
+}
+
+.social_icon span{
+    font-size: 60px;
+    margin-left: 10px;
+    color: #FFC312;
+    }
+    
+    .social_icon span:hover{
+    color: white;
+    cursor: pointer;
+    }
+    
+    .card-header h3{
+    color: white;
+    }
+    
+    .social_icon{
+    position: absolute;
+    right: 20px;
+    top: -45px;
+    }

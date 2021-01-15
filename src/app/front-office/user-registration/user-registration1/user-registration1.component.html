@@ -1,0 +1,175 @@
+<!-- Default form user registration -->
+<form *ngIf="isUser" [formGroup]="formUser1" class="text-center form-mag">
+  <!-- row-item-->
+  <div class="form-row mb-3">
+    <div class="col">
+      <!-- First name -->
+      <input type="text" [formControl]="formUser1.controls['name']" id="defaultRegisterFormFirstName"
+        class="form-control field" placeholder="Name">
+      <p class="title-form sub-indication text-left">Name</p>
+    </div>
+    <div class="col">
+
+    </div>
+  </div>
+  <!-- row-item-->
+
+  <!-- row-item-->
+  <div class="form-row mb-3">
+    <div class="col">
+      <!-- First name -->
+      <input type="text" [formControl]="formUser1.controls['field_surname']" id="defaultRegisterFormFirstName"
+        class="form-control field" placeholder="Surname">
+      <p class="title-form sub-indication text-left">Surname</p>
+    </div>
+    <div class="col">
+
+    </div>
+  </div>
+  <!-- row-item-->
+
+  <!-- row-item-->
+  <div class="form-row mb-3">
+    <div class="col">
+      <!-- First name -->
+      <input type="text" [formControl]="formUser1.controls['mail']" id="defaultRegisterFormFirstName"
+        class="form-control field" placeholder="Email">
+      <p class="title-form sub-indication text-left">Eamil</p>
+    </div>
+    <div class="col">
+
+    </div>
+  </div>
+  <!-- row-item-->
+
+  <!-- row-item-->
+  <div class="form-row">
+    <div class="col">
+      <!-- First name -->
+      <input type="password" [formControl]="formUser1.controls['pass']" id="defaultRegisterFormFirstName"
+        class="form-control field" placeholder="Password">
+      <p class="title-form sub-indication text-left">Password</p>
+    </div>
+    <div class="col">
+
+    </div>
+  </div>
+  <!-- row-item-->
+
+  <!-- row-item-->
+  <div class="form-row f-mag">
+    <!-- First name -->
+    <select class="form-control field" [formControl]="formUser1.controls['country_uuid']">
+      <option disabled value="null">Country or Residense</option>
+      <option *ngFor="let country of countries" value="{{country.attributes.uuid}}">
+        {{country.attributes.name}}
+      </option>
+    </select> </div>
+  <!-- row-item-->
+
+  <!-- row-item-->
+  <div class="form-row f-mag">
+    <!-- First name -->
+    <mat-form-field class="example-chip-list">
+      <mat-chip-list #chipList>
+        <mat-chip *ngFor="let language of languages" [selectable]="selectable" [removable]="removable"
+          (removed)="remove(language)">
+          {{language}}
+          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+        </mat-chip>
+        <input placeholder="Add Language..." #languageInput [formControl]="languageCtrl" [matAutocomplete]="auto"
+          [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+          [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)">
+      </mat-chip-list>
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+        <mat-option *ngFor="let language of filteredLanguage | async" [value]="language">
+          {{language}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </div>
+  <!-- row-item-->
+</form>
+<!-- Default form user registration -->
+
+
+<!-- Default form register as carrier/shipper/transporter -->
+<form *ngIf="!isUser" class="text-center form-mag form2">
+  <!-- row-item-->
+  <div class="form-row mb-3">
+    <div class="col">
+      <!-- First name -->
+      <input type="text" id="defaultRegisterFormFirstName" class="form-control field" placeholder="FirstName">
+      <p class="title-form sub-indication text-left">FirstName</p>
+    </div>
+    <div class="col">
+      <!-- First name -->
+      <input type="text" id="defaultRegisterFormFirstName" class="form-control field" placeholder="LastName">
+    </div>
+  </div>
+  <!-- row-item-->
+
+  <!-- row-item-->
+  <div class="form-row mb-3">
+    <div class="col">
+      <!-- First name -->
+      <input type="text" id="defaultRegisterFormFirstName" class="form-control field" placeholder="Email">
+      <p class="title-form sub-indication text-left">Email</p>
+    </div>
+    <div class="col">
+      <!-- First name -->
+      <input type="text" id="defaultRegisterFormFirstName" class="form-control field" placeholder="Confirm Email">
+    </div>
+  </div>
+  <!-- row-item-->
+
+  <!-- row-item-->
+  <div class="form-row">
+    <div class="col">
+      <!-- First name -->
+      <input type="password" id="defaultRegisterFormFirstName" class="form-control field" placeholder="Password">
+      <p class="title-form sub-indication text-left">Password</p>
+    </div>
+    <div class="col">
+      <!-- First name -->
+      <input type="password" id="defaultRegisterFormFirstName" class="form-control field"
+        placeholder="Confirm Password">
+    </div>
+  </div>
+  <!-- row-item-->
+
+  <!-- row-item-->
+  <div class="form-row f-mag">
+    <!-- First name -->
+    <select class="form-control field">
+      <option disabled value="null">Country or Residense</option>
+      <option *ngFor="let country of countries" value="{{country.attributes.uuid}}">
+        {{country.attributes.name}}
+      </option>
+    </select> </div>
+  <!-- row-item-->
+
+  <!-- row-item-->
+  <div class="form-row f-mag">
+    <!-- First name -->
+    <mat-form-field class="example-chip-list">
+      <mat-chip-list #chipList>
+        <mat-chip *ngFor="let language of languages" [selectable]="selectable" [removable]="removable"
+          (removed)="remove(language)">
+          {{language}}
+          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+        </mat-chip>
+        <input placeholder="Add Language..." #languageInput [formControl]="languageCtrl" [matAutocomplete]="auto"
+          [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+          [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)">
+      </mat-chip-list>
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+        <mat-option *ngFor="let language of filteredLanguage | async" [value]="language">
+          {{language}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </div>
+  <!-- row-item-->
+</form>
+<!-- Default form register as carrier/shipper/transporter -->

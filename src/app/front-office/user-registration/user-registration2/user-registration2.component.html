@@ -1,0 +1,121 @@
+<form [formGroup]="formUser2" class="container text-center cont">
+  <div class="row">
+    <p class="text-left p-style">Do you hier as business ?</p>
+    <!-- Default inline 1-->
+    <div class="custom-control custom-radio custom-control-inline radio-style waves-light" mdbWavesEffect>
+      <input type="radio" [formControl]="formUser2.controls['yes']" class="custom-control-input color"
+        id="defaultInline1" name="inlineDefaultRadiosExample">
+      <label class="custom-control-label" for="defaultInline1">Yes</label>
+    </div>
+
+    <!-- Default inline 2-->
+    <div class="custom-control custom-radio custom-control-inline radio-style waves-light" mdbWavesEffect>
+      <input type="radio" checked class="custom-control-input" id="defaultInline2" name="inlineDefaultRadiosExample">
+      <label class="custom-control-label" for="defaultInline2">No</label>
+    </div>
+  </div>
+
+  <!-- Default form register -->
+  <div class="text-center form-mag">
+
+    <!-- row-item-->
+    <div class="form-row mb-2">
+      <div class="col">
+        <!-- First name -->
+        <input type="text" [formControl]="formUser2.controls['companyName']" id="defaultRegisterFormFirstName"
+          class="form-control field" placeholder="Company Name">
+        <p class="title-form sub-indication text-left">Company name</p>
+      </div>
+      <div class="col">
+        <input type="text" [formControl]="formUser2.controls['companyRegistrationNumber']"
+          id="defaultRegisterFormFirstName" class="form-control field" placeholder="Company registartion number">
+      </div>
+    </div>
+    <!-- row-item-->
+
+    <!-- row-item-->
+    <div class="form-row mb-2">
+      <div class="col">
+        <!-- First name -->
+        <input type="text" [formControl]="formUser2.controls['companyImpExpCode']" id="defaultRegisterFormFirstName"
+          class="form-control field" placeholder="Company Import/Export Code">
+      </div>
+      <div class="col">
+        <input type="text" [formControl]="formUser2.controls['companyWebsite']" id="defaultRegisterFormFirstName"
+          class="form-control field" placeholder="Company Website">
+        <p class="title-form sub-indication text-left">ie: www.siteweb.com</p>
+      </div>
+    </div>
+    <!-- row-item-->
+
+    <!-- row-item-->
+    <div class="form-row">
+      <div class="col">
+        <!-- First name -->
+        <input type="text" [formControl]="formUser2.controls['companyEmail']" id="defaultRegisterFormFirstName"
+          class="form-control field" placeholder="Email">
+      </div>
+      <div class="col">
+        <input type="text" [formControl]="formUser2.controls['companyPhone']" id="defaultRegisterFormFirstName"
+          class="form-control field" placeholder="Phone">
+        <p class="title-form sub-indication text-left">including international code ie: +1 658369123</p>
+      </div>
+    </div>
+    <!-- row-item-->
+
+
+    <p class="p-add text-left">Address</p>
+    <!-- row-item-->
+    <div class="form-row mb-1">
+      <div class="col">
+        <!-- First name -->
+        <select [(ngModel)]="selectedCountry" (change)="onSelect($event.target.value)"
+          [formControl]="formUser2.controls['companyCountry']" class="form-control field">
+          <option disabled value="null">Country</option>
+          <option *ngFor="let country of countries" value="{{country}}">
+            {{country}}
+          </option>
+        </select>
+        <p class="title-form sub-indication text-left">Country</p>
+      </div>
+      <div class="col">
+
+      </div>
+    </div>
+    <!-- row-item-->
+
+    <!-- row-item-->
+    <div class="form-row mb-2">
+      <div class="col">
+        <!-- First name -->
+        <select [formControl]="formUser2.controls['companyCity']" class="form-control field">
+          <option disabled value="null">City</option>
+          <option *ngFor="let city of cities" value="{{city}}">
+            {{city}}
+          </option>
+        </select>
+        <p class="title-form sub-indication text-left">City</p>
+      </div>
+      <div class="col">
+
+      </div>
+    </div>
+    <!-- row-item-->
+
+    <!-- row-item-->
+    <div class="form-row mb-3">
+      <input type="text" [formControl]="formUser2.controls['companyAddress1']" id="defaultRegisterFormFirstName"
+        class="form-control field address" placeholder="Address 1">
+    </div>
+    <!-- row-item-->
+
+    <!-- row-item-->
+    <div class="form-row">
+      <input type="text" [formControl]="formUser2.controls['companyAddress2']" id="defaultRegisterFormFirstName"
+        class="form-control field address" placeholder="Address 2">
+    </div>
+    <!-- row-item-->
+
+  </div>
+  <!-- Default form register -->
+</form>

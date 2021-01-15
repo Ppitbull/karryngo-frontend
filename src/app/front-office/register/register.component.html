@@ -1,0 +1,112 @@
+<app-nav-bar></app-nav-bar>
+
+<div class="imag">
+    <div class="container" style="margin-top: 70px;">
+        <div class="row">
+            <div class="col-md-7 bg-white my-5" style="margin-right: auto; margin-left: auto; border-radius: 15px; color: white; background-color: rgba(10, 10, 10, 0.82) !important;">
+                <div class="p-4" style="margin-bottom: 20px; margin-top: 20px; text-align: center; border-bottom: 1px solid gray;">
+                    <h3 style="font-size:20px;"><b>Registrater</b></h3>
+                    <div class="d-flex justify-content-end social_icon">
+                        <span><i class="fab fa-google-plus-square"></i></span>
+                        <span><i class="fab fa-facebook-square"></i></span>
+                        <span><i class="fab fa-twitter-square"></i></span>
+                    </div>
+                </div>
+
+                <div class="row p-1" style="font-size:15px;">
+                    <div class="col-md-12">
+                        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                            <div class="form-group row mx-2">
+                                <div class="mb-4 col-md-6">
+                                    <label for="Firstname">Firstname</label>
+                                    <input type="text" id="Firstname" formControlName="firstname" placeholder="Enter you Firstname" class="form-control">
+                                    <div *ngIf="submitted && f.firstname.errors" class="invalid-feedback text-danger">
+                                        <div *ngIf="f.firstname.errors.required">Field is required</div>
+                                    </div>
+                                </div>
+                                <div class="mb-4 col-md-6">
+                                    <label for="Surname">Surname</label>
+                                    <input type="text" id="Surname" formControlName="surname" placeholder="Enter you Surname" class="form-control">
+                                    <div *ngIf="submitted && f.surname.errors" class="invalid-feedback text-danger">
+                                        <div *ngIf="f.surname.errors.required">Field is required</div>
+                                    </div>
+                                </div>
+                                <div class="mb-4 col-md-6">
+                                    <label for="Username">Username</label>
+                                    <input type="text" id="Username" formControlName="username" placeholder="Enter you Username" class="form-control">
+                                    <div *ngIf="submitted && f.username.errors" class="invalid-feedback text-danger">
+                                        <div *ngIf="f.username.errors.required">Field is required</div>
+                                    </div>
+                                </div>
+                                <div class="mb-4 col-md-6">
+                                    <label for="Email">Email</label>
+                                    <input type="text" id="Email" formControlName="email" placeholder="Enter you Email" class="form-control">
+                                    <div *ngIf="submitted && f.firstname.errors" class="invalid-feedback text-danger">
+                                        <div *ngIf="f.email.errors.required">Field is required</div>
+                                    </div>
+                                </div>
+                                <div class="mb-4 col-md-6">
+                                    <label for="Password">Password</label>
+                                    <input type="text" id="Password" formControlName="password" placeholder="Enter your password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+
+                                    <div *ngIf="submitted && f.firstname.errors" class="invalid-feedback text-danger">
+                                        <div *ngIf="f.password.errors.required">Field is required</div>
+                                    </div>
+                                </div>
+                                <div class="mb-4 col-md-6">
+                                    <label for="Password2">Confirm password</label>
+                                    <input type="text" id="Password2" formControlName="password2" placeholder="Confirm your password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+
+                                    <div *ngIf="submitted && f.firstname.errors" class="invalid-feedback text-danger">
+                                        <div *ngIf="f.password2.errors.required">Field is required</div>
+                                    </div>
+                                </div>
+                                <div class="form-row col-md-12">
+                                  <div class="form-group col-md-4">
+                                    <label for="language">Language</label>
+                                    <select id="language" class="form-control">
+                                      <option selected value="English">English</option>
+                                      <option value="French">French</option>
+                                    </select>
+                                  </div>
+                                  <div class="form-group col-md-4">
+                                    <label for="Country">Country</label>
+                                    <select id="Country" class="form-control">
+                                      <option selected value="Cameroon">Cameroon</option>
+                                      <option value="Nigeria">Nigeria</option>
+                                    </select>
+                                  </div>
+                                  <div class="form-group col-md-4">
+                                    <label for="AccType">Account type</label>
+                                    <select id="AccType" class="form-control">
+                                      <option selected value="Shipper">Shipper</option>
+                                      <option value="Carrier">Carrier</option>
+                                    </select>
+                                  </div>
+                                </div>
+                            </div>
+                            <div class="form-group row mx-2">
+                                <div class="mb-4 col-md-12">
+                                    <span class="pull-left" style="margin-top: -15px;">
+                                       <input id="checkbox-1" formControlName="agree" class="checkbox-custom" name="checkbox-1" type="checkbox">
+                                       <label for="checkbox-1" class="checkbox-custom-label"> I accept the Terms and Conditions, the Data Policy and the Cookie Policy.</label>
+                                     </span>
+
+                                 <div *ngIf="submitted && f.agree.errors" class="invalid-feedback text-danger">
+                                    <div *ngIf="f.agree.errors.required">Agree is required</div>
+                                </div></div>
+                            </div>
+                        <span class="pull-right">
+                            <button type="submit" class="Register loginmodal-submit btn btn-warning" value="Register">Register</button>
+                        </span>
+                    </form>
+                </div>
+            </div>
+                <br><br>
+                <p style="color: white; font-size:15px;">Already have an account? <a href="javascript:void(0)" (click)="navigateToLogin()"> Login.</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-front-footer></app-front-footer>

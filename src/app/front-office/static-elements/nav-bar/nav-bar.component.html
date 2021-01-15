@@ -1,0 +1,58 @@
+<!-- Navbar -->
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+
+    <!-- Brand -->
+    <a class="navbar-brand" routerLink="/welcome">
+      <img class="logo" src="assets/img/logo.png" alt="KarrynGo logo">
+    </a>
+
+    <!-- Collapse -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Links -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+      <!-- Right -->
+      <ul class="navbar-nav ml-auto mt-auto nav-link-mr">
+        
+        <!--
+
+        <li class="nav-item">
+          <a class="nav-link link-h" routerLink="/test-page">Test Pages</a>
+        </li>
+
+        -->
+
+        <li class="nav-item">
+          <a class="nav-link link-h" routerLink="/welcome">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link link-h" routerLink="/trips">TRIPS</a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link link-h" routerLink="/requests">REQUEST</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link link-h" routerLink="/how-does-it-work">HOW DOES IT WORK</a>
+        </li>
+      </ul>
+      <form class="form-inline">
+          <ul id="liAuth">
+              <li class="mr-4"> <a href="javascript:void(0)" [routerLink]="['/access/notifications']"><img
+                          src="assets/header/notification.png" alt=""></a> </li>
+              <li class="mr-4"> <a href="javascript:void(0)" [routerLink]="['/login']"
+                      style="color:rgb(253, 204, 9)">Login</a> </li>
+              <li> <a href="javascript:void(0)" [routerLink]="['/register']"
+                      style="color:rgb(253, 204, 9)">Register</a> </li>
+          </ul>
+      </form>
+
+    </div>
+
+  </div>
+</nav>
+<!-- Navbar -->
