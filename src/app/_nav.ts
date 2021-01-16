@@ -12,22 +12,22 @@ export const navItems: INavData[] = [
   },
   {
     name: 'Profil',
-    url: '/theme/colors',
+    url: '/profil',
     icon: 'fa fa-user'
   },
   {
     name: 'Wallet',
-    url: '/theme',
+    url: '/walet',
     icon: 'fa fa-wallet',
     children: [
       {
         name: 'Deposit',
-        url: '/theme/typography',
+        url: '/wallet/deposit',
         icon: 'none'
       },
       {
         name: 'Withdrawal',
-        url: '/theme/typography',
+        url: '/wallet/withdrawal',
         icon: 'none'
       },
     ]
@@ -38,34 +38,34 @@ export const navItems: INavData[] = [
   },
   {
     name: 'Carrier',
-    url: '/base',
+    url: '/carrier',
     icon: 'fa fa-truck',
     children: [
       {
-        name: 'Vehicul',
-        url: '/base/cards',
+        name: 'Vehiculs',
+        url: '/carrier/vehiculs',
         icon: 'none'
       },
       {
         name: 'Settings',
-        url: '/base/carousels',
+        url: '/carrier/settings',
         icon: 'none'
       },
     ]
   },
   {
     name: 'Trips',
-    url: '/buttons',
+    url: '/trips',
     icon: 'fa fa-bus',
     children: [
       {
-        name: 'Vehicul',
-        url: '/base/cards',
+        name: 'Vehiculs',
+        url: '/trips/vehiculs',
         icon: 'none'
       },
       {
         name: 'Settings',
-        url: '/base/carousels',
+        url: '/trips/settings',
         icon: 'none'
       },
     ]
@@ -76,29 +76,29 @@ export const navItems: INavData[] = [
   },
   {
     name: 'Post Requests',
-    url: '/icons',
+    url: '/post-requests',
     icon: 'icon-cursor',
     children: [
       {
         name: 'Packages',
-        url: '/icons/coreui-icons',
+        url: '/post-requests/packages',
         icon: 'none',
       },
       {
         name: 'Trips',
-        url: '/icons/flags',
+        url: '/post-requests/trips',
         icon: 'none'
       }
     ]
   },
   {
     name: 'Chat',
-    url: '/charts',
+    url: '/chat',
     icon: 'icon-speech'
   },
   {
     name: 'Map',
-    url: '/notifications',
+    url: '/map',
     icon: 'icon-map'
   },
   {

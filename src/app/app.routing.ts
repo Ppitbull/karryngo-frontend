@@ -3,8 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 
 // Import Containers
 import { DefaultLayoutComponent } from './containers';
-import { P404Component } from './views/error/404.component';
-import { P500Component } from './views/error/500.component';
+import { P404Component } from './back-office/views/error/404.component';
+import { P500Component } from './back-office/views/error/500.component';
 // import { LoginComponent } from './views/login/login.component';
 // import { RegisterComponent } from './views/register/register.component';
 
@@ -178,13 +178,6 @@ export const routes: Routes = [
     }
   },
   {
-    path: 'register',
-    component: RegisterComponent,
-    data: {
-      title: 'Register Page'
-    }
-  },
-  {
     path: '',
     component: DefaultLayoutComponent,
     data: {
@@ -192,36 +185,36 @@ export const routes: Routes = [
     },
     children: [
       {
-        path: 'base',
-        loadChildren: () => import('./views/base/base.module').then(m => m.BaseModule)
+        path: 'carrier',
+        loadChildren: () => import('./back-office/views/carrier/carrier.module').then(m => m.CarrierModule)
       },
       {
-        path: 'buttons',
-        loadChildren: () => import('./views/buttons/buttons.module').then(m => m.ButtonsModule)
+        path: 'trips',
+        loadChildren: () => import('./back-office/views/trips/trips.module').then(m => m.TripsModule)
       },
       {
-        path: 'charts',
-        loadChildren: () => import('./views/chartjs/chartjs.module').then(m => m.ChartJSModule)
+        path: 'chat',
+        loadChildren: () => import('./back-office/views/chat/chat.module').then(m => m.ChatModule)
       },
       {
         path: 'dashboard',
-        loadChildren: () => import('./views/dashboard/dashboard.module').then(m => m.DashboardModule)
+        loadChildren: () => import('./back-office/views/dashboard/dashboard.module').then(m => m.DashboardModule)
       },
       {
-        path: 'icons',
-        loadChildren: () => import('./views/icons/icons.module').then(m => m.IconsModule)
+        path: 'post-requests',
+        loadChildren: () => import('./back-office/views/post-requests/post-requests.module').then(m => m.PostRequestsModule)
       },
       {
-        path: 'notifications',
-        loadChildren: () => import('./views/notifications/notifications.module').then(m => m.NotificationsModule)
+        path: 'profil',
+        loadChildren: () => import('./back-office/views/profil/profil.module').then(m => m.ProfilModule)
       },
       {
-        path: 'theme',
-        loadChildren: () => import('./views/theme/theme.module').then(m => m.ThemeModule)
+        path: 'wallet',
+        loadChildren: () => import('./back-office/views/wallet/wallet.module').then(m => m.WalletModule)
       },
       {
-        path: 'widgets',
-        loadChildren: () => import('./views/widgets/widgets.module').then(m => m.WidgetsModule)
+        path: 'map',
+        loadChildren: () => import('./back-office/views/map/map.module').then(m => m.MapModule)
       }
     ]
   },

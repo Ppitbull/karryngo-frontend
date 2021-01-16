@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NguiMapModule} from '@ngui/map';
 
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
@@ -122,6 +123,7 @@ import { PrivacyPolicyComponent } from './shared/components/privacy-policy/priva
 import { TermsAndConditionsComponent } from './shared/components/terms-and-conditions/terms-and-conditions.component';
 
 import { TestPagesComponent } from './test-pages/test-pages.component';
+import { MapsComponent } from './back-office/users/maps/maps.component';
 
 @NgModule({
   imports: [
@@ -138,6 +140,8 @@ import { TestPagesComponent } from './test-pages/test-pages.component';
     TabsModule.forRoot(),
     ChartsModule,
     BrowserAnimationsModule,
+    NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=MY_GOOGLE_API_KEY'}),
+
 
     ToastrModule.forRoot({
       timeOut: 2000,
@@ -227,6 +231,7 @@ import { TestPagesComponent } from './test-pages/test-pages.component';
     HowDoesItWorkComponent,
     RequestsComponent,
     BlankPageComponent,
+    MapsComponent
   ],
   providers: [{
     provide: LocationStrategy,
