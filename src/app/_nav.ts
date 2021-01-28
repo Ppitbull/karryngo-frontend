@@ -42,8 +42,8 @@ export const navItems: INavData[] = [
     icon: 'fa fa-truck',
     children: [
       {
-        name: 'Vehiculs',
-        url: '/carrier/vehiculs',
+        name: 'Vehicles',
+        url: '/carrier/vehicles',
         icon: 'none'
       },
       {

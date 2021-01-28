@@ -58,7 +58,7 @@ export class AuthService {
     *  Get local user profile data.
     */
    getLocalStorageUser() {
-      this.userData = JSON.parse(localStorage.getItem('user-data'));
+      this.userData = JSON.parse(localStorage.getItem('user-data')?localStorage.getItem('user-data'):null);
       if (this.userData) {
          this.isLoggedIn = true;
          return true;

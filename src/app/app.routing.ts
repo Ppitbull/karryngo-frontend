@@ -33,13 +33,6 @@ import { TestPagesComponent } from './test-pages/test-pages.component';
 
 //// Back Office
 import { TripsModule } from './back-office/users/trips/trips.module';
-import { PostRequest1Component } from './back-office/users/request/post-request1/post-request1.component';
-import { PostRequestColis1Component } from './back-office/users/request/post-request-colis/post-request-colis1/post-request-colis1.component';
-import { PostRequestColis2Component } from './back-office/users/request/post-request-colis/post-request-colis2/post-request-colis2.component';
-import { PostRequestColis3Component } from './back-office/users/request/post-request-colis/post-request-colis3/post-request-colis3.component';
-import { PostRequestTransport1Component } from './back-office/users/request/post-request-transport/post-request-transport1/post-request-transport1.component';
-import { PostRequestTransport2Component } from './back-office/users/request/post-request-transport/post-request-transport2/post-request-transport2.component';
-import { PostRequestTransport3Component } from './back-office/users/request/post-request-transport/post-request-transport3/post-request-transport3.component';
 import { PostTripCarrierShipper1Component } from './back-office/users/trips/post-trip-carrier-shipper/post-trip-carrier-shipper1/post-trip-carrier-shipper1.component';
 import { PostTripCarrierShipper2Component } from './back-office/users/trips/post-trip-carrier-shipper/post-trip-carrier-shipper2/post-trip-carrier-shipper2.component';
 import { PostTripTransport1Component } from './back-office/users/trips/post-trip-transport1/post-trip-transport1.component';
@@ -119,36 +112,8 @@ export const routes: Routes = [
     component: RequestsComponent
   },
   {
-    path: 'post-request',
-    component: PostRequest1Component
-  },
-  {
     path: 'forgot-password',
     component: ForgotPasswordComponent
-  },
-  {
-    path: 'post-request-colis-1',
-    component: PostRequestColis1Component
-  },
-  {
-    path: 'post-request-colis-2',
-    component: PostRequestColis2Component
-  },
-  {
-    path: 'post-request-colis-3',
-    component: PostRequestColis3Component
-  },
-  {
-    path: 'post-request-transport-1',
-    component: PostRequestTransport1Component
-  },
-  {
-    path: 'post-request-transport-2',
-    component: PostRequestTransport2Component
-  },
-  {
-    path: 'post-request-transport-3',
-    component: PostRequestTransport3Component
   },
   {
     path: 'post-trip-carrier-shipper-1',

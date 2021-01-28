@@ -6,8 +6,6 @@ import { TripsComponent } from './trips.component';
 import { SettingsComponent } from './settings.component';
 
 // Dropdowns Component
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-
 import { VehiculsComponent } from './vehiculs.component';
 
 // Trips Routing
@@ -19,13 +17,12 @@ import { TripsRoutingModule } from './trips-routing.module';
   imports: [
     CommonModule,
     TripsRoutingModule,
-    BsDropdownModule.forRoot(),
     FormsModule
   ],
   declarations: [
     TripsComponent,
     VehiculsComponent,
-    SettingsComponent
+    SettingsComponent,
   ]
 })
 export class TripsModule { }

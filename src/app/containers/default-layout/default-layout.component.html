@@ -1,11 +1,11 @@
-<app-header style="background-color: #242121;" [navbarBrandRouterLink]="['/dashboard']" [fixed]="true"
+<app-header style="background-color: #efefef;" [navbarBrandRouterLink]="['/dashboard']" [fixed]="true"
   [navbarBrandFull]="{src: 'assets/img/logo.jpg', width: 89, height: 25, alt: 'karryngo Logo'}"
   [navbarBrandMinimized]="{src: 'assets/img/logo.jpg', width: 30, height: 30, alt: 'Karryngo Logo'}"
   [sidebarToggler]="'lg'" [asideMenuToggler]="'lg'">
   <ul class="nav navbar-nav d-md-down-none">
     <li class="nav-item px-3">
-      <a class="nav-link" style="font-family: 'Times New Roman', Times, serif; color: white;"
-        [routerLink]="['/profil']">User Name</a>
+      <a class="nav-link" style="font-family: 'Times New Roman', Times, serif; color: black;"
+        [routerLink]="['/profil']">{{userName}}</a>
     </li>
   </ul>
   <ul class="nav navbar-nav ml-auto">
@@ -14,7 +14,7 @@
           class="badge badge-pill badge-danger">5</span></a>
     </li>
     <li class="nav-item d-md-down-none">
-      <strong><a class="nav-link" [routerLink]="['/wallet/deposit']">|| 50 000 FCFA</a></strong>
+      <strong><a class="nav-link" [routerLink]="['/wallet/deposit']">|| {{balence}} {{currency}}</a></strong>
     </li>
     <li class="nav-item dropdown" dropdown placement="bottom right">
       <div class="dropdown-menu dropdown-menu-right" *dropdownMenu aria-labelledby="simple-dropdown">

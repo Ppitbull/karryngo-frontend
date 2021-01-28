@@ -103,13 +103,6 @@ import { RegisterCarrierShipperTransporterComponent } from './front-office/regis
 
 //// Back Office
 import { TripsModule } from './back-office/users/trips/trips.module';
-import { PostRequest1Component } from './back-office/users/request/post-request1/post-request1.component';
-import { PostRequestColis1Component } from './back-office/users/request/post-request-colis/post-request-colis1/post-request-colis1.component';
-import { PostRequestColis2Component } from './back-office/users/request/post-request-colis/post-request-colis2/post-request-colis2.component';
-import { PostRequestColis3Component } from './back-office/users/request/post-request-colis/post-request-colis3/post-request-colis3.component';
-import { PostRequestTransport1Component } from './back-office/users/request/post-request-transport/post-request-transport1/post-request-transport1.component';
-import { PostRequestTransport2Component } from './back-office/users/request/post-request-transport/post-request-transport2/post-request-transport2.component';
-import { PostRequestTransport3Component } from './back-office/users/request/post-request-transport/post-request-transport3/post-request-transport3.component';
 import { PostTripCarrierShipper1Component } from './back-office/users/trips/post-trip-carrier-shipper/post-trip-carrier-shipper1/post-trip-carrier-shipper1.component';
 import { PostTripCarrierShipper2Component } from './back-office/users/trips/post-trip-carrier-shipper/post-trip-carrier-shipper2/post-trip-carrier-shipper2.component';
 import { PostTripTransport1Component } from './back-office/users/trips/post-trip-transport1/post-trip-transport1.component';
@@ -201,13 +194,6 @@ import { MapsComponent } from './back-office/users/maps/maps.component';
     FooterComponent,
     FullIntroComponent,
     WelcomeComponent,
-    PostRequest1Component,
-    PostRequestColis1Component,
-    PostRequestColis2Component,
-    PostRequestColis3Component,
-    PostRequestTransport1Component,
-    PostRequestTransport2Component,
-    PostRequestTransport3Component,
     PostTripCarrierShipper1Component,
     PostTripCarrierShipper2Component,
     PostTripTransport1Component,

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { CanActivate } from '@angular/router';
 import { Router } from '@angular/router';
-import { UserInfo } from 'src/app/back-office/_models/user';
+import { UserInfo } from '../../back-office/_models/user';
 
 function myFunction(f: string) {
-    alert("Hello! Only an administrator can access this! " + f);
+    alert('Hello! Only an administrator can access this! ' + f);
 }
 
 @Injectable()

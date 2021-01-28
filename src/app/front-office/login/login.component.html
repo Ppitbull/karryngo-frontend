@@ -1,47 +1,53 @@
 <app-nav-bar></app-nav-bar>
 
 <div class="imag">
-    <div class="container" style="margin-top: 70px; margin-bottom: 10px;">
+    <div class="container" style="margin-top: 70px; margin-bottom: 0px;">
         <div class="row">
             <div class="col-md-5 bg-white my-5" style="margin-right: auto; margin-left: auto; border-radius: 15px;
-            background-color: rgba(10, 10, 10, 0.82) !important;">
-                <div class="p-4" style="margin-bottom: 20px; margin-top: 20px; text-align: center; border-bottom: 1px solid gray;">
+            background-color: rgba(10, 10, 10, 0.82) !important;"><br>
+                <div class="p-4"
+                    style="margin-bottom: 20px; margin-top: 20px; text-align: center; border-bottom: 1px solid gray;">
 
                     <h3 style="color: white; font-size:20px;"><b>Login</b></h3>
-                    <div class="d-flex justify-content-end social_icon">
-                        <span><i class="fab fa-google-plus-square"></i></span>
-                        <span><i class="fab fa-facebook-square"></i></span>
-                        <span><i class="fab fa-twitter-square"></i></span>
-                    </div>
-                </div>
+                </div><br>
                 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" style="color: white;">
                     <div class="form-group">
                         <label for="Email"><b>Email</b></label>
-                        <input id="Email" type="text" formControlName="email" placeholder="Enter Your Email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+                        <input id="Email" type="text" formControlName="email" placeholder="Enter Your Email"
+                            class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
 
                         <div *ngIf="submitted && f.email.errors" class="invalid-feedback text-danger">
                             <div *ngIf="f.email.errors.required">Field is required</div>
                         </div>
-                    </div>
+                    </div><br>
                     <div class="form-group">
-                        <label for="Password"><b>Email</b></label>
-                        <input id="Password" type="password" formControlName="password" placeholder="Enter Your Password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.pwd.errors }">
+                        <label for="Password"><b>Password</b></label>
+                        <input id="Password" type="password" formControlName="password"
+                            placeholder="Enter Your Password" class="form-control"
+                            [ngClass]="{ 'is-invalid': submitted && f.pwd.errors }">
 
-                         <div *ngIf="submitted && f.pwd.errors" class="invalid-feedback text-danger">
+                        <div *ngIf="submitted && f.pwd.errors" class="invalid-feedback text-danger">
                             <div *ngIf="f.pwd.errors.required">Password is required</div>
-                         </div>
-                     </div><br>
-                        <div class="login-help">
-                             <span class="pull-left" style="margin-top: -15px;">
-                                <input id="checkbox-1" class="checkbox-custom" name="checkbox-1" type="checkbox">
-                                <label for="checkbox-1" class="checkbox-custom-label"> Remember me</label>
-                              </span>
                         </div>
-                        <span class="pull-right">
-                        <button type="submit" class="login loginmodal-submit btn btn-warning" value="Login">Login</button>
+                    </div>
+                    <br>
+                    <div class="login-help">
+                        <span class="pull-left" style="margin-top: -15px;">
+                            <input id="checkbox-1" class="checkbox-custom" name="checkbox-1" type="checkbox">
+                            <label for="checkbox-1" class="checkbox-custom-label"> Remember me</label>
                         </span>
-                      </form><br><br><br>
-                <p><a href="javascript:void(0)" (click)="navigateToForgot()" >I forgot my password.</a><br>
+                    </div><br>
+                    <span class="pull-right">
+                        <button type="submit" class="login loginmodal-submit btn btn-warning"
+                            value="Login">Login</button>
+                    </span><br>
+                </form>
+                <div class="d-flex justify-content-end social_icon">
+                    <span><i class="fab fa-google-plus-square"></i></span>
+                    <span><i class="fab fa-facebook-square"></i></span>
+                    <span><i class="fab fa-twitter-square"></i></span>
+                </div><br><br><br>
+                <p><a href="javascript:void(0)" (click)="navigateToForgot()">I forgot my password.</a><br><br>
             </div>
         </div>
     </div>

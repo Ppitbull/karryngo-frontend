@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { VehiculsComponent } from './vehiculs.component';
+import { VehiclesComponent } from './vehicles.component';
 import { SettingsComponent } from './settings.component';
 
 const routes: Routes = [
@@ -13,13 +13,13 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'vehiculs'
+        redirectTo: 'vehicles'
       },
       {
-        path: 'vehiculs',
-        component: VehiculsComponent,
+        path: 'vehicles',
+        component: VehiclesComponent,
         data: {
-          title: 'Vehiculs'
+          title: 'Vehicles'
         }
       },
       {

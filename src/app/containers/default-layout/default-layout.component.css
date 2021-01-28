@@ -6,7 +6,7 @@
   background: transparent;
 }
 .sidebar .nav-link:hover {
-  color: black !important;
+  color: white !important;
   background: #d8ad20 !important;
 }
 .sidebar .nav-link:active {

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
-import { VehiculsComponent } from './vehiculs.component';
+import { VehiclesComponent } from './vehicles.component';
 
 // Forms Component
 import { SettingsComponent } from './settings.component';
@@ -18,7 +18,7 @@ import { CarrierRoutingModule } from './carrier-routing.module';
     CarrierRoutingModule
   ],
   declarations: [
-    VehiculsComponent,
+    VehiclesComponent,
     SettingsComponent
   ]
 })

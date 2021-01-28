@@ -7,11 +7,19 @@
         </div>
         <div class="card-body">
           <div class="row">
-            <div class="col-sm-5">
+            <div class="col-sm-4">
               <div class="form-group text-center">
+                <label for="ccmonth">Country</label>
+                <select class="form-control field-form1" id="ccmonth">
+                  <option>Cameroon</option>
+                  <option>Nigeria</option>
+                  <option>Gabon</option>
+                  <option>South Africa</option>
+                  <option>Congo</option>
+                </select><br>
                 <label for="ccnumber">Amount</label>
                 <div class="input-group">
-                  <input class="form-control" id="appendedInput" size="16" type="text">
+                  <input class="form-control field-form1 col-sm-8" id="appendedInput" size="16" type="text" placeholder="00">
                   <div class="input-group-append">
                     <span class="input-group-text">FCFA</span>
                   </div>
@@ -22,7 +30,7 @@
           <div class="row">
             <div class="tab">
               <button type="button" class="btn btn-brand mr-1" style="margin-bottom: 4px"
-                onclick="openCity(event, 'mastercard')">
+                onclick="openCity(event, 'mastercard-select')">
                 <i class="fa fa-cc-mastercard" style="font-size:24px"></i>
                 <span>Mastercard</span>
               </button>
@@ -32,31 +40,114 @@
                 <span>Paypal</span>
               </button>
               <button type="button" class="btn btn-brand mr-1" style="margin-bottom: 4px"
-                onclick="openCity(event, 'visa')">
+                onclick="openCity(event, 'visa-select')">
                 <i class="fa fa-cc-visa" style="font-size:24px"></i>
                 <span>VISA</span>
               </button>
               <button type="button" class="btn btn-brand mr-1" style="margin-bottom: 4px"
-                onclick="openCity(event, 'orange-money')">
+                onclick="openCity(event, 'om-select')">
                 <i style="font-size:10px; border: 3px solid;">OM</i>
                 <span>Orange Money</span>
               </button>
               <button type="button" class="btn btn-brand mr-1" style="margin-bottom: 4px"
-                onclick="openCity(event, 'mtn-money')">
+                onclick="openCity(event, 'momo-select')">
                 <i style="font-size:7px; border: 3px solid;">MoMo</i>
                 <span>MTN Money</span>
               </button>
             </div>
-            <!-- Tab content -->
-            <div id="mastercard" class="tabcontent">
+
+            <div id="mastercard-select" class="tabcontent">
               <br><br>
               <h3>Mastercard</h3>
-              <div class="card-body">
+              <div class="card-body text-left">
+                <button type="radio" class="btn-pill" onclick="openCity(event, 'my-account')">
+                  <span>My card</span>
+                </button>
+                <button type="radio" class="btn-pill" onclick="openCity(event, 'mastercard')">
+                  <span>Other account</span>
+                </button>
+              </div>
+            </div>
+
+            <div id="visa-select" class="tabcontent">
+              <br><br>
+              <h3>Visa</h3>
+              <div class="card-body text-left">
+                <button type="radio" class="btn-pill" onclick="openCity(event, 'my-account')">
+                  <span>My card</span>
+                </button>
+                <button type="radio" class="btn-pill" onclick="openCity(event, 'visa')">
+                  <span>Other account</span>
+                </button>
+              </div>
+            </div>
+
+            <div id="om-select" class="tabcontent">
+              <br><br>
+              <h3>Orange Money</h3>
+              <div class="card-body text-left">
+                <button type="radio" class="btn-pill" onclick="openCity(event, 'my-number')">
+                  <span>My number</span>
+                </button>
+                <button type="radio" class="btn-pill" onclick="openCity(event, 'orange-money')">
+                  <span>Other number</span>
+                </button>
+              </div>
+            </div>
+
+            <div id="momo-select" class="tabcontent">
+              <br><br>
+              <h3>Mobil Moeny</h3>
+              <div class="card-body text-left">
+                <button type="radio" class="btn-pill" onclick="openCity(event, 'my-number')">
+                  <span>My number</span>
+                </button>
+                <button type="radio" class="btn-pill" onclick="openCity(event, 'mtn-money')">
+                  <span>Other number</span>
+                </button>
+              </div>
+            </div>
+
+            <div id="my-account" class="tabcontent card-body">
+              <div class="col-sm-6">
                 <div class="row">
                   <div class="col-sm-12">
+                    <h3>Mastercard</h3>
+                    <label for="name">Use my card</label>
+                    <br><br>
+                    <div>
+                      <button class="btn"  data-toggle="modal" (click)="myModal.show()">Submit</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div id="my-number" class="tabcontent card-body">
+              <div class="col-sm-6">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <h3>Mobil</h3>
+                    <label for="name">Use my number</label>
+                    <br><br>
+                    <div>
+                      <button class="btn"  data-toggle="modal" (click)="myModal.show()">Submit</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tab content -->
+            <div id="mastercard" class="tabcontent card-body">
+              <div class="col-sm-6">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <br><br>
+                    <h3>Other mastercard</h3>
                     <div class="form-group">
                       <label for="name">Name</label>
-                      <input type="text" class="form-control" id="name" placeholder="Enter your name">
+                      <input type="text" class="form-control field-form1" id="name" placeholder="Enter your name">
                     </div>
                   </div>
                 </div>
@@ -65,7 +156,7 @@
                   <div class="col-sm-12">
                     <div class="form-group">
                       <label for="ccnumber">Credit Card Number</label>
-                      <input type="text" class="form-control" id="ccnumber" placeholder="0000 0000 0000 0000">
+                      <input type="text" class="form-control field-form1" id="ccnumber" placeholder="0000 0000 0000 0000">
                     </div>
                   </div>
                 </div>
@@ -73,7 +164,7 @@
                 <div class="row">
                   <div class="form-group col-sm-4">
                     <label for="ccmonth">Month</label>
-                    <select class="form-control" id="ccmonth">
+                    <select class="form-control field-form1" id="ccmonth">
                       <option>1</option>
                       <option>2</option>
                       <option>3</option>
@@ -90,7 +181,7 @@
                   </div>
                   <div class="form-group col-sm-4">
                     <label for="ccyear">Year</label>
-                    <select class="form-control" id="ccyear">
+                    <select class="form-control field-form1" id="ccyear">
                       <option>2014</option>
                       <option>2015</option>
                       <option>2016</option>
@@ -108,16 +199,16 @@
                   <div class="col-sm-4">
                     <div class="form-group">
                       <label for="cvv">CVV/CVC</label>
-                      <input type="text" class="form-control" id="cvv" placeholder="123">
+                      <input type="text" class="form-control field-form1" id="cvv" placeholder="123">
                     </div>
                   </div>
                   <br><br>
                   <div>
-                    <button class="btn">Submit</button>
+                    <button class="btn"  data-toggle="modal" (click)="myModal.show()">Submit</button>
                   </div>
                 </div>
-                <!--/.row-->
               </div>
+              <!--/.row-->
             </div>
 
             <div id="visa" class="tabcontent">
@@ -128,7 +219,7 @@
                   <div class="col-sm-12">
                     <div class="form-group">
                       <label for="name">Name</label>
-                      <input type="text" class="form-control" id="name" placeholder="Enter your name">
+                      <input type="text" class="form-control field-form1" id="name" placeholder="Enter your name">
                     </div>
                   </div>
                 </div>
@@ -137,7 +228,7 @@
                   <div class="col-sm-12">
                     <div class="form-group">
                       <label for="ccnumber">Credit Card Number</label>
-                      <input type="text" class="form-control" id="ccnumber" placeholder="0000 0000 0000 0000">
+                      <input type="text" class="form-control field-form1" id="ccnumber" placeholder="0000 0000 0000 0000">
                     </div>
                   </div>
                 </div>
@@ -145,7 +236,7 @@
                 <div class="row">
                   <div class="form-group col-sm-4">
                     <label for="ccmonth">Month</label>
-                    <select class="form-control" id="ccmonth">
+                    <select class="form-control field-form1" id="ccmonth">
                       <option>1</option>
                       <option>2</option>
                       <option>3</option>
@@ -162,7 +253,11 @@
                   </div>
                   <div class="form-group col-sm-4">
                     <label for="ccyear">Year</label>
-                    <select class="form-control" id="ccyear">
+                    <select class="form-control field-form1" id="ccyear">
+                      <option>2010</option>
+                      <option>2011</option>
+                      <option>2012</option>
+                      <option>2013</option>
                       <option>2014</option>
                       <option>2015</option>
                       <option>2016</option>
@@ -180,12 +275,12 @@
                   <div class="col-sm-4">
                     <div class="form-group">
                       <label for="cvv">CVV/CVC</label>
-                      <input type="text" class="form-control" id="cvv" placeholder="123">
+                      <input type="text" class="form-control field-form1" id="cvv" placeholder="123">
                     </div>
                   </div>
                   <br><br>
                   <div>
-                    <button class="btn">Submit</button>
+                    <button class="btn"  data-toggle="modal" (click)="myModal.show()">Submit</button>
                   </div>
                 </div>
                 <!--/.row-->
@@ -196,27 +291,17 @@
               <h3>Orange Money</h3>
               <p>Select you country, enter your phone number and submit. Then, compose #150*44*793563#</p><br>
               <div class="row">
-                <div class="form-group col-sm-4">
-                  <label for="country">Country</label>
-                  <select class="form-control" id="country">
-                    <option>Cameroon</option>
-                    <option>Nigeria</option>
-                    <option>Tchad</option>
-                    <option>South Africa</option>
-                    <option>Congo</option>
-                  </select>
-                </div>
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="tel">Phone</label>
-                    <input type="tel" class="form-control" id="tel" placeholder="Your Phone number">
+                    <input type="tel" class="form-control field-form1" id="tel" placeholder="Your Phone number">
                   </div>
                 </div>
               </div>
               <!--/.row-->
               <br><br>
               <div>
-                <button class="btn">Submit</button>
+                <button class="btn"  data-toggle="modal" (click)="myModal.show()">Submit</button>
               </div>
             </div>
             <div id="paypal" class="tabcontent">
@@ -233,33 +318,19 @@
               <h3>Mobile Money</h3>
               <p>Select you country, enter your phone number and submit.</p><br>
               <div class="row">
-                <div class="form-group col-sm-4">
-                  <label for="country">Country</label>
-                  <select class="form-control" id="country">
-                    <option>Cameroon</option>
-                    <option>Nigeria</option>
-                    <option>Tchad</option>
-                    <option>South Africa</option>
-                    <option>Congo</option>
-                  </select>
-                </div>
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="tel">Phone</label>
-                    <input type="tel" class="form-control" id="tel" placeholder="Your Phone number">
+                    <input type="tel" class="form-control field-form1" id="tel" placeholder="Your Phone number">
                   </div>
                 </div>
               </div>
               <!--/.row-->
               <br><br>
               <div>
-                <button class="btn">Submit</button>
+                <button class="btn"  data-toggle="modal" (click)="myModal.show()">Submit</button>
               </div>
             </div>
-
-
-
-
           </div>
         </div>
       </div>
@@ -271,9 +342,32 @@
           Curent balance
         </div>
         <div class="card-body">
-          <strong>5O 000,000</strong> <small>FCFA</small>
+          <strong style="text-shadow: 1px 1px 3px rgb(172, 140, 10);">5O 000,000</strong> <small>FCFA</small>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+
+
+
+<div bsModal #myModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Confirm your transaction</h4>
+        <button type="button" class="close" (click)="myModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Do you confirm the transaction?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="myModal.hide()">Cancel</button>
+        <button type="button" class="btn btn-success" (click)="myModal.hide()">Confirm</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

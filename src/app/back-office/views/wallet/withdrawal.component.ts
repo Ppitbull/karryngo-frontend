@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import {ModalDirective} from 'ngx-bootstrap/modal';
 
 @Component({
   templateUrl: 'withdrawal.component.html',
@@ -6,6 +7,5 @@ import { Component } from '@angular/core';
 })
 export class WithdrawalComponent {
 
-  constructor() { }
-
+  @ViewChild('myModal') public myModal: ModalDirective;
 }

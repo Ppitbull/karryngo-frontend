@@ -9,6 +9,9 @@ import { navItems } from '../../_nav';
 export class DefaultLayoutComponent {
   public sidebarMinimized = false;
   public navItems = navItems;
+  public userName: string = 'Flambel SANOU';
+  private balence: number = 50000;
+  private currency: string = 'FCFA';
 
   today: number = Date.now();
 
