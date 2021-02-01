@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import {Router} from "@angular/router";
-import { environment } from 'src/environments/environment';
+import {Router} from '@angular/router';
+import { environment } from '../../../environments/environment';
 import { UserService } from './user.service';
 
 @Injectable({
@@ -12,8 +12,8 @@ export class AuthenticationService {
 
     url = 'http://localhost:8080';
 
-    constructor(private http: HttpClient, 
-                private router: Router, 
+    constructor(private http: HttpClient,
+                private router: Router,
                 private userService: UserService
                 ) { }
 
@@ -22,18 +22,19 @@ export class AuthenticationService {
         .subscribe(
             res => {
                 console.log(res['status']);
-                if(res['status'] == "exists"){
+                if (res['status'] == 'exists') {
                     alert(res['message']);
-                    return
-                } else{
+                    return;
+                } else {
                     alert('Account created. use the code we sent you by email to activate your account');
                     this.router.navigate(['/login']);
-                }                
+                }
             },
             err => {
-                if(err.error.status == "exists"){
+                // tslint:disable-next-line:triple-equals
+                if (err.error.status == 'exists') {
                     alert(err.error.message);
-                    return
+                    return;
                 }
                 console.log(err.error);
                 console.log('Error occured:' , err);
@@ -43,11 +44,11 @@ export class AuthenticationService {
     }
 
     update(data, user_id) {
-        this.http.put(`${this.url}/api/user/update/`+user_id, data)
+        this.http.put(`${this.url}/api/user/update/` + user_id, data)
         .subscribe(
             res => {
                 console.log(res);
-                alert('profile successfully updated.'+ 'Success');
+                alert('profile successfully updated.' + 'Success');
             },
             err => {
                 console.log('Error occured:' , err);
@@ -56,15 +57,16 @@ export class AuthenticationService {
         );
     }
 
-    login(data){
+    login(data) {
         console.log(data);
         return this.http.post(`${environment.apiUrl}/login/check`, data)
         .subscribe(
             res => {
                 console.log(res);
-                if(res['status'] != "success"){
+                // tslint:disable-next-line:triple-equals
+                if (res['status'] != 'success') {
                     alert('Icorrect email or password');
-                } else{
+                } else {
                     console.log(res['user']._id);
                     this.userService.getByLoginID(res['user']._id)
                     .subscribe(
@@ -74,7 +76,7 @@ export class AuthenticationService {
                             localStorage.setItem('currentUser', JSON.stringify(res['data']));
                             localStorage.setItem('isLoggedin', 'true');
                             console.log(localStorage.getItem('currentUser'));
-                            this.router.navigate(["/home"]);
+                            this.router.navigate(['/home']);
                         },
                         err => {
                             console.log('Error occured:' , err);
@@ -82,7 +84,7 @@ export class AuthenticationService {
                         }
                     );
                 }
-                
+
             },
             err => {
                 console.log('Error occured:' , err);
@@ -91,7 +93,7 @@ export class AuthenticationService {
         );
     }
 
-    changePass(data){
+    changePass(data) {
         return this.http.put(`${environment.apiUrl}/login/update`, data)
         .subscribe(
             res => {
@@ -120,19 +122,19 @@ export class AuthenticationService {
         );
     }
 
-    activate(data){
+    activate(data) {
         this.http.post(`${environment.apiUrl}/login/activateAccount`, data)
         .subscribe(
             res => {
                 console.log(res);
-                if(res['status'] == "activated"){
+                if (res['status'] == 'activated') {
                     alert(res['message']);
-                    let loginData ={
+                    let loginData = {
                         emailOrPhone: res['data'].email,
                         password: res['data'].password
-                    }
+                    };
                     this.login(loginData);
-                } else{
+                } else {
                     alert('User not found');
                 }
                 // console.log('Votre matière a été créer avec succès.', 'Success');
@@ -145,15 +147,15 @@ export class AuthenticationService {
         );
     }
 
-    sendForgottenMail(email){
-        this.http.get(`${environment.apiUrl}/login/sendForgottenMail/`+ email)
+    sendForgottenMail(email) {
+        this.http.get(`${environment.apiUrl}/login/sendForgottenMail/` + email)
         .subscribe(
             res => {
                 console.log(res);
-                if(res['status'] == "success"){
+                if (res['status'] == 'success') {
                     alert(res['message']);
-                    this.router.navigate(["/home"]);
-                } else{
+                    this.router.navigate(['/home']);
+                } else {
                     alert(res['message']);
                 }
             },
@@ -164,30 +166,30 @@ export class AuthenticationService {
         );
     }
 
-    recoverPassword(data){
+    recoverPassword(data) {
         this.http.post(`${environment.apiUrl}/login/recoverPassword`, data)
         .subscribe(
             res => {
                 console.log(res);
-                if(res['status'] == "error"){
-                    alert("couldn't complete your request, please make sure the url is correct");
+                if (res['status'] == 'error') {
+                    alert('couldn\'t complete your request, please make sure the url is correct');
                 }
-                if(res['status'] == "reset"){
+                if (res['status'] == 'reset') {
                     alert(res['message']);
-                    this.router.navigate(["/login"]);
+                    this.router.navigate(['/login']);
                 }
             },
             err => {
-                alert("couldn't complete your request, please make sure the url is correct");
+                alert('couldn\'t complete your request, please make sure the url is correct');
                 console.log('Error occured:' , err);
                 console.log(err.message, 'Error occured');
             }
         );
     }
 
-    logout(){
+    logout() {
         localStorage.removeItem('currentUser');
         localStorage.removeItem('isLoggedin');
-        this.router.navigate(["/home"]);
+        this.router.navigate(['/home']);
     }
 }

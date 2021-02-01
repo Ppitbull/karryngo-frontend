@@ -160,13 +160,13 @@ export class UserRegistration1Component implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    UserService.userEncour.name = this.formUser1.controls.name.value;
-    UserService.userEncour.field_surname = this.formUser1.controls.field_surname.value;
-    UserService.userEncour.mail = this.formUser1.controls.mail.value;
-    UserService.userEncour.pass = this.formUser1.controls.pass.value;
-    UserService.userEncour.country_uuid = this.formUser1.controls.country_uuid.value;
-    UserService.userEncour.field_language = this.getAllUserChoiseLanguage();
-    console.log(UserService.userEncour);
+    UserService.currentUser.field_firstname = this.formUser1.controls.name.value;
+    UserService.currentUser.field_surname = this.formUser1.controls.field_surname.value;
+    UserService.currentUser.field_email = this.formUser1.controls.mail.value;
+    UserService.currentUser.field_password = this.formUser1.controls.pass.value;
+    UserService.currentUser.country_uuid = this.formUser1.controls.country_uuid.value;
+    UserService.currentUser.field_language = this.getAllUserChoiseLanguage();
+    console.log(UserService.currentUser);
   }
 
 }

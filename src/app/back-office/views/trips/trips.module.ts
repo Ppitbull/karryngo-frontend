@@ -3,10 +3,10 @@ import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
 import { TripsComponent } from './trips.component';
-import { SettingsComponent } from './settings.component';
+import { SettingsComponent } from './settings/settings.component';
 
 // Dropdowns Component
-import { VehiculsComponent } from './vehiculs.component';
+import { VehiculsComponent } from './vehicles/vehiculs.component';
 
 // Trips Routing
 import { TripsRoutingModule } from './trips-routing.module';

@@ -5,7 +5,7 @@ import { FormBuilder } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { PageFormComponent } from './page-form.component';
 import { RouterTestingModule } from '@angular/router/testing';
-import { ConfigService } from '../../services/config/config.service';
+import { ConfigService } from '../../../shared/service/config/config.service';
 
 describe('PageFormComponent', () => {
   let component: PageFormComponent;

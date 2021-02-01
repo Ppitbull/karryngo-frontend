@@ -12,22 +12,22 @@
                 </div><br>
                 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" style="color: white;">
                     <div class="form-group">
-                        <label for="Email"><b>Email</b></label>
-                        <input id="Email" type="text" formControlName="email" placeholder="Enter Your Email"
-                            class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+                        <label for="field_email"><b>Email</b></label>
+                        <input id="field_email" type="text" formControlName="field_email" placeholder="Enter Your Email"
+                            class="form-control" [ngClass]="{ 'is-invalid': submitted && f.field_email.errors }">
 
-                        <div *ngIf="submitted && f.email.errors" class="invalid-feedback text-danger">
-                            <div *ngIf="f.email.errors.required">Field is required</div>
+                        <div *ngIf="submitted && f.field_email.errors" class="invalid-feedback text-danger">
+                            <div *ngIf="f.field_email.errors.required">Field is required</div>
                         </div>
                     </div><br>
                     <div class="form-group">
-                        <label for="Password"><b>Password</b></label>
-                        <input id="Password" type="password" formControlName="password"
+                        <label for="field_password"><b>Password</b></label>
+                        <input id="field_password" type="password" formControlName="field_password"
                             placeholder="Enter Your Password" class="form-control"
-                            [ngClass]="{ 'is-invalid': submitted && f.pwd.errors }">
+                            [ngClass]="{ 'is-invalid': submitted && f.field_password.errors }">
 
-                        <div *ngIf="submitted && f.pwd.errors" class="invalid-feedback text-danger">
-                            <div *ngIf="f.pwd.errors.required">Password is required</div>
+                        <div *ngIf="submitted && f.field_password.errors" class="invalid-feedback text-danger">
+                            <div *ngIf="f.field_password.errors.required">Password is required</div>
                         </div>
                     </div>
                     <br>

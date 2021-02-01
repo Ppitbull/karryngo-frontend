@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientModule } from '@angular/common/http';
 import { PageListComponent } from './page-list.component';
 import { RouterTestingModule } from '@angular/router/testing';
-import { ConfigService } from '../../services/config/config.service';
+import { ConfigService } from '../../../shared/service/config/config.service';
 
 describe('PageListComponent', () => {
   let component: PageListComponent;

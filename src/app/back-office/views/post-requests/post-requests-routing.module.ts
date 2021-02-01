@@ -1,12 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { PostRequestColis1Component } from './request/post-request-colis/post-request-colis1/post-request-colis1.component';
-import { PostRequestColis2Component } from './request/post-request-colis/post-request-colis2/post-request-colis2.component';
-import { PostRequestColis3Component } from './request/post-request-colis/post-request-colis3/post-request-colis3.component';
-import { PostRequestTransport3Component } from './request/post-request-transport/post-request-transport3/post-request-transport3.component';
-
-import { PackagesComponent } from './packages.component';
-import { TripsComponent } from './trips.component';
+import { PostRequestColisComponent } from './post-request-colis/post-request-colis/post-request-colis.component';
+import { PostRequestTripsComponent } from './post-request-trips/post-request-trips.component';
 
 const routes: Routes = [
   {
@@ -21,35 +16,14 @@ const routes: Routes = [
       },
       {
         path: 'packages',
-        component: PostRequestColis3Component,
+        component: PostRequestColisComponent,
         data: {
           title: 'Packages'
         }
       },
-      // {
-      //   path: 'transport-result',
-      //   component: PostRequestColis2Component,
-      //   data: {
-      //     title: 'Transport Results'
-      //   }
-      // },
-      // {
-      //   path: 'submit-request',
-      //   component: PostRequestColis3Component,
-      //   data: {
-      //     title: 'Submit your request'
-      //   }
-      // },
-      // {
-      //   path: 'packages',
-      //   component: PackagesComponent,
-      //   data: {
-      //     title: 'Packages'
-      //   }
-      // },
       {
         path: 'trips',
-        component: PostRequestTransport3Component,
+        component: PostRequestTripsComponent,
         data: {
           title: 'Trips'
         }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from '../api/api.service';
 import { GeneraleService } from '../generale/generale.service';
-import { ParametersService } from 'src/app/shared/parameters/parameters.service';
+import { ParametersService } from '../../../shared/parameters/parameters.service';
 
 @Injectable({
   providedIn: 'root'

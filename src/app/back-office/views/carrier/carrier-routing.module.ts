@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { VehiclesComponent } from './vehicles.component';
-import { SettingsComponent } from './settings.component';
+import { VehiclesComponent } from './vehicles/vehicles.component';
+import { SettingsComponent } from './settings/settings.component';
 
 const routes: Routes = [
   {

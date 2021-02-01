@@ -83,7 +83,7 @@ export const routes: Routes = [
     component: ViewTripTransportPersonsComponent
   },
   {
-    path: 'registration',
+    path: 'carrier-registration',
     component: RegisterCarrierShipperTransporterComponent
   },
   {
@@ -133,6 +133,10 @@ export const routes: Routes = [
   },
   {
     path: 'register',
+    component: RegisterComponent
+  },
+  {
+    path: 'registration',
     component: RegisterComponent
   },
   {

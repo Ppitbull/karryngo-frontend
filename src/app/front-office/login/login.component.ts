@@ -12,11 +12,7 @@ export class LoginComponent implements OnInit {
 
     submitted: boolean;
     loginForm: FormGroup;
-    source = { pic: "assets/profile-user.png", title: "Login", btnText: "Login", text: "Don't have an account? ", link: "Register" };
-    data = [
-        { controlName: "email", type: "text", label: "Email", dim: "col-md-12" },
-        { controlName: "password", type: "password", label: "Password", dim: "col-md-12" }
-    ]
+   
 
     constructor(private router: Router,
         // private authen: AuthenticationService, 
@@ -27,13 +23,13 @@ export class LoginComponent implements OnInit {
             this.router.navigate(['/home']);
         }
         this.loginForm = this.formLog.group({
-            'password': ['', Validators.required],
-            'email': ['', Validators.compose([Validators.required])]
+            'field_password': ['', Validators.required],
+            'field_email': ['', Validators.compose([Validators.required])]
         });
     }
 
     navigateToRegister() {
-        this.router.navigate(['/user-registration']);
+        this.router.navigate(['/registration']);
     }
 
     navigateToForgot() {
@@ -41,7 +37,7 @@ export class LoginComponent implements OnInit {
     }
 
     onSubmit() {
-        console.log(this.loginForm.value)
+        console.log(this.loginForm.value);
     }
     get f() {
         return this.loginForm.controls;

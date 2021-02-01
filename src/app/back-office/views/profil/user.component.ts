@@ -10,6 +10,7 @@ declare var $: any;
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
+  styleUrls: ['./user.component.scss']
 })
 export class UserComponent implements OnInit {
   // user: any[];
@@ -24,12 +25,12 @@ export class UserComponent implements OnInit {
   userZip: string = '0000';
   userPhone: string = '(+237) 691 224 472';
   userCoverImg: string = 'assets/img/userCoverImg1.png';
-  userProfileImg: string = '../../../../assets/img/flambel.jpg';
+  userProfileImg: string = '../../../../assets/img/user_image.png';
   userName: string = 'Flambel55';
   userEmail: string = 'flambel55@gmail.com';
   userLabel: string = 'if we are satisfied with our present, we have no future.';
 
-  message: string = "\<b>Error\</b>\<br>Someone was not going. This option is not available.";
+  message: string = '\<b>Error\</b>\<br>Someone was not going. This option is not available.';
 
   constructor(
     // private userService: UserService,
@@ -45,10 +46,6 @@ export class UserComponent implements OnInit {
   }
 
   showNotification(from, align, colortype, icon, text) {
-    // Differents from are 'top' and 'bottom'
-    // Differents align are 'left','center' and 'right'
-    // Differents color type are 'info','success','warning','danger' ...
-    // Icons is type 'pe-7s-icon'
 
     $.notify({
       icon: icon,

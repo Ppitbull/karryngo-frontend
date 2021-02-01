@@ -1,8 +1,8 @@
 import { Component, Injector } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { ConfigService } from '../../services/config/config.service';
-import { ItemsService } from '../../services/items/items.service';
+import { ConfigService } from '../../../shared/service/config/config.service';
+import { ItemsService } from '../../../shared/service/items/items.service';
 
 import { Params } from './params';
 

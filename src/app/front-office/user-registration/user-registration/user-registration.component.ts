@@ -55,7 +55,7 @@ export class UserRegistrationComponent implements OnInit {
     this.initPage();
   }
   createAccount() {
-    this.userService.userAccountCreation(UserService.userEncour);
+    this.userService.userAccountCreation(UserService.currentUser);
     //this.userService.loginUser(UserService.userEncour.name, UserService.userEncour.pass);
     this.toastr.success('You have been successfully Register!');
     this.router.navigate(['login']);

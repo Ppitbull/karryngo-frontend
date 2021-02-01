@@ -1,0 +1,177 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-sm-3 col-md-7">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="jaune text-left mx-4">New package request</h3>
+        </div>
+        <div class="container cont2">
+          <form [formGroup]="packageForm" (ngSubmit)="onSubmit()" class="text-center p-1">
+
+            <!-- Package Details-->
+            <h4 class="mb-2 text-left title-form">Details</h4>
+            <!-- row-item-->
+            <br>
+            <div class="form-row mb-3">
+              Start :
+              <div class="col">
+                <div class="form-row mb-3">
+                  <div class="col-md-5">
+                    <input type="text" id="countryStart" formControlName="field_countryStart"
+                      class="form-control field-form1 field" placeholder="Country">
+                    <p class="title-form sub-indication text-left">Departure country</p>
+
+                  </div>
+                  <div class="col-md-5">
+                    <input type="text" id="cityStart" formControlName="field_cityStart"
+                      class="form-control field-form1 field" placeholder="City">
+                    <p class="title-form sub-indication text-left">Departure city</p>
+                  </div>
+                </div>
+              </div>
+
+              to :
+              <div class="col">
+                <div class="form-row mb-3">
+                  <div class="col-md-5">
+                    <input type="text" id="countryArrived" formControlName="field_countryArrived"
+                      class="form-control field-form1 field" placeholder="Country">
+                    <p class="title-form sub-indication text-left">Arrival country</p>
+                  </div>
+                  <div class="col-md-5">
+                    <input type="text" id="cityArrived" formControlName="field_cityArrived"
+                      class="form-control field-form1 field" placeholder="City">
+                    <p class="title-form sub-indication text-left">Arrival city</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- row-item-->
+
+            <!-- row-item-->
+            <div class="form-row mb-3">
+              <div class="col">
+                <div class="form-row mb-5">
+                  <div class="col-md-3">
+                    <label for="isWeak">is weak</label>
+                    <input type="checkbox" id="isWeak" formControlName="field_isWeak">
+                  </div>
+                  <div class="col-md-3">
+                    <label for="isUrgent">is urgent</label>
+                    <input type="checkbox" id="isUrgent" formControlName="field_isUrgent">
+                  </div>
+                  <div class="col-md-5">
+                    <input type="date" id="delayDate" formControlName="field_delayDate"
+                      class="form-control field-form1 field">
+                    <p class="title-form sub-indication text-left">Delay Date</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- row-item-->
+
+            <!-- row-item-->
+            <div class="form-row mb-4">
+              <div class="col">
+                <input type="text" id="recipientContact" formControlName="field_recipientContact"
+                  class="form-control field-form1 field" placeholder="Recipient contact">
+                <p class="title-form sub-indication text-left">If it's you, leave blank</p>
+              </div>
+              <div class="col">
+                <div class="form-row mb-3">
+                  <div class="col-md-5">
+                    <select id="typeof" formControlName="field_typeof" class="form-control field-form1 field">
+                      <option value="documents">Documents</option>
+                      <option value="smallPackage">Small Package</option>
+                      <option value="bigPackage">Big Package</option>
+                    </select>
+                    <p class="title-form sub-indication text-left">Type</p>
+                  </div>
+                  <div class="col-md-5">
+                    <select id="vehicleType" formControlName="field_vehicleType" class="form-control field-form1 field">
+                      <option value="bike">Bike</option>
+                      <option value="car">car</option>
+                      <option value="truck">Truck</option>
+                    </select>
+                    <p class="title-form sub-indication text-left">Vehicle Type</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- row-item-->
+            <!-- Package Details-->
+
+            <!-- package image-->
+            <p class="text-left pack-img"><strong>PACKAGE IMAGES</strong></p>
+            <div class="form-row mb-4">
+              <i class="fas fa-plus-square fa-6x img-plus"></i>
+              <i class="ml-2 fas fa-plus-square fa-6x img-plus"></i>
+              <i class="ml-2 fas fa-plus-square fa-6x img-plus"></i>
+              <i class="ml-2 fas fa-plus-square fa-6x img-plus"></i>
+            </div>
+            <!-- package image-->
+
+
+            <!-- row-item-->
+            <div class="form-row">
+              <div class="col-md-2">
+                <input type="number" id="weightPackage" formControlName="field_weightPackage"
+                  class="form-control field-form1 field" placeholder="Weight">
+                <p class="title-form sub-indication text-left">weight (kg)</p>
+              </div>
+              <div class="col-md-2">
+                <input type="number" id="heightPackages" formControlName="field_heightPackages"
+                  class="form-control field-form1 field" placeholder="Height">
+                <p class="title-form sub-indication text-left">Height (cm)</p>
+              </div>
+              <div class="col-md-2">
+                <input type="number" id="widhtPackage" formControlName="field_widhtPackage"
+                  class="form-control field-form1 field" placeholder="Widht">
+                <p class="title-form sub-indication text-left">Widht (cm)</p>
+              </div>
+              <div class="col-md-2">
+                <input type="number" id="lengthPackage" formControlName="field_lengthPackage"
+                  class="form-control field-form1 field" placeholder="Length">
+                <p class="title-form sub-indication text-left">Length (cm)</p>
+              </div>
+              <div class="col-md-2">
+                <input type="number" id="numberPackage" formControlName="field_numberPackage"
+                  class="form-control field-form1 field" placeholder="Number">
+                <p class="title-form sub-indication text-left">Piece number</p>
+              </div>
+            </div>
+            <!-- row-item-->
+
+            <!-- row-item-->
+            <div class="form-row mb-4 form-group shadow-textarea">
+              <label for="descriptionPackage">Description</label>
+              <textarea class="form-control field-form2 z-depth-1" id="descriptionPackage"
+                formControlName="field_descriptionPackage" rows="3"
+                placeholder="Tell us a little bit more about your package and provide us with all specific request"></textarea>
+            </div>
+            <!-- row-item-->
+
+            <!-- Trips Details-->
+
+            <!-- Default form register -->
+            <button type="submit" class="btn next-button btn-weith">Go</button>
+          </form>
+        </div>
+      </div>
+      <!-- Start your project here-->
+
+    </div>
+
+    <div class="col-sm-6 col-md-5">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="jaune text-left mx-4">My requests list</h3>
+        </div>
+        <div class="container cont2">
+
+          <br><br><br>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

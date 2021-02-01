@@ -92,21 +92,21 @@ export class UserRegistration2Component implements OnInit, OnDestroy {
     const choise = this.formUser2.controls.yes.value;
     console.log(choise);
     if (true) {
-      UserService.userEncour.field_do_you_hire_as_business = 'Yes';
-      UserService.userEncour.field_company_name = this.formUser2.controls.companyName.value;
-      UserService.userEncour.field_company_registration_numbe = this.formUser2.controls.companyRegistrationNumber.value;
-      UserService.userEncour.field_company_import_export_code = this.formUser2.controls.companyImpExpCode.value;
-      UserService.userEncour.field_company_website = this.formUser2.controls.companyWebsite.value;
-      UserService.userEncour.field_country_company = this.formUser2.controls.companyCountry.value;
-      UserService.userEncour.field_city_company = this.formUser2.controls.companyCity.value;
-      UserService.userEncour.field_company_email = this.formUser2.controls.companyEmail.value;
-      UserService.userEncour.field_company_phone = this.formUser2.controls.companyPhone.value;
-      UserService.userEncour.field_address_1_company = this.formUser2.controls.companyAddress1.value;
-      UserService.userEncour.field_address_2_company = this.formUser2.controls.companyAddress2.value;
+      UserService.currentUser.field_do_you_hire_as_business = 'Yes';
+      UserService.currentUser.field_company_name = this.formUser2.controls.companyName.value;
+      UserService.currentUser.field_company_registration_numbe = this.formUser2.controls.companyRegistrationNumber.value;
+      UserService.currentUser.field_company_import_export_code = this.formUser2.controls.companyImpExpCode.value;
+      UserService.currentUser.field_company_website = this.formUser2.controls.companyWebsite.value;
+      UserService.currentUser.field_country_company = this.formUser2.controls.companyCountry.value;
+      UserService.currentUser.field_city_company = this.formUser2.controls.companyCity.value;
+      UserService.currentUser.field_company_email = this.formUser2.controls.companyEmail.value;
+      UserService.currentUser.field_company_phone = this.formUser2.controls.companyPhone.value;
+      UserService.currentUser.field_address_1_company = this.formUser2.controls.companyAddress1.value;
+      UserService.currentUser.field_address_2_company = this.formUser2.controls.companyAddress2.value;
     } else {
-      UserService.userEncour.field_do_you_hire_as_business = 'No';
+      UserService.currentUser.field_do_you_hire_as_business = 'No';
     }
-    console.log(UserService.userEncour);
+    console.log(UserService.currentUser);
   }
 
 }

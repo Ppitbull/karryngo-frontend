@@ -27,6 +27,7 @@ export class AuthService {
 
  userData: any;
  isLoggedIn = false;
+  authStatus: boolean;
 
    constructor(
      //private firebaseAuth: AngularFireAuth,
@@ -73,7 +74,7 @@ export class AuthService {
     */
    resetPassword() {
       this.toastr.success('Email Sent');
-      this.router.navigate(['/session/loginone']);
+      this.router.navigate(['/login']);
    }
 
    /*
@@ -83,7 +84,7 @@ export class AuthService {
       localStorage.removeItem('user-data');
       this.isLoggedIn = false;
       this.toastr.success('You have been successfully logged out!');
-      this.router.navigate(['/session/loginone']);
+      this.router.navigate(['/login']);
    }
 
 
@@ -131,6 +132,14 @@ export class AuthService {
 
   }
 
+  getAuthStatus(authStatus){
+    if (authStatus == 'true') {
+      this.authStatus = true;
+    } else {
+      this.authStatus = false;
+    }
+
+  }
 
     // Login into your account
     authLogin(username ?: string, password ?: string ): Promise<any> {

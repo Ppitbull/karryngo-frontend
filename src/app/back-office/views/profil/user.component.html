@@ -3,7 +3,9 @@
     <div class="col-sm-8">
       <div class="card">
         <div class="card-header">
-          <h4 class="title">My Profile</h4>
+          <h3 class="jaune text-left mx-4 mb-4">
+            My Profil
+          </h3>
         </div>
         <div class="card-body">
           <form>
@@ -92,18 +94,20 @@
                 </div>
               </div>
             </div>
-            <button type="submit" class="btn btn-info btn-fill pull-right"
-              (click)="showNotification('top','center', 'danger', 'pe-7s-close-circle', '\<b>Error\</b>\<br>Update service was not available now. Tray later.')">
-              Update Profile</button>
+            <button type="button" class="btn btn-info btn-fill pull-right"
+              (click)="showNotification('top','center', 'danger', 'pe-7s-close-circle', '\<b>Sorry\</b>\<br>This service was not available now. Tray later.')">
+              This Profile</button>
             <div class="clearfix"></div>
           </form>
         </div>
       </div>
     </div>
+
+
     <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
       <div class="card card-profile shadow">
-        <div class="row justify-content-center align-items-center">
-          <div class="col-lg-3 order-lg-2">
+        <div class="row">
+          <div class="col-lg-2 order-lg-2">
             <div class="card-profile-image">
                 <img class="rounded-circle" src="{{userProfileImg}}" alt="..." />
             </div>
@@ -131,7 +135,11 @@
             </div>
             <div>
               {{userCountry}}
+              <br>
+              <button type="button" class="btn btn-info btn-fill pull-center" data-toggle="modal" (click)="myModal.show()">
+                Add payment</button>
             </div>
+            <br>
             <hr class="my-4">
             <p>{{userLabel}}</p>
             <div class="text-center">
@@ -145,3 +153,308 @@
     </div>
   </div>
 </div>
+
+
+<div bsModal #myModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Add payment</h4>
+        <button type="button" class="close" (click)="myModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group text-center">
+              <label for="ccmonth">Country</label>
+              <select class="form-control field-form1" id="ccmonth">
+                <option>Cameroon</option>
+                <option>Nigeria</option>
+                <option>Gabon</option>
+                <option>South Africa</option>
+                <option>Congo</option>
+              </select><br>
+            </div>
+          </div>
+        </div><br>
+        <div class="row">
+          <div class="tab">
+            <button type="button" class="btn btn-brand mr-1" style="margin-bottom: 4px"
+              onclick="openCity(event, 'visa')">
+              <i class="fa fa-cc-visa" style="font-size:24px"></i>
+              <span>VISA</span>
+            </button>
+            <button type="button" class="btn btn-brand mr-1" style="margin-bottom: 4px"
+              onclick="openCity(event, 'om-select')">
+              <i style="font-size:10px; border: 3px solid;">OM</i>
+              <span>Orange Money</span>
+            </button>
+            <button type="button" class="btn btn-brand mr-1" style="margin-bottom: 4px"
+              onclick="openCity(event, 'momo-select')">
+              <i style="font-size:7px; border: 3px solid;">MoMo</i>
+              <span>MTN Money</span>
+            </button>
+            <button type="button" class="btn btn-brand mr-1" style="margin-bottom: 4px"
+              onclick="openCity(event, 'paypal')">
+              <i class="fa fa-paypal" style="font-size:24px"></i>
+              <span>Paypal</span>
+            </button>
+          </div>
+
+          <div id="visa-select" class="tabcontent">
+            <br><br>
+            <h3>Visa</h3>
+            <div class="card-body text-left">
+              <button type="radio" class="btn-pill" onclick="openCity(event, 'my-account')">
+                <span>My card</span>
+              </button>
+              <button type="radio" class="btn-pill" onclick="openCity(event, 'visa')">
+                <span>Other account</span>
+              </button>
+            </div>
+          </div>
+
+          <div id="om-select" class="tabcontent">
+            <br><br>
+            <h3>Orange Money</h3>
+            <div class="card-body text-left">
+              <button type="radio" class="btn-pill" onclick="openCity(event, 'orange-number')">
+                <span>My number</span>
+              </button>
+              <button type="radio" class="btn-pill" onclick="openCity(event, 'orange-money')">
+                <span>Other number</span>
+              </button>
+            </div>
+          </div>
+
+          <div id="momo-select" class="tabcontent">
+            <br><br>
+            <h3>Mobil Money</h3>
+            <div class="card-body text-left">
+              <button type="radio" class="btn-pill" onclick="openCity(event, 'mtn-number')">
+                <span>My number</span>
+              </button>
+              <button type="radio" class="btn-pill" onclick="openCity(event, 'mtn-money')">
+                <span>Other number</span>
+              </button>
+            </div>
+          </div>
+
+          <div id="mtn-number" class="tabcontent card-body">
+            <div class="col-sm-6">
+              <div class="row">
+                <div class="col-sm-12">
+                  <h3>Mobil</h3>
+                  <label for="name">Use my number</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="orange-number" class="tabcontent card-body">
+            <div class="col-sm-6">
+              <div class="row">
+                <div class="col-sm-12">
+                  <h3>Orange Money</h3>
+                  <label for="name">Use my number</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab content -->
+          <div id="mastercard" class="tabcontent card-body">
+            <div class="col-sm-6">
+              <div class="row">
+                <div class="col-sm-12">
+                  <br><br>
+                  <h3>Other mastercard</h3>
+                  <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control field-form1" id="name" placeholder="Enter your name">
+                  </div>
+                </div>
+              </div>
+              <!--/.row-->
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <label for="ccnumber">Credit Card Number</label>
+                    <input type="text" class="form-control field-form1" id="ccnumber" placeholder="0000 0000 0000 0000">
+                  </div>
+                </div>
+              </div>
+              <!--/.row-->
+              <div class="row">
+                <div class="form-group col-sm-4">
+                  <label for="ccmonth">Month</label>
+                  <select class="form-control field-form1" id="ccmonth">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>11</option>
+                    <option>12</option>
+                  </select>
+                </div>
+                <div class="form-group col-sm-4">
+                  <label for="ccyear">Year</label>
+                  <select class="form-control field-form1" id="ccyear">
+                    <option>2014</option>
+                    <option>2015</option>
+                    <option>2016</option>
+                    <option>2017</option>
+                    <option>2018</option>
+                    <option>2019</option>
+                    <option>2020</option>
+                    <option>2021</option>
+                    <option>2022</option>
+                    <option>2023</option>
+                    <option>2024</option>
+                    <option>2025</option>
+                  </select>
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label for="cvv">CVV/CVC</label>
+                    <input type="text" class="form-control field-form1" id="cvv" placeholder="123">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--/.row-->
+          </div>
+
+          <div id="visa" class="tabcontent">
+            <br><br>
+            <h3>Visa</h3>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control field-form1" id="name" placeholder="Enter your name">
+                  </div>
+                </div>
+              </div>
+              <!--/.row-->
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <label for="ccnumber">Credit Card Number</label>
+                    <input type="text" class="form-control field-form1" id="ccnumber" placeholder="0000 0000 0000 0000">
+                  </div>
+                </div>
+              </div>
+              <!--/.row-->
+              <div class="row">
+                <div class="form-group col-sm-4">
+                  <label for="ccmonth">Month</label>
+                  <select class="form-control field-form1" id="ccmonth">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>11</option>
+                    <option>12</option>
+                  </select>
+                </div>
+                <div class="form-group col-sm-4">
+                  <label for="ccyear">Year</label>
+                  <select class="form-control field-form1" id="ccyear">
+                    <option>2010</option>
+                    <option>2011</option>
+                    <option>2012</option>
+                    <option>2013</option>
+                    <option>2014</option>
+                    <option>2015</option>
+                    <option>2016</option>
+                    <option>2017</option>
+                    <option>2018</option>
+                    <option>2019</option>
+                    <option>2020</option>
+                    <option>2021</option>
+                    <option>2022</option>
+                    <option>2023</option>
+                    <option>2024</option>
+                    <option>2025</option>
+                  </select>
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label for="cvv">CVV/CVC</label>
+                    <input type="text" class="form-control field-form1" id="cvv" placeholder="123">
+                  </div>
+                </div>
+              </div>
+              <!--/.row-->
+            </div>
+          </div>
+          
+          <div id="orange-money" class="tabcontent">
+            <br><br>
+            <h3>Orange Money</h3>
+            <p>Enter your phone number and confirm.</p><br>
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label for="tel">Phone</label>
+                  <input type="tel" class="form-control field-form1" id="tel" placeholder="Your Phone number">
+                </div>
+              </div>
+            </div>
+            <!--/.row-->
+            
+          </div>
+          <div id="paypal" class="tabcontent">
+            <br><br>
+            <h3>Paypal</h3>
+            <form>
+              <input valign="center" type="image" alt="Paiement par Paypal"
+                src=" https://www.paypal.com/fr_FR/i/bnr/horizontal_solution_PP.gif" name="submit"
+                alt="Paiement sécurisé par paypal" />
+            </form>
+          </div>
+          <div id="mtn-money" class="tabcontent">
+            <br><br>
+            <h3>Mobile Money</h3>
+            <p>Enter your phone number and confirm.</p><br>
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label for="tel">Phone</label>
+                  <input type="tel" class="form-control field-form1" id="tel" placeholder="Your Phone number">
+                </div>
+              </div>
+            </div>
+            <!--/.row-->
+            
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="myModal.hide()">Cancel</button>
+        <button type="button" class="btn btn-success" (click)="myModal.hide();showNotification('top','center', 'danger', 'pe-7s-close-circle', '\<b>Sorry\</b>\<br>This service was not available now. Tray later.')">Confirm</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

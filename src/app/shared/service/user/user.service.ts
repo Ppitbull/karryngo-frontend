@@ -13,7 +13,7 @@ import { User } from '../../../shared/entity/user';
 })
 export class UserService {
 
-  public static userEncour: User = new User();
+  public static currentUser: User = new User();
   public static isUser = true;
   params: any;
   userData: any;
@@ -63,7 +63,7 @@ export class UserService {
   */
   resetPassword() {
     this.toastr.success('Email Sent');
-    this.router.navigate(['/session/loginone']);
+    this.router.navigate(['/login']);
   }
 
   /*
@@ -73,7 +73,7 @@ export class UserService {
     localStorage.removeItem('user-data');
     this.isLoggedIn = false;
     this.toastr.success('You have been successfully logged out!');
-    this.router.navigate(['/session/loginone']);
+    this.router.navigate(['/login']);
   }
 
   // permet denvoyer le code au user par mail pour reset son password
@@ -94,8 +94,8 @@ export class UserService {
   validateCodeEmailUser(data: any): Promise<any> {
     return new Promise((resolve, reject) => {
       const params = {
-        'email': data.email,
-        'code': data.code
+        'field_email': data.field_email,
+        'user_code': data.user_code
       };
       this.api.post(`api/v01/recover-user/by-email/validate-code`, JSON.stringify(params)).subscribe(success => {
         resolve(success);
@@ -109,9 +109,9 @@ export class UserService {
   changeUserPassword(data: any): Promise<any> {
     return new Promise((resolve, reject) => {
       const params = {
-        'email': data.email,
-        'code': data.code,
-        'password': data.password
+        'field_email': data.field_email,
+        'user_code': data.user_code,
+        'field_password': data.field_password
       };
       this.api.post(`api/v01/recover-user/by-email/change-password`, JSON.stringify(params)).subscribe(success => {
         resolve(success);
@@ -138,10 +138,10 @@ export class UserService {
             'href': cheminUrl
           }
         },
-        'name': [{ 'value': data.name }],
+        'name': [{ 'value': data.field_firstname }],
         'field_surname': [{ 'value': data.field_surname }],
-        'mail': [{ 'value': data.mail }],
-        'pass': [{ 'value': data.pass }],
+        'mail': [{ 'value': data.field_email }],
+        'pass': [{ 'value': data.field_password }],
         'field_country': [          // représente le tableau de JSON du pays choisi par le user.
           {
             '_links': {
@@ -278,15 +278,21 @@ export class UserService {
           }
         },
         // body
-        'field_firstsname': [
+        'field_firstname': [
           {
-            'value': data.field_firstsname
+            'value': data.field_firstname
           }
         ],
 
         'field_surname': [
           {
             'value': data.field_surname
+          }
+        ],
+
+        'field_username': [
+          {
+            'value': data.field_username
           }
         ],
 
@@ -297,9 +303,9 @@ export class UserService {
           }
         ],
 
-        'field_addresse': [
+        'field_address': [
           {
-            'value': data.field_addresse
+            'value': data.field_address
           }
         ],
 
@@ -451,7 +457,7 @@ export class UserService {
           }
         ],
         // représente le tableau de JSON des villes saisies
-        'field_ville': data.field_ville || [],
+        'field_city': data.field_city || [],
         'type': [
           {
             'target_id': 'countries'

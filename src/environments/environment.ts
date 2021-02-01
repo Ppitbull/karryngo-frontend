@@ -21,7 +21,7 @@ export const environment = {
     url: 'http://localhost:5200/', */
   },
   firebase: {
-    databaseURL: 'https://sdk-games-scheduler.firebaseio.com',
+    databaseURL: 'https://karry-n-go.firebaseio.com',
     apiKey: 'AIzaSyCOX5wXZyToH9HhBfrzTbA-6RgCzAecllE',
     authDomain: 'karry-n-go.firebaseapp.com',
     projectId: 'karry-n-go',

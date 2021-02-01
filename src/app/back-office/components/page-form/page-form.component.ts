@@ -2,8 +2,8 @@ import { Component, Injector } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { ConfigService } from '../../services/config/config.service';
-import { ItemsService } from '../../services/items/items.service';
+import { ConfigService } from '../../../shared/service/config/config.service';
+import { ItemsService } from '../../../shared/service/items/items.service';
 
 @Component({
   selector: 'app-page-form',

@@ -51,7 +51,7 @@ export class RegisterCarrierShipperTransporterComponent implements OnInit {
     this.initPage();
   }
   createAccount() {
-    this.userService.userAccountCreation(UserService.userEncour);
+    this.userService.userAccountCreation(UserService.currentUser);
   }
 
 }
