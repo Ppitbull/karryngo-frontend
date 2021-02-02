@@ -18,7 +18,7 @@ export class PackageService {
     params: any;
     packageData: any;
     isLoggedIn = false;
-    static packageCreation: any;
+    // static packageCreation: any;
 
     constructor(
         private api: ApiService,

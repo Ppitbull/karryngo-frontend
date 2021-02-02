@@ -370,7 +370,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" (click)="myModal.hide()">Cancel</button>
-        <button type="button" class="btn btn-success" (click)="myModal.hide()">Confirm</button>
+        <button type="button" class="btn btn-success" (click)="myModal.hide();showNotification('top','center', 'danger', 'pe-7s-close-circle', '\<b>Sorry\</b>\<br>This service was not available now. Tray later.')">Confirm</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

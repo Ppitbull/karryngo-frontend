@@ -59,8 +59,8 @@ export const navItems: INavData[] = [
     icon: 'fa fa-bus',
     children: [
       {
-        name: 'Vehiculs',
-        url: '/trips/vehiculs',
+        name: 'Vehicles',
+        url: '/trips/vehicles',
         icon: 'none'
       },
       {

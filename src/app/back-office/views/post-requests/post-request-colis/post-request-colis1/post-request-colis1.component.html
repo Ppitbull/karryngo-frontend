@@ -1,99 +1,57 @@
-<!-- <app-nav-bar></app-nav-bar> -->
-
-<!-- Start your project here-->
-<div class="container container-global cont-margin text-center">
-  <h3 class="jaune text-left mx-4">Carrier/Shipment details</h3>
-  <div class="container cont2">
-    <!-- Default form register -->
-    <form class="text-center p-2">
-
-      <!-- Package Details-->
-      <h4 class="mb-2 text-left title-form">Package Details</h4>
-      <!-- row-item-->
-      <div class="form-row mb-3">
-        <div class="col">
-          <!-- First name -->
-          <input type="text" id="defaultRegisterFormFirstName" class="form-control field-form1 field"
-            placeholder="Number of Pieces">
-        </div>
-        <div class="col">
-          <!-- Last name -->
-          <input type="text" id="defaultRegisterFormLastName" class="form-control field-form1 field"
-            placeholder="Total Weight">
-          <p class="title-form sub-indication text-left">LBS</p>
-        </div>
-      </div>
-      <!-- row-item-->
-      <!-- row-item-->
-      <div class="form-row mb-3">
-        <div class="col">
-          <!-- First name -->
-          <input type="text" id="defaultRegisterFormFirstName" class="form-control field-form1 field"
-            placeholder="Height">
-          <p class="title-form sub-indication text-left">Inches</p>
-        </div>
-        <div class="col">
-          <!-- Last name -->
-          <input type="text" id="defaultRegisterFormLastName" class="form-control field-form1 field"
-            placeholder="Width">
-          <p class="title-form sub-indication text-left">Inches</p>
-        </div>
-      </div>
-      <!-- row-item-->
-      <!-- row-item-->
-      <div class="form-row mb-4">
-        <div class="col">
-          <!-- First name -->
-          <input type="text" id="defaultRegisterFormFirstName" class="form-control field-form1 field"
-            placeholder="Depth">
-          <p class="title-form sub-indication text-left">Inches</p>
-        </div>
-        <div class="col">
-
-        </div>
-      </div>
-      <!-- row-item-->
-      <!-- Package Details-->
-
-
-      <!-- Trips Details-->
-      <h4 class="mb-2 text-left title-form">Trips Details</h4>
-      <!-- row-item-->
-      <div class="form-row mb-3">
-        <div class="col">
-          <!-- First name -->
-          <input type="text" id="defaultRegisterFormFirstName" class="form-control field-form1 field"
-            placeholder="From">
-            <p class="title-form sub-indication text-left">Departure city</p>
-        </div>
-        <div class="col">
-          <!-- Last name -->
-          <input type="text" id="defaultRegisterFormLastName" class="form-control field-form1 field"
-            placeholder="To">
-          <p class="title-form sub-indication text-left">Arrival city</p>
-        </div>
-      </div>
-      <!-- row-item-->
-      <!-- row-item-->
-      <div class="form-row mb-4">
-        <div class="col">
-          <!-- First name -->
-          <input type="text" id="defaultRegisterFormFirstName" class="form-control field-form1 field"
-            placeholder="Prefered departure Date">
-          <p class="title-form sub-indication text-left">Date</p>
-        </div>
-        <div class="col">
-
-        </div>
-      </div>
-      <!-- row-item-->
-      <!-- Trips Details-->
-
-    </form>
-    <!-- Default form register -->
-  </div>
-  <button type="button" class="btn next-button btn-weith" routerLink="/post-request-colis-2">Go</button>
-</div>
-<!-- Start your project here-->
-
-<!-- <app-front-footer></app-front-footer> -->
+<br>
+<h4 class="mb-2 text-left title-form">Carriers List available for your request.</h4>
+<br>
+<table class="table table-bordered table-striped table-sm">
+    <thead>
+        <tr>
+            <th>Type</th>
+            <th>Driver</th>
+            <th>Start Date</th>
+            <th>Time</th>
+        </tr>
+    </thead>
+    <tbody
+        (click)="showNotification('top','center', 'danger', 'pe-7s-close-circle', '\<b>Sorry\</b>\<br>This service was not available now. Tray later.')">
+        <tr>
+            <td>car</td>
+            <td>Cedric Nguendap</td>
+            <td>2021/02/15</td>
+            <td>06 : 30 AM</td>
+        </tr>
+        <tr>
+            <td>Bus</td>
+            <td>Emmerick </td>
+            <td>2021/02/16</td>
+            <td>02 : 30 PM</td>
+        </tr>
+        <tr>
+            <td>Bus</td>
+            <td>Kamdem</td>
+            <td>2021/02/20</td>
+            <td>09 : 00 AM</td>
+        </tr>
+        <tr>
+            <td>Car</td>
+            <td>Marc Paho</td>
+            <td>2021/02/20</td>
+            <td>11 : 30 AM</td>
+        </tr>
+        <tr>
+            <td>Bike</td>
+            <td>Sanou flambel</td>
+            <td>2020/12/30</td>
+            <td>06 : 30 AM</td>
+        </tr>
+    </tbody>
+</table>
+<nav>
+    <ul class="pagination pull-right">
+        <li class="page-item"><a class="page-link">Prev</a></li>
+        <li class="page-item active">
+            <a class="page-link">1</a>
+        </li>
+        <li class="page-item"><a class="page-link">2</a></li>
+        <li class="page-item"><a class="page-link">3</a></li>
+        <li class="page-item"><a class="page-link">Next</a></li>
+    </ul>
+</nav>

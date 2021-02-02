@@ -1,0 +1,135 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-sm-3 col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="jaune text-left mx-4">{{titleInterface}}</h3>
+        </div>
+        <div class="container cont2">
+
+          <div class="cont">
+            <div *ngIf="interface1">
+              <app-post-request-colis0></app-post-request-colis0>
+            </div>
+            <div *ngIf="interface2">
+              <app-post-request-colis1></app-post-request-colis1>
+            </div>
+            <div *ngIf="interface3">
+              <app-post-request-colis2></app-post-request-colis2>
+            </div>
+          </div>
+          <br><br><br>
+
+          <div class="footer-registration text-right">
+            <button *ngIf="visiblePrev" type="button" class="btn next-button btn-w" (click)="prev()">Back</button>
+            <button *ngIf="visible" type="button" class="btn next-button btn-w"
+              (click)="next()">
+              NEXT
+            </button>
+          </div>
+          <button *ngIf="!visible" type="button" class="btn next-button b-mag" (click)="myModal.show()">Confirm</button>
+
+        </div>
+      </div>
+      <!-- Start your project here-->
+
+    </div>
+
+    <div class="col-sm-6 col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="jaune text-left mx-4">My requets history</h3>
+        </div>
+        <div class="container cont2">
+          <table class="table table-bordered table-striped table-sm">
+            <thead>
+              <tr>
+                <th>Status</th>
+                <th>Name</th>
+                <th>Delay date</th>
+                <th>Type</th>
+              </tr>
+            </thead>
+            <tbody
+              (click)="showNotification('top','center', 'danger', 'pe-7s-close-circle', '\<b>Sorry\</b>\<br>This service was not available now. Tray later.')">
+              <tr>
+                <td>
+                  <span class="badge badge-secondary">Stand by</span>
+                </td>
+                <td>Phone</td>
+                <td>2021/02/05</td>
+                <td>Small Package</td>
+              </tr>
+              <tr>
+                <td>
+                  <span class="badge badge-danger">Canceled</span>
+                </td>
+                <td>Beds</td>
+                <td>2021/02/02</td>
+                <td>Big package</td>
+              </tr>
+              <tr>
+                <td>
+                  <span class="badge badge-warning">Started</span>
+                </td>
+                <td>PC DELL</td>
+                <td>2021/01/20</td>
+                <td>Small package</td>
+              </tr>
+              <tr>
+                <td>
+                  <span class="badge badge-warning">Started</span>
+                </td>
+                <td>Tomato Bag</td>
+                <td>2021/01/15</td>
+                <td>Big package</td>
+              </tr>
+              <tr>
+                <td>
+                  <span class="badge badge-success">Finished</span>
+                </td>
+                <td>Traditionnal dress</td>
+                <td>2020/12/30</td>
+                <td>small package</td>
+              </tr>
+            </tbody>
+          </table>
+          <nav>
+            <ul class="pagination pull-right">
+              <li class="page-item"><a class="page-link">Prev</a></li>
+              <li class="page-item active">
+                <a class="page-link">1</a>
+              </li>
+              <li class="page-item"><a class="page-link">2</a></li>
+              <li class="page-item"><a class="page-link">3</a></li>
+              <li class="page-item"><a class="page-link">Next</a></li>
+            </ul>
+          </nav>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div bsModal #myModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Confirm your request</h4>
+        <button type="button" class="close" (click)="myModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Once the request has been confirmed, the withdrawal will be made from your wallet</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="myModal.hide()">Cancel</button>
+        <button type="button" class="btn btn-success" (click)="myModal.hide();showNotification('top','center', 'danger', 'pe-7s-close-circle', '\<b>Sorry\</b>\<br>This service was not available now. Tray later.')">Confirm</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

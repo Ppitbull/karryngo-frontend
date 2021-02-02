@@ -10,12 +10,12 @@ const routes: Routes = [
     data: {
       title: 'Dashboard'
     },
-    children: [
-      {
-        path: '',
-        loadChildren: () => import('../../users/trips/trips.module')
-          .then(mod => mod.TripsModule),
-      }]
+    // children: [
+    //   {
+    //     path: '',
+    //     loadChildren: () => import('../../users/trips/trips.module')
+    //       .then(mod => mod.TripsModule),
+    //   }]
   }
 ];
 

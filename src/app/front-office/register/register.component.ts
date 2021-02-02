@@ -41,11 +41,11 @@ export class RegisterComponent implements OnInit {
     }
 
     navigateToLogin() {
-        this.router.navigate(['/login']);
+        this.router.navigate(['login']);
     }
 
-    goToActivate() {
-        this.router.navigate(['/account-activation']);
+    navigateToVerifyEmail() {
+        this.router.navigate(['verify-email-address']);
     }
 
     /////

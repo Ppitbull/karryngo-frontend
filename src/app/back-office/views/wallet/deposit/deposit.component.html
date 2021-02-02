@@ -118,7 +118,7 @@
                     <label for="name">Use my card</label>
                     <br><br>
                     <div>
-                      <button class="btn"  data-toggle="modal" (click)="myModal.show();showNotification('top','center', 'danger', 'pe-7s-close-circle', '\<b>Sorry\</b>\<br>This service was not available now. Tray later.')">Submit</button>
+                      <button class="btn"  data-toggle="modal" (click)="myModal.show()">Submit</button>
                     </div>
                   </div>
                 </div>
@@ -133,7 +133,7 @@
                     <label for="name">Use my number</label>
                     <br><br>
                     <div>
-                      <button class="btn"  data-toggle="modal" (click)="myModal.show();showNotification('top','center', 'danger', 'pe-7s-close-circle', '\<b>Sorry\</b>\<br>This service was not available now. Tray later.')">Submit</button>
+                      <button class="btn"  data-toggle="modal" (click)="myModal.show()">Submit</button>
                     </div>
                   </div>
                 </div>
@@ -206,7 +206,7 @@
                   </div>
                   <br><br>
                   <div>
-                    <button class="btn"  data-toggle="modal" (click)="myModal.show();showNotification('top','center', 'danger', 'pe-7s-close-circle', '\<b>Sorry\</b>\<br>This service was not available now. Tray later.')">Submit</button>
+                    <button class="btn"  data-toggle="modal" (click)="myModal.show()">Submit</button>
                   </div>
                 </div>
               </div>
@@ -282,7 +282,7 @@
                   </div>
                   <br><br>
                   <div>
-                    <button class="btn"  data-toggle="modal" (click)="myModal.show();showNotification('top','center', 'danger', 'pe-7s-close-circle', '\<b>Sorry\</b>\<br>This service was not available now. Tray later.')">Submit</button>
+                    <button class="btn"  data-toggle="modal" (click)="myModal.show()">Submit</button>
                   </div>
                 </div>
                 <!--/.row-->
@@ -297,14 +297,14 @@
                 <div class="col">
                   <div class="form-group">
                     <label for="tel">Phone</label>
-                    <input type="tel" class="form-control field-form1" id="tel" placeholder="Your Phone number">
+                    <input type="text" class="form-control field-form1" id="tel" placeholder="Your Phone number">
                   </div>
                 </div>
               </div>
               <!--/.row-->
               <br><br>
               <div>
-                <button class="btn"  data-toggle="modal" (click)="myModal.show();showNotification('top','center', 'danger', 'pe-7s-close-circle', '\<b>Sorry\</b>\<br>This service was not available now. Tray later.')">Submit</button>
+                <button class="btn"  data-toggle="modal" (click)="myModal.show()">Submit</button>
               </div>
             </div>
             <div id="paypal" class="tabcontent">
@@ -331,7 +331,7 @@
               <!--/.row-->
               <br><br>
               <div>
-                <button class="btn"  data-toggle="modal" (click)="myModal.show();showNotification('top','center', 'danger', 'pe-7s-close-circle', '\<b>Sorry\</b>\<br>This service was not available now. Tray later.')">Submit</button>
+                <button class="btn"  data-toggle="modal" (click)="myModal.show()">Submit</button>
               </div>
             </div>
           </div>
@@ -347,7 +347,7 @@
           </h3>
         </div>
         <div class="card-body">
-          <strong style="text-shadow: 1px 1px 3px rgb(172, 140, 10);">5O 000,000</strong> <small>FCFA</small>
+          <strong style="text-shadow: 1px 1px 3px rgb(172, 140, 10);">{{balence | currency :'XOF':true:'1.1-3'}}</strong> <small>FCFA</small>
         </div>
       </div>
     </div>
@@ -371,7 +371,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" (click)="myModal.hide()">Cancel</button>
-        <button type="button" class="btn btn-success" (click)="myModal.hide()">Confirm</button>
+        <button type="button" class="btn btn-success" (click)="myModal.hide();showNotification('top','center', 'danger', 'pe-7s-close-circle', '\<b>Sorry\</b>\<br>This service was not available now. Tray later.')">Confirm</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

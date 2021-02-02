@@ -54,6 +54,7 @@ export class UserRegistrationComponent implements OnInit {
     }
     this.initPage();
   }
+  
   createAccount() {
     this.userService.userAccountCreation(UserService.currentUser);
     //this.userService.loginUser(UserService.userEncour.name, UserService.userEncour.pass);

@@ -15,7 +15,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 import { AppComponent } from './app.component';
 
 // Import containers
-import { DefaultLayoutComponent } from './containers';
+import { DefaultLayoutComponent } from './back-office/containers';
 import { LoginComponent } from './front-office/login/login.component';
 import { RegisterComponent } from './front-office/register/register.component';
 
@@ -117,6 +117,7 @@ import { TermsAndConditionsComponent } from './shared/components/terms-and-condi
 
 import { TestPagesComponent } from './test-pages/test-pages.component';
 import { MapsComponent } from './back-office/users/maps/maps.component';
+import { VerifyEmailComponent } from './front-office/verify-email/verify-email.component';
 
 @NgModule({
   imports: [
@@ -194,6 +195,7 @@ import { MapsComponent } from './back-office/users/maps/maps.component';
     FooterComponent,
     FullIntroComponent,
     WelcomeComponent,
+    VerifyEmailComponent,
     PostTripCarrierShipper1Component,
     PostTripCarrierShipper2Component,
     PostTripTransport1Component,

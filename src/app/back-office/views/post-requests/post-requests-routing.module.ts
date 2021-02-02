@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { PostRequestColisComponent } from './post-request-colis/post-request-colis/post-request-colis.component';
+import { PostRequestColisComponent } from './post-request-colis/post-request-colis.component';
 import { PostRequestTripsComponent } from './post-request-trips/post-request-trips.component';
 
 const routes: Routes = [

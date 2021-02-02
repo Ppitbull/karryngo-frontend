@@ -12,13 +12,13 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'vehiculs'
+        redirectTo: 'vehicles'
       },
       {
-        path: 'vehiculs',
+        path: 'vehicles',
         component: VehiculsComponent,
         data: {
-          title: 'Vehiculs'
+          title: 'Vehicles'
         }
       },
       {

@@ -2,11 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 // Import Containers
-import { DefaultLayoutComponent } from './containers';
-import { P404Component } from './back-office/views/error/404.component';
-import { P500Component } from './back-office/views/error/500.component';
-// import { LoginComponent } from './views/login/login.component';
-// import { RegisterComponent } from './views/register/register.component';
+import { DefaultLayoutComponent } from './back-office/containers';
 
 
 /// Front Office
@@ -32,13 +28,14 @@ import { TestPagesComponent } from './test-pages/test-pages.component';
 
 
 //// Back Office
-import { TripsModule } from './back-office/users/trips/trips.module';
+// import { TripsModule } from './back-office/users/trips/trips.module';
 import { PostTripCarrierShipper1Component } from './back-office/users/trips/post-trip-carrier-shipper/post-trip-carrier-shipper1/post-trip-carrier-shipper1.component';
 import { PostTripCarrierShipper2Component } from './back-office/users/trips/post-trip-carrier-shipper/post-trip-carrier-shipper2/post-trip-carrier-shipper2.component';
 import { PostTripTransport1Component } from './back-office/users/trips/post-trip-transport1/post-trip-transport1.component';
 import { ProfileCarrierBusinessComponent } from './back-office/users/profile/profile-carrier-business/profile-carrier-business.component';
 import { ProfileCarrierComponent } from './back-office/users/profile/profile-carrier/profile-carrier.component';
 import { ProfileNormalUserComponent } from './back-office/users/profile/profile-normal-user/profile-normal-user.component';
+import { VerifyEmailComponent } from './front-office/verify-email/verify-email.component';
 
 export const routes: Routes = [
   {
@@ -61,6 +58,10 @@ export const routes: Routes = [
   {
     path: 'test',
     component: TestPagesComponent
+  },
+  {
+    path: 'verify-email-address',
+    component: VerifyEmailComponent
   },
   {
     path: 'how-does-it-work',
@@ -129,6 +130,10 @@ export const routes: Routes = [
   },
   {
     path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: 'sign-in',
     component: LoginComponent
   },
   {

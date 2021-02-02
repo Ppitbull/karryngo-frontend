@@ -168,8 +168,61 @@
           <h3 class="jaune text-left mx-4">My requests list</h3>
         </div>
         <div class="container cont2">
-
-          <br><br><br>
+          <table class="table table-bordered table-striped table-sm">
+            <thead>
+              <tr>
+                <th>Status</th>
+                <th>Date</th>
+                <th>Start</th>
+                <th>To</th>
+              </tr>
+            </thead>
+            <tbody (click)="showNotification('top','center', 'danger', 'pe-7s-close-circle', '\<b>Sorry\</b>\<br>This service was not available now. Tray later.')">
+              <tr>
+                <td>
+                  <span class="badge badge-secondary">Stand by</span>
+                </td>
+                <td>2021/02/05</td>
+                <td>Douala</td>
+                <td>Bafoussam</td>
+              </tr>
+              <tr>
+                <td>
+                  <span class="badge badge-danger">Canceled</span>
+                </td>
+                <td>2021/02/01</td>
+                <td>Yaounde</td>
+                <td>Douala</td>
+              </tr>
+              <tr>
+                <td>
+                  <span class="badge badge-success">Finished</span>
+                </td>
+                <td>2021/01/15</td>
+                <td>Bangangte</td>
+                <td>Yaounde</td>
+              </tr>
+              <tr>
+                <td>
+                  <span class="badge badge-success">Finished</span>
+                </td>
+                <td>2020/12/30</td>
+                <td>Bafoussam</td>
+                <td>Bangangte</td>
+              </tr>
+            </tbody>
+          </table>
+          <nav>
+            <ul class="pagination pull-right">
+              <li class="page-item"><a class="page-link">Prev</a></li>
+              <li class="page-item active">
+                <a class="page-link">1</a>
+              </li>
+              <li class="page-item"><a class="page-link">2</a></li>
+              <li class="page-item"><a class="page-link">3</a></li>
+              <li class="page-item"><a class="page-link">Next</a></li>
+            </ul>
+          </nav>
         </div>
       </div>
     </div>

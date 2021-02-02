@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PackageService } from '../../../../shared/service/back-office/package.service';
+declare var $: any;
 
 @Component({
   selector: 'app-post-request-trips',
@@ -84,5 +85,20 @@ export class PostRequestTripsComponent implements OnInit {
   }
   get f() {
     return this.packageForm.controls;
+  }
+
+  showNotification(from, align, colortype, icon, text) {
+
+    $.notify({
+      icon: icon,
+      message: text
+    }, {
+      type: colortype,
+      timer: 1000,
+      placement: {
+        from: from,
+        align: align
+      }
+    });
   }
 }

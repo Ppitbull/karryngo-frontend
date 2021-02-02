@@ -3,6 +3,7 @@ export class Package {
     field_owner: string;
     field_status: string;
     field_name: string;
+    field_price: string;
     field_countryStart: string;
     field_cityStart: string;
     field_latStart: any;
