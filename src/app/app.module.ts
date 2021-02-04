@@ -89,17 +89,13 @@ import { NavBarComponent } from './front-office/static-elements/nav-bar/nav-bar.
 import { FooterComponent } from './front-office/static-elements/footer/footer.component';
 import { FullIntroComponent } from './front-office/static-elements/full-intro/full-intro.component';
 import { WelcomeComponent } from './front-office/welcome/welcome.component';
-import { UserRegistration1Component } from './front-office/user-registration/user-registration1/user-registration1.component';
-import { UserRegistration2Component } from './front-office/user-registration/user-registration2/user-registration2.component';
-import { UserRegistration3Component } from './front-office/user-registration/user-registration3/user-registration3.component';
-import { UserRegistrationComponent } from './front-office/user-registration/user-registration/user-registration.component';
 import { HowDoesItWorkComponent } from './front-office/how-does-it-work/how-does-it-work.component';
 import { RequestsComponent } from './front-office/requests/requests.component';
 import { AboutUsComponent } from './front-office/about-us/about-us.component';
 import { ForgotPasswordComponent } from './front-office/forgot-password/forgot-password.component';
 import { ViewTripCarrierShipmentComponent } from './front-office/view-trip/view-trip-carrier-shipment/view-trip-carrier-shipment.component';
 import { ViewTripTransportPersonsComponent } from './front-office/view-trip/view-trip-transport-persons/view-trip-transport-persons.component';
-import { RegisterCarrierShipperTransporterComponent } from './front-office/registration/register-carrier-shipper-transporter/register-carrier-shipper-transporter.component';
+// import { RegisterCarrierShipperTransporterComponent } from './front-office/registration/register-carrier-shipper-transporter/register-carrier-shipper-transporter.component';
 
 //// Back Office
 import { TripsModule } from './back-office/users/trips/trips.module';
@@ -199,11 +195,7 @@ import { VerifyEmailComponent } from './front-office/verify-email/verify-email.c
     PostTripCarrierShipper1Component,
     PostTripCarrierShipper2Component,
     PostTripTransport1Component,
-    UserRegistration1Component,
-    UserRegistration2Component,
-    UserRegistration3Component,
-    UserRegistrationComponent,
-    RegisterCarrierShipperTransporterComponent,
+    // RegisterCarrierShipperTransporterComponent,
     ProfileCarrierBusinessComponent,
     ProfileCarrierComponent,
     ViewTripCarrierShipmentComponent,

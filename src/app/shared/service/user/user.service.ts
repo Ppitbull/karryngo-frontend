@@ -121,136 +121,29 @@ export class UserService {
     });
   }
 
-  // permet d'enregistrer un user en creant son compte
-  userAccountCreation(data: User): Promise<any> {
-
-    return new Promise((resolve, reject) => {
-
-      const headers = {
-        'Content-Type': 'application/hal+json',
-        'X-CSRF-Token': 'FWjJkOClVTMzyhEPEhz_OPR3PulweXUqi-NePcofKU8' || JSON.parse(localStorage.getItem('app-token')),
-        'Accept': 'application/json',
-      }
-      const cheminUrl = `${this.api.url}/rest/type/user/user`;
-      this.params = {
-        '_links': {
-          'type': {
-            'href': cheminUrl
-          }
-        },
-        'name': [{ 'value': data.field_firstname }],
-        'field_surname': [{ 'value': data.field_surname }],
-        'mail': [{ 'value': data.field_email }],
-        'pass': [{ 'value': data.field_password }],
-        'field_country': [          // représente le tableau de JSON du pays choisi par le user.
-          {
-            '_links': {
-              'type': {
-                'href': 'http://dev.sdkgames.com/karryngo/rest/type/taxonomy_term/countries'
-              }
-            },
-            'uuid': [
-              {
-                'value': data.country_uuid
-              }
-            ]
-          }
-        ],
-        'field_language': data.field_language || [],
-        'field_do_you_hire_as_business': [{ 'value': data.field_do_you_hire_as_business }],
-        'field_company_name': [{ 'value': data.field_company_name }],
-        'field_company_import_export_code': [{ 'value': data.field_company_import_export_code }],
-        'field_company_email': [{ 'value': data.field_company_email }],
-        'field_company_registration_numbe': [{ 'value': data.field_company_registration_numbe }],
-        'field_company_website': [{ 'value': data.field_company_website }],
-        'field_company_phone': [{ 'value': data.field_company_phone }],
-        'field_country_company': [{ 'value': data.field_country_company }],
-        'field_city_company': [{ 'value': data.field_city_company }],
-        'field_address_1_company': [{ 'value': data.field_address_1_company }],
-        'field_address_2_company': [{ 'value': data.field_address_2_company }],
-        'field_choose_type_of_services': data.field_choose_type_of_services || [],
-        'field_interested_countries': data.field_interested_countries || []
-      };
-      this.api.post(`user/register?_format=hal_json`, JSON.stringify(this.params), headers).subscribe(success => {
-        resolve(success);
-        this.setUserInformations(success);
-        //this.toastr.success('You have been successfully Register!');
-        //this.router.navigate(['login']);
-      }, error => {
-        this.toastr.success(error.message);
-        reject(error);
-      });
-    });
-  }
-
-  // permet de login un user
-  loginUser(username?: string, password?: string): Promise<any> {
-
-    const params = new URLSearchParams();
-
-    params.append('grant_type', 'password');
-    params.append('client_id', '8a4f8634-4f16-4b6e-b617-554664897bbe');
-    params.append('client_secret', 'sdkgames2015');
-    params.append('username', username);
-    params.append('password', password);
-
-    const header = {
-      'Content-Type': 'application/x-www-form-urlencoded',
-      'Accept': 'application/json'
-    };
-
-    return new Promise((resolve, reject) => {
-      this.api.post('oauth/token', params.toString(), header).subscribe(success => {
-        resolve(success);
-        this.api.setAccessToken(success.access_token);
-        this.api.setRefreshToken(success.refresh_token);
-
-        // Check if the user data is available
-        if (this.getLocalStorageUser()) {
-          this.router.navigate(['/']);
-          this.toastr.success('You have been successfully logged In!');
-        } else {
-
-          // Get the user informations
-          this.userConnectedInformations().then(reponse => {
-            this.toastr.success('You have been successfully logged In!');
-            this.router.navigate(['/']);
-          }).catch(error => {
-            this.router.navigate(['/']);
-          });
-        }
-
-      }, error => {
-        this.toastr.success('You have failed to logged In!');
-        reject(error);
-
-        if (error && error.error === 'invalid_grant') {
-          this.toastr.success('Invalid credentials ! Please check your informations and try again.');
-        }
-      });
-    });
-  }
 
   // Permet de get le user connected en renvoyant toutes les infos nécessaires sur le profil du user
   userConnectedInformations(): Promise<any> {
 
     return new Promise((resolve, reject) => {
-
+      console.log('de nimporte quoi');
       const headers = {
         'Authorization': 'Bearer ' + this.api.getAccessToken(),
-        'Content-Type': 'application/hal+json',
-        'Accept': 'application/json'
+        'Content-Type': 'application/json',
+        // 'Accept': 'application/json'
       };
 
-      this.api.get('api/v01/user/connected?_format=hal_json', headers).subscribe((reponse: any) => {
-        if (reponse) {
-          resolve(reponse);
-          this.setUserInformations(reponse);
+      this.api.get('requester/profil', headers)
+      .subscribe((response: any) => {
+        if (response) {
+          resolve(response);
+          this.setUserInformations(response);
         }
 
       }, (error: any) => {
 
         if (error) {
+          console.log(error);
           this.toastr.success(error.message);
           reject(error);
         }

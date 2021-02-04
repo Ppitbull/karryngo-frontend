@@ -1,8 +1,5 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from '../api/api.service';
-import { GeneraleService } from '../generale/generale.service';
-import { ParametersService } from '../../../shared/parameters/parameters.service';
-import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Package } from '../../../shared/entity/package';
 
@@ -14,23 +11,36 @@ import { Package } from '../../../shared/entity/package';
 export class PackageService {
 
     public static currentPackage: Package = new Package();
-    public static isPackage = true;
     params: any;
+    packages: any[];
     packageData: any;
-    isLoggedIn = false;
-    // static packageCreation: any;
 
     constructor(
         private api: ApiService,
-        private generalService: GeneraleService,
-        private parameters: ParametersService,
-        private router: Router,
         private toastr: ToastrService
     ) { }
 
-    /*
-  *  Set the package informations.
-  */
+    // Get all packages.
+    getPackages() {
+        const headers = {
+            'Content-Type': 'application/hal+json',
+            // 'X-CSRF-Token': 'FWjJkOClVTMzyhEPEhz_OPR3PulweXUqi-NePcofKU8' || JSON.parse(localStorage.getItem('app-token')),
+            // 'Accept': 'application/json',
+        };
+
+        // Id à utiliser dans pour avoir les packages correspondant
+        // const id = JSON.parse(localStorage.getItem('package-data')).id;
+
+        this.api.get('user/packages', headers)
+        .subscribe(response => {
+            this.packages = response.json();
+        }, error => {
+            this.toastr.success(error.message);
+            console.log('Several error: ', error);
+        });
+    }
+
+    // Set the package informations.
     setPackageInformations(currentPackage: any) {
         localStorage.setItem('package-data', JSON.stringify(currentPackage));
     }
@@ -52,16 +62,17 @@ export class PackageService {
 
     // permet d'enregistrer un package en creant son compte
     packageCreation(data: Package): Promise<any> {
-
         return new Promise((resolve, reject) => {
 
             const headers = {
-                'Content-Type': 'application/hal+json',
-                'X-CSRF-Token': 'FWjJkOClVTMzyhEPEhz_OPR3PulweXUqi-NePcofKU8' || JSON.parse(localStorage.getItem('app-token')),
-                'Accept': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('access-token'),
+                'Content-Type': 'application/json',
+                // 'X-CSRF-Token': 'FWjJkOClVTMzyhEPEhz_OPR3PulweXUqi-NePcofKU8' || JSON.parse(localStorage.getItem('app-token')),
+                // 'Accept': 'application/json',
             };
-            const cheminUrl = `${this.api.url}/rest/type/package/package`;
-            this.params = {
+            // const cheminUrl = `${this.api.url}/rest/type/package/package`;
+            setTimeout(()=> { 
+                this.params = {
                 // '_links': {
                 //     'type': {
                 //         'href': cheminUrl
@@ -100,20 +111,29 @@ export class PackageService {
                         'piece_nber': data.field_numberPackage,
                     },
                     'detail': data.field_descriptionPackage,
-                    'images': data.field_image
+                    'images': data.field_image,
+                    // 'price': data.field_price
                 }
 
             };
-            console.log(this.params);
-            this.api.post(`package/package?_format=hal_json`, JSON.stringify(this.params), headers).subscribe(success => {
-                resolve(success);
-                this.setPackageInformations(success);
-                // this.toastr.success('You have been successfully Register your package!');
-                // this.router.navigate(['dashboard']);
+            this.api.post('requester/service/add', JSON.stringify(this.params), headers)
+            .subscribe(success => {
+                if(success.resultCode === 0)
+                {
+                    this.setPackageInformations(success);
+                    this.toastr.success('You have been successfully Register your package!');
+                    resolve(success);
+                }
+                else
+                {
+                    reject(success);
+                }
             }, error => {
                 this.toastr.success(error.message);
                 reject(error);
             });
+        }, 3000);
+            /**/
         });
     }
 
@@ -126,11 +146,11 @@ export class PackageService {
             const headers = {
                 'Authorization': 'Bearer ' + token,
                 'Content-Type': 'application/hal+json',
-                'Accept': 'application/json',
-                'X-CSRF-Token': 'FWjJkOClVTMzyhEPEhz_OPR3PulweXUqi-NePcofKU8' || JSON.parse(localStorage.getItem('app-token'))
+                // 'Accept': 'application/json',
+                // 'X-CSRF-Token': 'FWjJkOClVTMzyhEPEhz_OPR3PulweXUqi-NePcofKU8' || JSON.parse(localStorage.getItem('app-token'))
             };
 
-            const cheminUrl = `${this.api.url}/rest/type/package/package`;
+            // const cheminUrl = `${this.api.url}/rest/type/package/package`;
             this.params = {
                 // '_links': {
                 //     'type': {
@@ -174,11 +194,12 @@ export class PackageService {
                             }
                         ],
                         'detail': data.field_descriptionPackage,
-                        'images': data.field_image
+                        'images': data.field_image,
+                        // 'price': data.field_price
                     }
                 ]
             };
-            this.api.patch(`package/${nid}?_format=hal_json`, JSON.stringify(this.params), headers).subscribe(success => {
+            this.api.patch(`package/${nid}`, JSON.stringify(this.params), headers).subscribe(success => {
                 resolve(success);
             }, error => {
                 reject(error);

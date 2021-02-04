@@ -15,7 +15,7 @@ export class ApiService {
   formImage: FormGroup;
   currency: any;
 
-  public url = 'http://dev.sdkgames.com/karryngo';
+  public url = 'http://192.168.43.68:8090/api';
   public url1 = 'http://dev.sdkgames.com/flashfood/web';
 
   constructor(
@@ -42,18 +42,6 @@ export class ApiService {
     return data;
   }
 
-
-  // Currency code
-  getCurrency() {
-
-    this.currency.push({ name: 'Francs FCFA BEAC', lang: 'fr', currency: 'XAF' });
-    this.currency.push({ name: 'Francs FCFA BCEAO', lang: 'fr', currency: 'XOF' });
-    this.currency.push({ name: 'South Africa currency', lang: 'fr', currency: 'RAND' });
-    return this.currency;
-  }
-
-
-
   // Init the image form
   initImageForm() {
     this.formImage = this.fb.group({
@@ -72,10 +60,8 @@ export class ApiService {
   }
 
 
-  /*
-    * add the an image
-    *
-    ***/
+  // Add the an image
+
   addImage(event: any): Promise<any> {
 
     return new Promise((resolve, reject) => {
@@ -110,67 +96,29 @@ export class ApiService {
     });
   }
 
-  /*
-   *  Set the user access token.
-   */
+  // Set the user access token.
   setAccessToken(token: string) {
-    return localStorage.setItem('access-token', JSON.stringify(token));
+    return localStorage.setItem('access-token', token);
   }
 
 
-  /*
-   *  Get the user access token.
-   */
+  // Get the user access token.
   getAccessToken() {
-    return JSON.parse(localStorage.getItem('access-token'));
+    return localStorage.getItem('access-token');
   }
 
 
-  /*
-  *  Set the user refresh token.
-  */
+  // Set the user refresh token.
   setRefreshToken(token: string) {
     return localStorage.setItem('refresh-token', JSON.stringify(token));
   }
 
-  /*
-  *  Get the user refresh token.
-  */
+  // Get the user refresh token.
   getRefreshToken() {
     return JSON.parse(localStorage.getItem('refresh-token'));
   }
 
-
-
-  /*
-  *  Set object value
-  */
-  setValue(value: string) {
-    const data = [];
-    const param = new Object();
-    Object.defineProperty(param, 'value', { value });
-    data.push(param);
-    return data;
-  }
-
-  /*
-  *  Set data links
-  */
-  // tslint:disable-next-line:ban-types
-  setLinks(url: string): Object {
-
-    const param = new Object();
-    const param1 = new Object();
-    Object.defineProperty(param, 'href', { value: url });
-    Object.defineProperty(param1, 'type', { value: param });
-
-    return param1;
-  }
-
-
-  /*
-  *  Construct data params
-  */
+  // Construct data params
   // tslint:disable-next-line:ban-types
   constructParam(keys: Array<any>, values: Array<any>): Object {
 
@@ -184,9 +132,7 @@ export class ApiService {
 
   }
 
-  /**
-   *   This service must be call in app.component.ts
-   */
+  // This service must be call in app.component.ts
 
   // Get the app token
   getAppToken() {
@@ -242,7 +188,7 @@ export class ApiService {
         'Content-Type': 'application/hal+json',
         Authorization: 'Bearer ' + JSON.parse(localStorage.getItem('access-token')),
         Accept: 'application/json',
-        'X-CSRF-Token':  JSON.parse(localStorage.getItem('app-token')) || '97dKe-0-qukVOMY1YNBhsZ-POfPUArpL11YLfRJFD94'
+        'X-CSRF-Token': JSON.parse(localStorage.getItem('app-token')) || '97dKe-0-qukVOMY1YNBhsZ-POfPUArpL11YLfRJFD94'
       };
       header = header3;
     }
@@ -258,7 +204,7 @@ export class ApiService {
       _links: {
         self: data.links,
         type: {
-          href: 'http://dev.sdkgames.com/karryngo/jsonapi/file/image'
+          href: this.url + '/jsonapi/file/image'
         }
       },
       uuid: [{ value: data.attributes.uuid }],
@@ -316,22 +262,23 @@ export class ApiService {
 
 
 
-  // HTTP Ends points
-  get(endpoint: string, options?: any): Observable<any> {
-
-    const headers = options;
-
-    return this.http.get(this.url + '/' + endpoint, {
-      headers
-    });
+  // HTTP get
+  get(endpoint: string, options?: any, body?: Record<string, any>): Observable<any> {
+    if (body) {
+      let req: String = '';
+      // tslint:disable-next-line:forin
+      for (const key in body) {
+        req += `${key}=${body[key]}&`;
+      }
+      endpoint += '?' + req;
+    }
+    console.log(this.url + '/' + endpoint);
+    return this.http.get(this.url + '/' + endpoint, { 'headers': options });
   }
 
+  // HTTP post
   post(endpoint: string, body: any, options?: any): Observable<any> {
-
-    const headers = options;
-    return this.http.post(this.url + '/' + endpoint, body, {
-      headers
-    });
+    return this.http.post(this.url + '/' + endpoint + '/', body, { 'headers': options });
   }
 
   post1(endpoint: string, body: any, options?: any): Observable<any> {
@@ -342,6 +289,7 @@ export class ApiService {
     });
   }
 
+  // HTTP put
   put(endpoint: string, body: any, options?: any): Observable<any> {
 
     const headers = options;
@@ -351,6 +299,7 @@ export class ApiService {
     });
   }
 
+  // HTTP delete
   delete(endpoint: string, options?: any): Observable<any> {
     const headers = options;
     return this.http.delete(this.url + '/' + endpoint, {
@@ -358,12 +307,11 @@ export class ApiService {
     });
   }
 
+  // HTTP pact
   patch(endpoint: string, body?: any, options?: any): Observable<any> {
     const headers = options;
 
-    return this.http.patch(this.url + '/' + endpoint, JSON.stringify(body), {
-      headers
-    });
+    return this.http.patch(this.url + '/' + endpoint, JSON.stringify(body), { 'headers': options });
   }
 
 
@@ -434,7 +382,7 @@ export class ApiService {
         Accept: 'application/json'
       };
 
-      this.post('oauth/token', params.toString(), headers).subscribe((success: any) => {
+      this.post('auth/token', params.toString(), headers).subscribe((success: any) => {
 
         resolve(success);
         this.setAccessToken(success.access_token);
@@ -484,261 +432,261 @@ export class ApiService {
   // Get the node data
   getNodeData(uuid: string, nodes: any): string {
 
-    const  nodedata = null;
+    const nodedata = null;
     if (nodes && nodes.length > 0) {
       nodes.forEach(node => {
-            if (node.uuid[0].value === uuid) {
-                return node;
-            }
+        if (node.uuid[0].value === uuid) {
+          return node;
+        }
       });
     }
     return nodedata;
   }
 
   // generate random string with
- randomString() {
+  randomString() {
 
-  let randomtext = '';
-  let ramdomnumber = '';
-  let text = '';
-  const alpha = 'ABCDEFGHJKLMPQRSTUVWXYZabcdefghjklmpqrstuvwxyz';
-  const chiffre = '0123456789';
-  const date = new Date();
+    let randomtext = '';
+    let ramdomnumber = '';
+    let text = '';
+    const alpha = 'ABCDEFGHJKLMPQRSTUVWXYZabcdefghjklmpqrstuvwxyz';
+    const chiffre = '0123456789';
+    const date = new Date();
 
-  randomtext = alpha.charAt(Math.floor(Math.random() * alpha.length));
-  ramdomnumber = chiffre.charAt(Math.floor(Math.random() * chiffre.length));
-  text = date.getFullYear() + (date.getMonth() + 1) + date.getDate() + date.getHours()
-  + date.getMinutes() + date.getSeconds()  + ramdomnumber;
+    randomtext = alpha.charAt(Math.floor(Math.random() * alpha.length));
+    ramdomnumber = chiffre.charAt(Math.floor(Math.random() * chiffre.length));
+    text = date.getFullYear() + (date.getMonth() + 1) + date.getDate() + date.getHours()
+      + date.getMinutes() + date.getSeconds() + ramdomnumber;
 
 
-  return parseInt(text, 10);
-}
+    return parseInt(text, 10);
+  }
 
-/**
- * Returns the week number for this date.  dowOffset is the day of week the week
- * "starts" on for your locale - it can be from 0 to 6. If dowOffset is 1 (Monday),
- * the week returned is the ISO 8601 week number.
- * @param number dowOffset
- * @return number
- */
+  /**
+   * Returns the week number for this date.  dowOffset is the day of week the week
+   * "starts" on for your locale - it can be from 0 to 6. If dowOffset is 1 (Monday),
+   * the week returned is the ISO 8601 week number.
+   * @param number dowOffset
+   * @return number
+   */
 
-getWeek(dowOffset) {
-  /*getWeek() was developed by Nick Baicoianu at MeanFreePath: http://www.meanfreepath.com */
+  getWeek(dowOffset) {
+    /*getWeek() was developed by Nick Baicoianu at MeanFreePath: http://www.meanfreepath.com */
 
-      const date = new Date();
-      let nYear;
-      let nday;
+    const date = new Date();
+    let nYear;
+    let nday;
 
-      dowOffset = typeof(dowOffset) === 'number' ? dowOffset : 0; // default dowOffset to zero
-      const newYear = new Date(date.getFullYear(), 0, 1);
-      let day = newYear.getDay() - dowOffset; // the day of week the year begins on
-      day = (day >= 0 ? day : day + 7);
-      const daynum = Math.floor((date.getTime() - newYear.getTime() -
+    dowOffset = typeof (dowOffset) === 'number' ? dowOffset : 0; // default dowOffset to zero
+    const newYear = new Date(date.getFullYear(), 0, 1);
+    let day = newYear.getDay() - dowOffset; // the day of week the year begins on
+    day = (day >= 0 ? day : day + 7);
+    const daynum = Math.floor((date.getTime() - newYear.getTime() -
       (date.getTimezoneOffset() - newYear.getTimezoneOffset()) * 60000) / 86400000) + 1;
-      let weeknum;
-      // if the year starts before the middle of a week
-      if (day < 4) {
-          weeknum = Math.floor((daynum + day - 1 ) / 7) + 1;
-          if (weeknum > 52) {
-              nYear = new Date(date.getFullYear() + 1, 0, 1);
-              nday = nYear.getDay() - dowOffset;
-              nday = nday >= 0 ? nday : nday + 7;
-              /*if the next year starts before the middle of
-                the week, it is week #1 of that year*/
-              weeknum = nday < 4 ? 1 : 53;
-          }
-      } else {
-          weeknum = Math.floor((daynum + day - 1 ) / 7);
+    let weeknum;
+    // if the year starts before the middle of a week
+    if (day < 4) {
+      weeknum = Math.floor((daynum + day - 1) / 7) + 1;
+      if (weeknum > 52) {
+        nYear = new Date(date.getFullYear() + 1, 0, 1);
+        nday = nYear.getDay() - dowOffset;
+        nday = nday >= 0 ? nday : nday + 7;
+        /*if the next year starts before the middle of
+          the week, it is week #1 of that year*/
+        weeknum = nday < 4 ? 1 : 53;
       }
-      return weeknum;
+    } else {
+      weeknum = Math.floor((daynum + day - 1) / 7);
+    }
+    return weeknum;
   }
 
-// filte by day
-hourfilter(data: any[], hour: number) {
+  // filte by day
+  hourfilter(data: any[], hour: number) {
 
-  const hoursValid = [];
-  let dateFormat;
-  data.forEach(item => {
-    if (item && item.created && item.created[0].value) {
-      dateFormat = new Date(item.created[0].value);
-      if (dateFormat.getHours() === hour) {
-         hoursValid.push(item);
+    const hoursValid = [];
+    let dateFormat;
+    data.forEach(item => {
+      if (item && item.created && item.created[0].value) {
+        dateFormat = new Date(item.created[0].value);
+        if (dateFormat.getHours() === hour) {
+          hoursValid.push(item);
+        }
       }
-    }
-  });
+    });
 
-  return hoursValid;
-}
+    return hoursValid;
+  }
 
 
-// filte by day
-dayfilter(data: any[], day: number) {
+  // filte by day
+  dayfilter(data: any[], day: number) {
 
-  const daysValid = [];
-  let dateFormat;
-  data.forEach(item => {
-    if (item && item.created && item.created[0].value) {
-      dateFormat = new Date(item.created[0].value);
-      if (dateFormat.getDay() === day) {
-        daysValid.push(item);
+    const daysValid = [];
+    let dateFormat;
+    data.forEach(item => {
+      if (item && item.created && item.created[0].value) {
+        dateFormat = new Date(item.created[0].value);
+        if (dateFormat.getDay() === day) {
+          daysValid.push(item);
+        }
       }
-    }
-  });
+    });
 
-  return daysValid;
+    return daysValid;
 
-}
+  }
 
 
-// filte by day
-datefilter(data: any[], date: number) {
+  // filte by day
+  datefilter(data: any[], date: number) {
 
-  const datesValid = [];
-  let dateFormat;
-  data.forEach(item => {
-    if (item && item.created && item.created[0].value) {
-      dateFormat = new Date(item.created[0].value);
-      if (dateFormat.getDate() === date) {
-        datesValid.push(item);
+    const datesValid = [];
+    let dateFormat;
+    data.forEach(item => {
+      if (item && item.created && item.created[0].value) {
+        dateFormat = new Date(item.created[0].value);
+        if (dateFormat.getDate() === date) {
+          datesValid.push(item);
+        }
       }
-    }
-  });
+    });
 
-  return datesValid;
+    return datesValid;
 
-}
+  }
 
-// count string occurence in array
-getStringOccurenceMenu(data: any[], nomRepas: string) {
+  // count string occurence in array
+  getStringOccurenceMenu(data: any[], nomRepas: string) {
 
-  let occurence  = 0;
+    let occurence = 0;
 
-  // tslint:disable-next-line:prefer-for-of
-  for (let i = 0; i < data.length; i++) {
-      if (data[i].field_nom_repas[0].value === nomRepas)  {
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0; i < data.length; i++) {
+      if (data[i].field_nom_repas[0].value === nomRepas) {
         occurence++;
       }
+    }
+    return occurence;
   }
-  return occurence;
-}
 
-// count string occurence in array
-removeStringOccurenceMenu(data: any[], nomRepas: string) {
+  // count string occurence in array
+  removeStringOccurenceMenu(data: any[], nomRepas: string) {
 
-  for (let i = 0; i <  data.length; i++) {
-      if (data[i].field_nom_repas[0].value === nomRepas)  {
-          data.splice(i, 1);
-      }
-  }
-  return data;
-}
-
-
-// count string occurence in array
-getStringOccurenceExtras(data: any[], nomRepas: string) {
-
-  let occurence  = 0;
-
-  // tslint:disable-next-line:prefer-for-of
-  for (let i = 0; i < data.length; i++) {
-      if (data[i].field_nom_repas[0].value === nomRepas)  {
-        occurence++;
-      }
-  }
-  return occurence;
-}
-
-// count string occurence in array
-removeStringOccurenceExtras(data: any[], nomRepas: string) {
-
-  for (let i = 0; i <  data.length; i++) {
-      if (data[i].field_nom_repas[0].value === nomRepas)  {
-          data.splice(i, 1);
-      }
-  }
-  return data;
-}
-
-// count string occurence in array
-getStringOccurenceUser(data: any[], nomUser: string) {
-
-  let occurence  = 0;
-
-  // tslint:disable-next-line:prefer-for-of
-  for (let i = 0; i < data.length; i++) {
-      if (data[i].name[0].value === nomUser)  {
-        occurence++;
-      }
-  }
-  return occurence;
-}
-
-// count string occurence in array
-removeStringOccurenceUser(data: any[], nomUser: string) {
-
-  for (let i = 0; i <  data.length; i++) {
-      if (data[i].name[0].value === nomUser)  {
-          data.splice(i, 1);
-      }
-  }
-  return data;
-}
-
-
-
-
-// filte by day
-getfulldatefilter(data: any[], date: string) {
-
-  const datesValid = [];
-  let dateFormat ;
-  const currentDate = new Date(date);
-  data.forEach(item => {
-    if (item && item.created && item.created[0].value) {
-      dateFormat = new Date(item.created[0].value);
-      if (dateFormat.getFullYear() === currentDate.getFullYear() && dateFormat.getMonth() === currentDate.getMonth()
-      && dateFormat.getDate() === currentDate.getDate()) {
-        datesValid.push(item);
+    for (let i = 0; i < data.length; i++) {
+      if (data[i].field_nom_repas[0].value === nomRepas) {
+        data.splice(i, 1);
       }
     }
-  });
-  return datesValid;
-}
+    return data;
+  }
 
-// count string occurence in array
-getStringOccurenceDate(data: any[], date: string) {
 
-  let occurence  = 0;
+  // count string occurence in array
+  getStringOccurenceExtras(data: any[], nomRepas: string) {
 
-  let dateFormat ;
-  const currentDate = new Date(date);
+    let occurence = 0;
 
-  // tslint:disable-next-line:prefer-for-of
-  for (let i = 0; i < data.length; i++) {
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0; i < data.length; i++) {
+      if (data[i].field_nom_repas[0].value === nomRepas) {
+        occurence++;
+      }
+    }
+    return occurence;
+  }
+
+  // count string occurence in array
+  removeStringOccurenceExtras(data: any[], nomRepas: string) {
+
+    for (let i = 0; i < data.length; i++) {
+      if (data[i].field_nom_repas[0].value === nomRepas) {
+        data.splice(i, 1);
+      }
+    }
+    return data;
+  }
+
+  // count string occurence in array
+  getStringOccurenceUser(data: any[], nomUser: string) {
+
+    let occurence = 0;
+
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0; i < data.length; i++) {
+      if (data[i].name[0].value === nomUser) {
+        occurence++;
+      }
+    }
+    return occurence;
+  }
+
+  // count string occurence in array
+  removeStringOccurenceUser(data: any[], nomUser: string) {
+
+    for (let i = 0; i < data.length; i++) {
+      if (data[i].name[0].value === nomUser) {
+        data.splice(i, 1);
+      }
+    }
+    return data;
+  }
+
+
+
+
+  // filte by day
+  getfulldatefilter(data: any[], date: string) {
+
+    const datesValid = [];
+    let dateFormat;
+    const currentDate = new Date(date);
+    data.forEach(item => {
+      if (item && item.created && item.created[0].value) {
+        dateFormat = new Date(item.created[0].value);
+        if (dateFormat.getFullYear() === currentDate.getFullYear() && dateFormat.getMonth() === currentDate.getMonth()
+          && dateFormat.getDate() === currentDate.getDate()) {
+          datesValid.push(item);
+        }
+      }
+    });
+    return datesValid;
+  }
+
+  // count string occurence in array
+  getStringOccurenceDate(data: any[], date: string) {
+
+    let occurence = 0;
+
+    let dateFormat;
+    const currentDate = new Date(date);
+
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0; i < data.length; i++) {
       dateFormat = new Date(data[i].created[0].value);
       if (dateFormat.getFullYear() === currentDate.getFullYear() && dateFormat.getMonth() === currentDate.getMonth()
-      && dateFormat.getDate() === currentDate.getDate())  {
+        && dateFormat.getDate() === currentDate.getDate()) {
         occurence++;
       }
+    }
+    return occurence;
   }
-  return occurence;
-}
 
-// count string occurence in array
-removeStringOccurenceDate(data: any[], date: string) {
+  // count string occurence in array
+  removeStringOccurenceDate(data: any[], date: string) {
 
-  let dateFormat ;
-  const currentDate = new Date(date);
+    let dateFormat;
+    const currentDate = new Date(date);
 
-  for (let i = 0; i <  data.length; i++) {
+    for (let i = 0; i < data.length; i++) {
       dateFormat = new Date(data[i].created[0].value);
       if (dateFormat.getFullYear() === currentDate.getFullYear() && dateFormat.getMonth() === currentDate.getMonth()
-      && dateFormat.getDate() === currentDate.getDate())  {
-          data.splice(i, 1);
+        && dateFormat.getDate() === currentDate.getDate()) {
+        data.splice(i, 1);
       }
+    }
+    return data;
   }
-  return data;
-}
 
 
 

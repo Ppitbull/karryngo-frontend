@@ -1,21 +1,18 @@
-import { Injectable } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { PackageService } from '../../../../shared/service/back-office/package.service';
-
+import { TripService } from '../../../../shared/service/back-office/trip.service';
 declare var $: any;
 
 @Component({
-  selector: 'app-post-request-colis',
-  templateUrl: './post-request-colis.component.html',
-  styleUrls: ['./post-request-colis.component.scss']
+  selector: 'app-post-request-trips',
+  templateUrl: './post-request-trips.component.html',
+  styleUrls: ['./post-request-trips.component.scss']
 })
-@Injectable()
-export class PostRequestColisComponent implements OnInit {
+export class PostRequestTripsComponent implements OnInit {
 
-  title = 'New package request ';
+  title = 'New trips request';
   titleInterface: string;
   interface1 = true;
   interface2 = false;
@@ -26,18 +23,18 @@ export class PostRequestColisComponent implements OnInit {
 
   constructor(
     private router: Router,
-    public packageService: PackageService,
+    public tripService: TripService,
     private toastr: ToastrService
   ) { }
 
   ngOnInit() {
-    this.packageService.getPackages();
+    this.tripService.getTrips();
     this.initPage();
-    this.posts = this.packageService.packages;
+    this.posts = this.tripService.trips;
     console.log(this.posts);
   }
 
-  // init the interface package
+  // init the interface trip
   initPage() {
     if (this.interface1) {
       this.titleInterface = this.title + '1/3';
@@ -56,7 +53,7 @@ export class PostRequestColisComponent implements OnInit {
 
   next() {
     if (this.interface1) {
-      this.pushPackageForm();
+      this.pushTripForm();
       this.interface1 = false;
       this.interface2 = true;
       this.interface3 = false;
@@ -98,9 +95,9 @@ export class PostRequestColisComponent implements OnInit {
     this.prevPage();
   }
 
-  pushPackageForm() {
-    console.log('Second: ', PackageService.currentPackage);
-    this.packageService.packageCreation(PackageService.currentPackage);
+  pushTripForm() {
+    console.log(TripService.currentTrip);
+    this.tripService.tripCreation(TripService.currentTrip);
   }
 
 

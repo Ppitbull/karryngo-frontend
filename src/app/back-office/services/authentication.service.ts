@@ -11,6 +11,7 @@ import { UserService } from './user.service';
 export class AuthenticationService {
 
     url = 'http://localhost:8080';
+    params: any;
 
     constructor(private http: HttpClient,
                 private router: Router,

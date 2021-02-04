@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import { UserService } from '../../../shared/service/user/user.service';
 import { navItems } from '../../../_nav';
 
 @Component({
@@ -15,7 +16,12 @@ export class DefaultLayoutComponent {
 
   today: number = Date.now();
 
+  constructor(private userService: UserService) {
+  }
   toggleMinimize(e) {
     this.sidebarMinimized = e;
+  }
+  logOut() {
+    this.userService.logOut();
   }
 }

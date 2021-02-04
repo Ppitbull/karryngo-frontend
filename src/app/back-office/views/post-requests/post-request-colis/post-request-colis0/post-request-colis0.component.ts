@@ -22,8 +22,7 @@ export class PostRequestColis0Component implements OnInit {
   visible = true;
 
   constructor(private router: Router,
-    private formBuilder: FormBuilder,
-    private pacakgeService: PackageService) { }
+    private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.initPage();
@@ -52,11 +51,6 @@ export class PostRequestColis0Component implements OnInit {
       'field_descriptionPackage': ['', ]
     });
 
-  }
-
-  pushPackageForm() {
-    console.log(PackageService.currentPackage);
-    this.pacakgeService.packageCreation(PackageService.currentPackage);
   }
 
 
@@ -90,7 +84,7 @@ export class PostRequestColis0Component implements OnInit {
     }
     this.initPage();
   }
-
+  
   // tslint:disable-next-line:use-lifecycle-interface
   ngOnDestroy(): void {
     PackageService.currentPackage.field_owner = this.packageForm.controls.field_owner?.value;
@@ -121,7 +115,6 @@ export class PostRequestColis0Component implements OnInit {
     PackageService.currentPackage.field_descriptionPackage = this.packageForm.controls.field_descriptionPackage?.value;
 
     // console.log(PackageService.currentPackage);
-    this.pushPackageForm();
   }
 
 }

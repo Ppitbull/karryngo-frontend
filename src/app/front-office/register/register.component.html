@@ -42,7 +42,7 @@
                                 </div>
                                 <div class="mb-4 col-md-6">
                                     <label for="field_password">Password</label>
-                                    <input type="text" id="field_password" formControlName="field_password" placeholder="Enter your password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.field_password.errors }">
+                                    <input type="password" id="field_password" formControlName="field_password" placeholder="Enter your password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.field_password.errors }">
 
                                     <div *ngIf="submitted && f.field_password.errors" class="invalid-feedback text-danger">
                                         <div *ngIf="f.field_password.errors.required">Field is required</div>
@@ -50,7 +50,7 @@
                                 </div>
                                 <div class="mb-4 col-md-6">
                                     <label for="field_password2">Confirm password</label>
-                                    <input type="text" id="field_password2" formControlName="field_password2" placeholder="Confirm your password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.field_password2.errors }">
+                                    <input type="password" id="field_password2" formControlName="field_password2" placeholder="Confirm your password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.field_password2.errors }">
 
                                     <div *ngIf="submitted && f.field_password2.errors" class="invalid-feedback text-danger">
                                         <div *ngIf="f.field_password2.errors.required">Field is required</div>
@@ -92,7 +92,7 @@
                                 </div></div>
                             </div>
                         <span class="pull-right">
-                            <button type="submit" class="Register registermodal-submit btn btn-warning" value="Register" (click)="navigateToVerifyEmail()">Register</button>
+                            <button type="submit" class="Register registermodal-submit btn btn-warning" value="Register" (click)="onSubmit()">Register</button>
                         </span><br><br>
                     </form>
                 </div>

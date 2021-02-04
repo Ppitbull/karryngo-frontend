@@ -1,138 +1,168 @@
-import { Injectable } from '@angular/core';
+import { Injectable, ɵConsole } from '@angular/core';
 // import { AngularFireAuth } from 'angularfire2/auth';
 // import * as firebase from 'firebase/app';
 import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ApiService } from '../api/api.service';
+import { User } from '../../entity/user';
+import { UserService } from '../user/user.service';
+import { async } from '@angular/core/testing';
 
-
-interface User {
-
-  links_self: string;
-  links_type: string;
-  uid: string;
-  uuid: string;
-  langCode: string;
-  name: string;
-  default_langcode: string;
-
-}
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
+  public static currentUser: User = new User();
 
- userData: any;
- isLoggedIn = false;
+  userData: User;
+  isLoggedIn = false;
   authStatus: boolean;
+  params: any;
+  registResult = false;
 
-   constructor(
-     //private firebaseAuth: AngularFireAuth,
-     private router: Router,
-     private api: ApiService,
-     private toastr: ToastrService
+
+  constructor(
+    // private firebaseAuth: AngularFireAuth,
+    private router: Router,
+    private api: ApiService,
+    private toastr: ToastrService,
+    private user: UserService
   ) {
 
+    // this.registResult = false;
+    // this.loginResult = false;
+
   }
 
-    /*
-    *  Set the user informations.
-    */
-   setUserInformations (user: any) {
-        localStorage.setItem('user-data', JSON.stringify(user));
-        this.isLoggedIn = true;
-   }
+  /*
+  *  Set the user informations.
+  */
+  setUserInformations(currentUser: any) {
+    localStorage.setItem('user-data', JSON.stringify(currentUser));
+    this.isLoggedIn = true;
+  }
 
 
-     /*
-    *  get the user informations.
-    */
-   getUserInformations() {
-      return JSON.parse(localStorage.getItem('user-data'));
-   }
+  /*
+ *  get the user informations.
+ */
+  getUserInformations() {
+    // tslint:disable-next-line:prefer-const
+    let data: any;
+
+    data['id'] = JSON.parse(localStorage.getItem('user-data')).result._id;
+    data['email'] = JSON.parse(localStorage.getItem('user-data')).result.address.email;
+    data['country'] = JSON.parse(localStorage.getItem('user-data')).result.address.country;
+    data['city'] = JSON.parse(localStorage.getItem('user-data')).result.address.city;
+    data['mobilePhone'] = JSON.parse(localStorage.getItem('user-data')).result.address.mobilePhone;
+    data['phone'] = JSON.parse(localStorage.getItem('user-data')).result.address.phone;
+    data['firstname'] = JSON.parse(localStorage.getItem('user-data')).result.skypeNumber;
+    data['lastname'] = JSON.parse(localStorage.getItem('user-data')).result.lastname;
+    console.log(data);
+    return JSON.parse(localStorage.getItem(data));
+  }
 
 
-   /*
-    *  Get local user profile data.
-    */
-   getLocalStorageUser() {
-      this.userData = JSON.parse(localStorage.getItem('user-data')?localStorage.getItem('user-data'):null);
-      if (this.userData) {
-         this.isLoggedIn = true;
-         return true;
-      } else {
-         this.isLoggedIn = false;
-         return false;
-      }
-   }
-
-   /*
-    * resetPassword is used to reset your password.
-    */
-   resetPassword() {
-      this.toastr.success('Email Sent');
-      this.router.navigate(['/login']);
-   }
-
-   /*
-    * logOut function is used to sign out .
-    */
-   logOut() {
-      localStorage.removeItem('user-data');
+  /*
+   *  Get local user profile data.
+   */
+  getLocalStorageUser() {
+    this.userData = JSON.parse(localStorage.getItem('user-data') ? localStorage.getItem('user-data') : null);
+    if (this.userData) {
+      this.isLoggedIn = true;
+      return true;
+    } else {
       this.isLoggedIn = false;
-      this.toastr.success('You have been successfully logged out!');
-      this.router.navigate(['/login']);
-   }
-
-
-
-   /**
-    *  Create an account on the drupal platform
-    *
-    */
-  authCreateAccount(data: any): Promise <any> {
-
-    return new Promise ((resolve, reject) => {
-
-    const params  = {
-      '_links' : {
-        'type' : {
-          'href' : `${this.api.url}/rest/type/user/user`
-        }
-      },
-      'name' : [{'value' : data.name}],
-      'mail' : [{'value' : data.email}],
-      'pass' : [{'value' : data.password}]
+      return false;
     }
+  }
+
+  /*
+   * resetPassword is used to reset your password.
+   */
+  resetPassword() {
+    this.toastr.success('Email Sent');
+    this.router.navigate(['/login']);
+  }
+
+  /*
+   * logOut function is used to sign out .
+   */
+  logOut() {
+    localStorage.removeItem('user-data');
+    this.isLoggedIn = false;
+    this.toastr.success('You have been successfully logged out!');
+    this.router.navigate(['/login']);
+  }
 
 
-    const headers = {
-      'Content-Type': 'application/hal+json',
-      'X-CSRF-Token': '97dKe-0-qukVOMY1YNBhsZ-POfPUArpL11YLfRJFD94',
-      'Accept': 'application/json'
-    };
 
-    this.api.post('user/register?_format=hal_json',  JSON.stringify(params), headers).subscribe((reponse: any) => {
-      if (reponse) {
-        resolve(reponse);
-        localStorage.setItem('user-secret', JSON.stringify(params.pass[0].value));
-        this.setUserInformations(reponse);
-      }
+  /**
+   *  Create an account on the drupal platform
+   *
+   */
+  createAccount(data: User): Promise<any> {
 
-    }, (error: any) => {
-    if (error) {
-      this.toastr.success(error.message);
-      reject(error);
-    }
+    return new Promise((resolve, reject) => {
+
+      const headers = {
+        'Content-Type': 'application/json',
+        // 'X-CSRF-Token': '97dKe-0-qukVOMY1YNBhsZ-POfPUArpL11YLfRJFD94',
+        // 'Accept': 'application/json'
+      };
+
+      const params = {
+        'firstname': data.field_firstName,
+        'lastname': data.field_surName,
+        'password': data.field_password,
+        'address':
+        {
+          'email': data.field_email,
+          'mobilePhone': data.field_contact,
+          'whatAppNumber': data.field_whatsappContact,
+          'country': data.field_country,
+          'zip': data.field_contact,
+          'skypeNumber': data.field_skype,
+          'phone': data.field_phone,
+          'websiteLink': data.field_websiteLink,
+        },
+        // 'userName': data.field_userName ,
+        // 'country': data.field_country ,
+        // 'city': data.field_city ,
+        // 'type': data.field_accountType ,
+        // 'email': data.field_email ,
+      };
+
+      this.api.post('auth/requester', JSON.stringify(params), headers)
+        .subscribe((response: any) => {
+          if (response) {
+            if (response.json().resultCode === 0) {
+              this.registResult = true;
+              resolve(response.json());
+              console.log('succes');
+              this.router.navigate(['login']);
+              return;
+            }
+            reject(response.json());
+            console.log('teste de la consol 2 ' + response.json());
+            return 0;
+          }
+        }, (error: any) => {
+          if (error) {
+            this.registResult = false;
+            this.toastr.error(error.message);
+            // console.log('Error message: ', error.message);
+            // reject(error);
+          }
+        });
     });
-  });
 
   }
 
-  getAuthStatus(authStatus){
+  getAuthStatus(authStatus) {
     if (authStatus == 'true') {
       this.authStatus = true;
     } else {
@@ -141,74 +171,78 @@ export class AuthService {
 
   }
 
-    // Login into your account
-    authLogin(username ?: string, password ?: string ): Promise<any> {
-      console.log('username is ' + username);
-      console.log('password is ' + password);
-      const params = new URLSearchParams();
+  // Login into your account
+  authLogin(email?: string, password?: string): Promise<any> {
+    const param = {
+      'email': email,
+      'password': password,
+    };
+    const header = {
+      'Content-Type': 'application/json',
+      // 'Accept': 'application/json'
+    };
 
-      params.append('grant_type', 'password');
-      params.append('client_id', '8a4f8634-4f16-4b6e-b617-554664897bbe');
-      params.append('client_secret', 'sdkgames2015');
-      params.append('username', 'colombo');
-      params.append('password', 'colombo_password');
+    return new Promise((resolve, reject) =>  {
+      this.api.post('auth/login', param, header)
+        .subscribe(response => {
+          this.api.setAccessToken(response.result.token);
+          localStorage.setItem('app-token', response.result.token);
+          this.user.userConnectedInformations()
+          .then((data) => {
+            // this.router.navigate(['dashboard']);
+            // this.api.getAppToken();
+            console.log('Data, ', data);
+            this.setUserInformations(data);
+            // Check if the user data is available
+            if (this.getLocalStorageUser()) {
+              this.router.navigate(['dashboard']);
+              this.toastr.success('You have been successfully logged In!');
+              resolve(response);
 
-      const header = {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Accept': 'application/json'
-      };
-
-      return new Promise((resolve, reject) => {
-        this.api.post('oauth/token', params.toString(), header).subscribe(success => {
-          resolve(success);
-          //console.log(success);
-          this.api.setAccessToken(success.access_token);
-          this.api.setRefreshToken(success.refresh_token);
-          this.api.getAppToken();
-
-          // Check if the user data is available
-          if (this.getLocalStorageUser()) {
-            this.router.navigate(['/']);
-            this.toastr.success('You have been successfully logged In!');
-          } else {
+              this.authUserInformations();
+                this.toastr.success('You have been successfully logged In!');
+                this.router.navigate(['dashboard']);
+            } else {
 
               // Get the user informations
-              this.authUserInformations().then(reponse => {
-                  this.toastr.success('You have been successfully logged In!');
-                  this.router.navigate(['/']);
-              }).catch(error => {
-                    this.router.navigate(['/']);
-              });
-          }
-
+              // this.authUserInformations().then(reponse => {
+              //   this.toastr.success('You have been successfully logged In!');
+              //   this.router.navigate(['dashboard']);
+              // }).catch(error => {
+              //   this.router.navigate(['dashboard']);
+              // });
+              reject(response);
+            }
+          });
         }, error => {
           this.toastr.success('You have failed to logged In!');
           reject(error);
 
           if (error && error.error === 'invalid_grant') {
-              this.toastr.success('Invalid credentials ! Please check your informations and try again.');
+            this.toastr.success('Invalid credentials ! Please check your informations and try again.');
           }
 
         });
-      });
-     }
+    });
+  }
 
 
-   /**
-    *  Get the user informations
-    */
+  /**
+   *  Get the user informations
+   */
 
-  authUserInformations(): Promise <any> {
+  authUserInformations(): Promise<any> {
 
-    return new Promise ((resolve, reject) => {
+    return new Promise((resolve, reject) => {
 
-        const headers = {
-          'Authorization' : 'Bearer ' + this.api.getAccessToken(),
-          'Content-Type': 'application/hal+json',
-          'Accept': 'application/json'
-        };
+      const headers = {
+        'Authorization': 'Bearer ' + this.api.getAccessToken(),
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      };
 
-        this.api.get('api/v01/user/connected?_format=hal_json', headers).subscribe((reponse: any) => {
+      this.api.get('requester/profil', headers)
+        .subscribe((reponse: any) => {
           if (reponse) {
             resolve(reponse);
             this.setUserInformations(reponse);
@@ -216,12 +250,12 @@ export class AuthService {
 
         }, (error: any) => {
 
-        if (error) {
+          if (error) {
             this.toastr.success(error.message);
             reject(error);
-        }
+          }
         });
-  });
+    });
 
-}
+  }
 }

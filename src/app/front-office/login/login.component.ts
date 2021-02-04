@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-// import { AuthenticationService } from '../../../shared/services/authentication.service';
+import { AuthService } from '../../shared/service/auth/auth.service';
 
 @Component({
     selector: 'app-login',
@@ -12,10 +12,12 @@ export class LoginComponent implements OnInit {
 
     submitted: boolean;
     loginForm: FormGroup;
-   
 
-    constructor(private router: Router,
-        // private authen: AuthenticationService, 
+
+
+    constructor(
+        private router: Router,
+        private authen: AuthService,
         private formLog: FormBuilder) { }
 
     ngOnInit(): void {
@@ -37,7 +39,7 @@ export class LoginComponent implements OnInit {
     }
 
     onSubmit() {
-        console.log(this.loginForm.value);
+        this.authen.authLogin(this.loginForm.controls.field_email.value, this.loginForm.controls.field_password.value);
     }
     get f() {
         return this.loginForm.controls;

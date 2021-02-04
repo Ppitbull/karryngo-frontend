@@ -7,14 +7,13 @@ import { DefaultLayoutComponent } from './back-office/containers';
 
 /// Front Office
 import { WelcomeComponent } from './front-office/welcome/welcome.component';
-import { UserRegistrationComponent } from './front-office/user-registration/user-registration/user-registration.component';
 import { HowDoesItWorkComponent } from './front-office/how-does-it-work/how-does-it-work.component';
 import { RequestsComponent } from './front-office/requests/requests.component';
 import { AboutUsComponent } from './front-office/about-us/about-us.component';
 import { ForgotPasswordComponent } from './front-office/forgot-password/forgot-password.component';
 import { ViewTripCarrierShipmentComponent } from './front-office/view-trip/view-trip-carrier-shipment/view-trip-carrier-shipment.component';
 import { ViewTripTransportPersonsComponent } from './front-office/view-trip/view-trip-transport-persons/view-trip-transport-persons.component';
-import { RegisterCarrierShipperTransporterComponent } from './front-office/registration/register-carrier-shipper-transporter/register-carrier-shipper-transporter.component';
+// import { RegisterCarrierShipperTransporterComponent } from './front-office/registration/register-carrier-shipper-transporter/register-carrier-shipper-transporter.component';
 import { LoginComponent } from './front-office/login/login.component';
 import { RegisterComponent } from './front-office/register/register.component';
 
@@ -83,10 +82,10 @@ export const routes: Routes = [
     path: 'view-trip-transport-of-person',
     component: ViewTripTransportPersonsComponent
   },
-  {
-    path: 'carrier-registration',
-    component: RegisterCarrierShipperTransporterComponent
-  },
+  // {
+  //   path: 'carrier-registration',
+  //   component: RegisterCarrierShipperTransporterComponent
+  // },
   {
     path: 'profie-carrier',
     component: ProfileCarrierComponent
@@ -98,10 +97,6 @@ export const routes: Routes = [
   {
     path: 'profie-normal-user',
     component: ProfileNormalUserComponent
-  },
-  {
-    path: 'user-registration',
-    component: UserRegistrationComponent
   },
   {
     path: 'trips',
