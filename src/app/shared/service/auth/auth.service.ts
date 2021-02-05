@@ -37,34 +37,6 @@ export class AuthService {
 
   }
 
-  /*
-  *  Set the user informations.
-  */
-  setUserInformations(currentUser: any) {
-    localStorage.setItem('user-data', JSON.stringify(currentUser));
-    this.isLoggedIn = true;
-  }
-
-
-  /*
- *  get the user informations.
- */
-  getUserInformations() {
-    // tslint:disable-next-line:prefer-const
-    let data: any;
-
-    data['id'] = JSON.parse(localStorage.getItem('user-data')).result._id;
-    data['email'] = JSON.parse(localStorage.getItem('user-data')).result.address.email;
-    data['country'] = JSON.parse(localStorage.getItem('user-data')).result.address.country;
-    data['city'] = JSON.parse(localStorage.getItem('user-data')).result.address.city;
-    data['mobilePhone'] = JSON.parse(localStorage.getItem('user-data')).result.address.mobilePhone;
-    data['phone'] = JSON.parse(localStorage.getItem('user-data')).result.address.phone;
-    data['firstname'] = JSON.parse(localStorage.getItem('user-data')).result.skypeNumber;
-    data['lastname'] = JSON.parse(localStorage.getItem('user-data')).result.lastname;
-    console.log(data);
-    return JSON.parse(localStorage.getItem(data));
-  }
-
 
   /*
    *  Get local user profile data.
@@ -186,23 +158,22 @@ export class AuthService {
       this.api.post('auth/login', param, header)
         .subscribe(response => {
           this.api.setAccessToken(response.result.token);
-          localStorage.setItem('app-token', response.result.token);
           this.user.userConnectedInformations()
           .then((data) => {
             // this.router.navigate(['dashboard']);
             // this.api.getAppToken();
             console.log('Data, ', data);
-            this.setUserInformations(data);
+            // this.setUserInformations(data);
             // Check if the user data is available
-            if (this.getLocalStorageUser()) {
+            // if (this.getLocalStorageUser()) {
               this.router.navigate(['dashboard']);
               this.toastr.success('You have been successfully logged In!');
               resolve(response);
 
-              this.authUserInformations();
-                this.toastr.success('You have been successfully logged In!');
-                this.router.navigate(['dashboard']);
-            } else {
+              // this.authUserInformations();
+                // this.toastr.success('You have been successfully logged In!');
+                // this.router.navigate(['dashboard']);
+            // } else {
 
               // Get the user informations
               // this.authUserInformations().then(reponse => {
@@ -211,8 +182,8 @@ export class AuthService {
               // }).catch(error => {
               //   this.router.navigate(['dashboard']);
               // });
-              reject(response);
-            }
+            //   reject(response);
+            // }
           });
         }, error => {
           this.toastr.success('You have failed to logged In!');
@@ -245,7 +216,7 @@ export class AuthService {
         .subscribe((reponse: any) => {
           if (reponse) {
             resolve(reponse);
-            this.setUserInformations(reponse);
+            this.user.setUserInformations(reponse);
           }
 
         }, (error: any) => {

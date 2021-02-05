@@ -70,14 +70,7 @@ export class PackageService {
                 // 'X-CSRF-Token': 'FWjJkOClVTMzyhEPEhz_OPR3PulweXUqi-NePcofKU8' || JSON.parse(localStorage.getItem('app-token')),
                 // 'Accept': 'application/json',
             };
-            // const cheminUrl = `${this.api.url}/rest/type/package/package`;
-            setTimeout(()=> { 
-                this.params = {
-                // '_links': {
-                //     'type': {
-                //         'href': cheminUrl
-                //     }
-                // },
+            this.params = {
                 'address':
                 {
                     'from':
@@ -98,7 +91,7 @@ export class PackageService {
                 'options':
                 {
                     'is_urgent': data.field_isUrgent,
-                    'is_fragile': data.field_isWeak,
+                    'is_weak': data.field_isWeak,
                     'typeof': data.field_typeof,
                     'date': data.field_delayDate,
                     'car_type': data.field_vehicleType,
@@ -110,18 +103,19 @@ export class PackageService {
                         'wight': data.field_weightPackage,
                         'piece_nber': data.field_numberPackage,
                     },
-                    'detail': data.field_descriptionPackage,
+                    'description': data.field_descriptionPackage,
                     'images': data.field_image,
                     // 'price': data.field_price
                 }
 
             };
-            this.api.post('requester/service/add', JSON.stringify(this.params), headers)
+            this.api.post('requester/service/add', this.params, headers)
             .subscribe(success => {
                 if(success.resultCode === 0)
                 {
-                    this.setPackageInformations(success);
-                    this.toastr.success('You have been successfully Register your package!');
+                    console.log(success.result)
+                    this.setPackageInformations(success.result);
+                    //this.toastr.success('You have been successfully Register your package!');
                     resolve(success);
                 }
                 else
@@ -129,10 +123,9 @@ export class PackageService {
                     reject(success);
                 }
             }, error => {
-                this.toastr.success(error.message);
+                //this.toastr.success(error.message);
                 reject(error);
             });
-        }, 3000);
             /**/
         });
     }

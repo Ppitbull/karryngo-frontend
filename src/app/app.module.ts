@@ -114,6 +114,7 @@ import { TermsAndConditionsComponent } from './shared/components/terms-and-condi
 import { TestPagesComponent } from './test-pages/test-pages.component';
 import { MapsComponent } from './back-office/users/maps/maps.component';
 import { VerifyEmailComponent } from './front-office/verify-email/verify-email.component';
+import { ProgressIndeterminateComponent } from './shared/components/progress-indeterminate/progress-indeterminate.component';
 
 @NgModule({
   imports: [

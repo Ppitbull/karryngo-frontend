@@ -5,6 +5,7 @@ import { ParametersService } from '../../../shared/parameters/parameters.service
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { User } from '../../../shared/entity/user';
+// import { AuthService } from '../auth/auth.service';
 
 
 
@@ -15,16 +16,19 @@ export class UserService {
 
   public static currentUser: User = new User();
   public static isUser = true;
+
+  listUser:User[]=[];
+
   params: any;
   userData: any;
-  isLoggedIn = false;
 
   constructor(
     private api: ApiService,
     private generalService: GeneraleService,
     private parameters: ParametersService,
     private router: Router,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    //private login: AuthService
   ) { }
 
   /*
@@ -32,16 +36,28 @@ export class UserService {
 */
   setUserInformations(user: any) {
     localStorage.setItem('user-data', JSON.stringify(user));
-    this.isLoggedIn = true;
+    //this.login.isLoggedIn = true;
   }
 
 
   /*
  *  get the user informations.
  */
-  getUserInformations() {
-    return JSON.parse(localStorage.getItem('user-data'));
-  }
+getUserInformations() {
+  // tslint:disable-next-line:prefer-const
+  let data: any;
+
+  data['id'] = JSON.parse(localStorage.getItem('user-data')).result._id;
+  data['email'] = JSON.parse(localStorage.getItem('user-data')).result.address.email;
+  data['country'] = JSON.parse(localStorage.getItem('user-data')).result.address.country;
+  data['city'] = JSON.parse(localStorage.getItem('user-data')).result.address.city;
+  data['mobilePhone'] = JSON.parse(localStorage.getItem('user-data')).result.address.mobilePhone;
+  data['phone'] = JSON.parse(localStorage.getItem('user-data')).result.address.phone;
+  data['firstname'] = JSON.parse(localStorage.getItem('user-data')).result.skypeNumber;
+  data['lastname'] = JSON.parse(localStorage.getItem('user-data')).result.lastname;
+  console.log(data);
+  return data;
+}
 
 
   /*
@@ -49,13 +65,13 @@ export class UserService {
   */
   getLocalStorageUser() {
     this.userData = JSON.parse(localStorage.getItem('user-data'));
-    if (this.userData) {
-      this.isLoggedIn = true;
+    /*if (this.userData) {
+      this.login.isLoggedIn = true;
       return true;
     } else {
-      this.isLoggedIn = false;
+      this.login.isLoggedIn = false;
       return false;
-    }
+    }*/
   }
 
   /*
@@ -71,7 +87,7 @@ export class UserService {
   */
   logOut() {
     localStorage.removeItem('user-data');
-    this.isLoggedIn = false;
+    //this.login.isLoggedIn = false;
     this.toastr.success('You have been successfully logged out!');
     this.router.navigate(['/login']);
   }
@@ -94,7 +110,7 @@ export class UserService {
   validateCodeEmailUser(data: any): Promise<any> {
     return new Promise((resolve, reject) => {
       const params = {
-        'field_email': data.field_email,
+        'user.field_email': data.user.field_email,
         'user_code': data.user_code
       };
       this.api.post(`api/v01/recover-user/by-email/validate-code`, JSON.stringify(params)).subscribe(success => {
@@ -109,9 +125,9 @@ export class UserService {
   changeUserPassword(data: any): Promise<any> {
     return new Promise((resolve, reject) => {
       const params = {
-        'field_email': data.field_email,
+        'user.field_email': data.user.field_email,
         'user_code': data.user_code,
-        'field_password': data.field_password
+        'user.field_password': data.user.field_password
       };
       this.api.post(`api/v01/recover-user/by-email/change-password`, JSON.stringify(params)).subscribe(success => {
         resolve(success);
@@ -136,6 +152,14 @@ export class UserService {
       this.api.get('requester/profil', headers)
       .subscribe((response: any) => {
         if (response) {
+          // let userData: any[];
+          // userData['user.field_email'] = response.result.email;
+          // userData['user.field_country'] = response.result.address.contray;
+          // userData['user.field_phone'] = response.result.address.mobilePhone;
+          // userData['user.field_id'] = response.result._id;
+          // userData['user.field_firstName'] = response.result.firstname;
+          // userData['user.field_lastName'] = response.result.lastname;
+
           resolve(response);
           this.setUserInformations(response);
         }
@@ -150,7 +174,43 @@ export class UserService {
       });
     });
   }
-
+  parseDataFromApi(userApiData:Record<string | number,any>):User
+  {
+    let user:User=new User();
+    user.field_id= userApiData._id;
+    user.field_firstName= userApiData.firstname;
+    user.field_surName= userApiData.lastname;
+    user.field_email= userApiData.adresse.email;
+    //user.field_userName= userApiData.;
+    user.field_city= userApiData.localtions;
+    user.field_country= userApiData.adresse.coutry;
+    user.field_password= userApiData.password;
+    user.field_contact= userApiData.adresse.mobilePhone;
+    user.field_whatsappContact= userApiData.adresse.whatsAppNumber;
+    user.field_image=[];
+    user.field_phone= userApiData.adresse.phone;
+    user.field_skype= userApiData.adresse.skypeNumber;
+    user.field_websiteLink= userApiData.adresse.websiteLink;
+    return user;
+  }
+  parseDataToApi(user:User):Record<string|number,any>
+  {
+    return {
+      "_id": user.field_id,
+      "firstname": user.field_firstName,
+      "lastname": user.field_surName,
+      "password": user.field_password,
+      "adresse": {
+        "email": user.field_email,
+        "mobilePhone": user.field_contact,
+        "phone": user.field_phone,
+        "websiteLink": user.field_websiteLink,
+        "whatsAppNumber": user.field_whatsappContact,
+        "skypeNumber": user.field_skype,
+        "country": user.field_country
+      }
+    }
+  }
   // permet d'update les infos d'un user
   UpdateUser(nid: string, token: string, data: any): Promise<any> {
 
@@ -171,58 +231,58 @@ export class UserService {
           }
         },
         // body
-        'field_firstname': [
+        'user.field_firstname': [
           {
-            'value': data.field_firstname
+            'value': data.user.field_firstname
           }
         ],
 
-        'field_surname': [
+        'user.field_surname': [
           {
-            'value': data.field_surname
+            'value': data.user.field_surname
           }
         ],
 
-        'field_username': [
+        'user.field_username': [
           {
-            'value': data.field_username
+            'value': data.user.field_username
           }
         ],
 
-        'field_addresse_gps': [
+        'user.field_addresse_gps': [
           {
             'lat': 52.47878999999999649617166141979396343231201171875,
             'lng': -0.11067700000000000072619688040731489309109747409820556640625
           }
         ],
 
-        'field_address': [
+        'user.field_address': [
           {
-            'value': data.field_address
+            'value': data.user.field_address
           }
         ],
 
-        'field_mobile_phone_number': [
+        'user.field_mobile_phone_number': [
           {
-            'value': data.field_mobile_phone_number
+            'value': data.user.field_mobile_phone_number
           }
         ],
 
-        'field_phone_number': [
+        'user.field_phone_number': [
           {
-            'value': data.field_phone_number
+            'value': data.user.field_phone_number
           }
         ],
 
-        'field_whatsapp_number': [
+        'user.field_whatsapp_number': [
           {
-            'value': data.field_whatsapp_number
+            'value': data.user.field_whatsapp_number
           }
         ],
         // Les 2 cas qui suivent sont utilisés pour enregistrer le pays du user en fonction de la langue choisie dans le système. N.B: 1 seul cas parmi les 2 est utilisé.
 
         // Cas 1: ceci est utilisé pour enregistrer le pays du user avec choix de la langue English (uuid est obtenu à partir du numéro 12)
-        'http://dev.sdkgames.com/karryngo/rest/relation/user/user/field_country': [
+        'http://dev.sdkgames.com/karryngo/rest/relation/user/user/user.field_country': [
           {
             '_links': {
               'type': {
@@ -239,7 +299,7 @@ export class UserService {
 
         '_embedded': {
           // Ceci est utilisé s'il y a le ID du type (ID Card ou Passport ou ...) (représente le ID type (ID Card ou Passport) obtenu à partir du numéro 6)
-          'http://dev.sdkgames.com/karryngo/rest/relation/user/user/field_id_type': [
+          'http://dev.sdkgames.com/karryngo/rest/relation/user/user/user.field_id_type': [
             {
               '_links': {
                 'type': {
@@ -248,7 +308,7 @@ export class UserService {
               },
               'uuid': [
                 {
-                  'value': data.field_id_type
+                  'value': data.user.field_id_type
                 }
               ]
             }
@@ -272,7 +332,7 @@ export class UserService {
           ],
 
           // Cas 1: ceci est utilisé pour enregistrer le pays du user avec choix de la langue English (uuid est obtenu à partir du numéro 12)
-          'http://dev.sdkgames.com/karryngo/rest/relation/user/user/field_country': [
+          'http://dev.sdkgames.com/karryngo/rest/relation/user/user/user.field_country': [
             {
               '_links': {
                 'type': {
@@ -281,14 +341,14 @@ export class UserService {
               },
               'uuid': [
                 {
-                  'value': data.field_country
+                  'value': data.user.field_country
                 }
               ]
 
             }
           ],
           // Cas 2: ceci est utilisé pour enregistrer le pays du user avec choix de la langue Français (uuid est obtenu à partir du numéro 13)
-          /* 'http://dev.sdkgames.com/karryngo/rest/relation/user/user/field_pays': [
+          /* 'http://dev.sdkgames.com/karryngo/rest/relation/user/user/user.field_pays': [
             {
               '_links': {
                 'type': {
@@ -297,7 +357,7 @@ export class UserService {
               },
               'uuid': [
                 {
-                  'value': data.field_pays
+                  'value': data.user.field_pays
                 }
               ]
 
@@ -305,16 +365,16 @@ export class UserService {
           ], */
 
           // Ceci est utilisé pour enregistrer les différentes langues choisies par le user (uuid est obtenu à partir du numéro 11).
-          'http://dev.sdkgames.com/karryngo/rest/relation/user/user/field_language': data.field_language || [],
+          'http://dev.sdkgames.com/karryngo/rest/relation/user/user/user.field_language': data.user.field_language || [],
 
           // ceci est ajouté pour mettre à jour les différents types de service que le user offre (Services offered)
-          'http://dev.sdkgames.com/karryngo/rest/relation/user/user/field_choose_type_of_services': data.field_choose_type_of_services || [],
+          'http://dev.sdkgames.com/karryngo/rest/relation/user/user/user.field_choose_type_of_services': data.user.field_choose_type_of_services || [],
 
           // ceci est utilisé pour mettre à jour le choix du pays avec ces villes
-          'http://dev.sdkgames.com/karryngo/rest/relation/user/user/field_interested_countries': data.field_interested_countries || [],
+          'http://dev.sdkgames.com/karryngo/rest/relation/user/user/user.field_interested_countries': data.user.field_interested_countries || [],
 
           // ceci est utilisé pour mettre à jour les documents personnels du user
-          'http://dev.sdkgames.com/karryngo/rest/relation/user/user/field_documents': data.field_documents || [],
+          'http://dev.sdkgames.com/karryngo/rest/relation/user/user/user.field_documents': data.user.field_documents || [],
         }
       };
       this.api.patch(`user/${nid}?_format=hal_json`, JSON.stringify(this.params), headers).subscribe(success => {
@@ -350,7 +410,7 @@ export class UserService {
           }
         ],
         // représente le tableau de JSON des villes saisies
-        'field_city': data.field_city || [],
+        'user.field_city': data.user.field_city || [],
         'type': [
           {
             'target_id': 'countries'
@@ -416,6 +476,35 @@ export class UserService {
   // touts les types ID(card id, passporId)
   getAllIdType(): Promise<any> {
     return this.generalService.getAllElement(this.parameters.allTypeId);
+  }
+
+  //recuperer les informations d'un utilisateur
+  getUserById(id:String):Promise<any>
+  { 
+    return new Promise<any>((resolve,reject)=>{
+      let user:User=this.listUser.find((u)=>u.field_id==id);
+      if(user!=undefined) resolve(user);
+      else{
+        this.api.get(`user/profil/${id}`,{
+          'Authorization': 'Bearer ' + this.api.getAccessToken(),
+   
+        }).subscribe(success => {
+          if(success)
+          {
+            console.log("Success ",success)
+            if(success.resultCode==0)
+            {
+              resolve(this.parseDataFromApi(success.result));
+            }
+            else reject(success)
+             
+          }          
+          else reject(success)
+        }, error => {
+          reject(error);
+        })
+      }
+    })    
   }
 
 }

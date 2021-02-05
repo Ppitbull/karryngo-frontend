@@ -1,4 +1,4 @@
-<div class="animated fadeIn">
+<div class="fadeIn">
   <div class="row">
     <div class="col-sm-3 col-md-6">
       <div class="card">
@@ -8,7 +8,8 @@
         <div class="container cont2">
 
           <div class="cont">
-            <div *ngIf="interface1">
+            <router-outlet></router-outlet>
+            <!--<div *ngIf="interface1">
               <app-post-request-colis0></app-post-request-colis0>
             </div>
             <div *ngIf="interface2">
@@ -16,18 +17,11 @@
             </div>
             <div *ngIf="interface3">
               <app-post-request-colis2></app-post-request-colis2>
-            </div>
+            </div>-->
           </div>
           <br><br><br>
 
-          <div class="footer-registration text-right">
-            <button *ngIf="visiblePrev" type="button" class="btn next-button btn-w" (click)="prev()">Back</button>
-            <button *ngIf="visible" type="button" class="btn next-button btn-w"
-              (click)="next()">
-              NEXT
-            </button>
-          </div>
-          <button *ngIf="!visible" type="button" class="btn next-button b-mag" (click)="myModal.show()">Confirm</button>
+          <!--<button *ngIf="!visible" type="button" class="btn next-button b-mag" (click)="myModal.show()">Confirm</button>-->
 
         </div>
       </div>

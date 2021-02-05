@@ -4,46 +4,30 @@
 <table class="table table-bordered table-striped table-sm">
     <thead>
         <tr>
-            <th>Type</th>
             <th>Driver</th>
-            <th>Start Date</th>
-            <th>Time</th>
+            <th>Location</th>
+            <th>Vehicles</th>
+            <th>Action</th>
         </tr>
     </thead>
-    <tbody
-        (click)="showNotification('top','center', 'danger', 'pe-7s-close-circle', '\<b>Sorry\</b>\<br>This service was not available now. Tray later.')">
-        <tr>
-            <td>car</td>
-            <td>Cedric Nguendap</td>
-            <td>2021/02/15</td>
-            <td>06 : 30 AM</td>
+    <tbody>
+        <tr *ngFor="let provider of providerList" (click)="showProviderDetail(provider.provider)">
+            <td>{{provider.provider.name}}</td>
+            <td>{{provider.locationString}}</td>
+            <td>{{provider.vehiculeString}}</td>
+            <td class="">
+                <div class="row">
+                    <div class="col-4"> <i class="fa fa-eye"></i></div>
+                    <div class="col-4"><input type="checkbox" (click)="selectProvider($event,provider.provider)"> </div>
+                </div>
+            </td>
         </tr>
-        <tr>
-            <td>Bus</td>
-            <td>Emmerick </td>
-            <td>2021/02/16</td>
-            <td>02 : 30 PM</td>
-        </tr>
-        <tr>
-            <td>Bus</td>
-            <td>Kamdem</td>
-            <td>2021/02/20</td>
-            <td>09 : 00 AM</td>
-        </tr>
-        <tr>
-            <td>Car</td>
-            <td>Marc Paho</td>
-            <td>2021/02/20</td>
-            <td>11 : 30 AM</td>
-        </tr>
-        <tr>
-            <td>Bike</td>
-            <td>Sanou flambel</td>
-            <td>2020/12/30</td>
-            <td>06 : 30 AM</td>
-        </tr>
+        
     </tbody>
 </table>
+<div class="row" *ngIf="selectedProvider!=null">
+  Selected driver: {{selectedProvider.name}}
+</div>
 <nav>
     <ul class="pagination pull-right">
         <li class="page-item"><a class="page-link">Prev</a></li>
@@ -55,3 +39,26 @@
         <li class="page-item"><a class="page-link">Next</a></li>
     </ul>
 </nav>
+
+<div bsModal #myModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Provider informations</h4>
+        <button type="button" class="close" (click)="cancelModel()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="!waitingProviderInfos">
+        Message: {{findProviderInfosMessage}}
+          Username: {{selectedUserInfos.field_firstName}}
+        </div>
+         <app-progress-indeterminate *ngIf="waitingProviderInfos"></app-progress-indeterminate>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="cancelModel()">Ok</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

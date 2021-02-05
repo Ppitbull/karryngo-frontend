@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Package } from '../../../../../shared/entity/package';
 import { PackageService } from '../../../../../shared/service/back-office/package.service';
+
+declare var $: any;
 
 @Component({
   selector: 'app-post-request-colis0',
@@ -22,10 +25,10 @@ export class PostRequestColis0Component implements OnInit {
   visible = true;
 
   constructor(private router: Router,
-    private formBuilder: FormBuilder) { }
+    private formBuilder: FormBuilder,
+    private packageService:PackageService) { }
 
   ngOnInit(): void {
-    this.initPage();
     this.packageForm = this.formBuilder.group({
       'field_owner': [this.owner, ],
       'field_status': [this.status, ],
@@ -58,36 +61,43 @@ export class PostRequestColis0Component implements OnInit {
     return this.packageForm.controls;
   }
 
-  // init the user registration
-  initPage() {
-    if (this.user1) {
-      this.titleUser = this.title + '1/3';
-      this.visible = true;
-    } else if (this.user2) {
-      this.titleUser = this.title + '2/3';
-      this.visible = true;
-    } else if (this.user3) {
-      this.titleUser = this.title + '3/3';
-      this.visible = false;
-    }
-  }
+  submit()
+  {
+    //console.log(this.packageForm.value);
+    //if(this.packageForm.invalid) return;
+    this.submitted=true;
+    this.packageService.packageCreation(Package.hydrate(this.packageForm.value))
+    .then((result:any)=>{
+      this.submitted=false;
+      this.showNotification('top','center', 'success', 'pe-7s-close-circle', '\<b>Success\</b>\<br>Service was created successfully')
+      setTimeout(() => {
+        this.router.navigate(['/post-requests/packages/list-providers'])
+      }, 1000);
+    })
+    .catch((error)=>{
+      console.log(error)
+      this.showNotification('top','center', 'danger', 'pe-7s-close-circle', '\<b>Sorry\</b>\<br>'+error.message)
+      this.submitted=false;
+    })
 
-  next() {
-    if (this.user1) {
-      this.user1 = false;
-      this.user2 = true;
-      this.user3 = false;
-    } else if (this.user2) {
-      this.user1 = false;
-      this.user2 = false;
-      this.user3 = true;
-    }
-    this.initPage();
   }
-  
+  showNotification(from, align, colortype, icon, text) {
+
+    $.notify({
+      icon: icon,
+      message: text
+    }, {
+      type: colortype,
+      timer: 1000,
+      placement: {
+        from: from,
+        align: align
+      }
+    });
+  }
   // tslint:disable-next-line:use-lifecycle-interface
   ngOnDestroy(): void {
-    PackageService.currentPackage.field_owner = this.packageForm.controls.field_owner?.value;
+    /*PackageService.currentPackage.field_owner = this.packageForm.controls.field_owner?.value;
     PackageService.currentPackage.field_price = this.packageForm.controls.field_price?.value;
     PackageService.currentPackage.field_name = this.packageForm.controls.field_name?.value;
     PackageService.currentPackage.field_countryStart = this.packageForm.controls.field_countryStart?.value;
@@ -113,7 +123,7 @@ export class PostRequestColis0Component implements OnInit {
     PackageService.currentPackage.field_numberPackage = this.packageForm.controls.field_numberPackage?.value;
     PackageService.currentPackage.field_image = this.packageForm.controls.field_image?.value;
     PackageService.currentPackage.field_descriptionPackage = this.packageForm.controls.field_descriptionPackage?.value;
-
+    */
     // console.log(PackageService.currentPackage);
   }
 

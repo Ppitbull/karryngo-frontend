@@ -17,6 +17,8 @@ import { PostRequestColis2Component } from './post-request-colis/post-request-co
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { ModalModule } from 'ngx-bootstrap/modal';
 
+import { ProgressIndeterminateModule } from '../../../shared/components/progress-indeterminate/progress-indeterminate.module';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -24,7 +26,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     PostRequestsRoutingModule,
     MatTabsModule,
     AlertModule.forRoot(),
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    ProgressIndeterminateModule
   ],
   declarations: [
     PackagesComponent,

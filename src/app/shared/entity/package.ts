@@ -27,4 +27,14 @@ export class Package {
     field_numberPackage: number;
     field_image: any[];
     field_descriptionPackage: string;
+    
+    static hydrate(entity:Record<string,any>):Package
+    {
+        let pac:Package=new Package();
+        for(const key in entity)
+        {
+            Reflect.set(pac,key,entity[key]);
+        }
+        return pac;
+    }
 }
