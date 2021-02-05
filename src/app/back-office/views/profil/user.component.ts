@@ -1,5 +1,6 @@
 import { Component, NgZone, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserService } from '../../../shared/service/user/user.service';
 // import { AuthService } from 'app/shared/services/auth.service';
 // import { UserService } from 'app/shared/services/user.service';
 // import { User } from 'app/shared/services/user';
@@ -16,18 +17,18 @@ export class UserComponent implements OnInit {
   // user: any[];
   // users: any[];
 
-  firstName: string = 'Flambel';
-  lastName: string = 'SANOU';
+  userEmail: string = this.userData.getUserInformations().field_email;
+  firstName: string = this.userData.getUserInformations().field_firstname;
+  lastName: string = this.userData.getUserInformations().field_lastname;
   name = this.firstName + ' ' + this.lastName;
-  userAddress: string = 'Mandja';
-  userCity: string = 'Bangangte';
-  userCountry: string = 'Cameroon';
-  userZip: string = '0000';
-  userPhone: string = '(+237) 691 224 472';
+  userAddress = '';
+  userCity: string = this.userData.getUserInformations().field_city;
+  userCountry: string = this.userData.getUserInformations().field_country;
+  userZip  = this.userData.getUserInformations().field_zip;
+  userPhone: string = this.userData.getUserInformations().field_phone;
   userCoverImg: string = 'assets/img/userCoverImg1.png';
   userProfileImg: string = '../../../../assets/img/user_image.png';
-  userName: string = 'Flambel55';
-  userEmail: string = 'flambel55@gmail.com';
+  userName: string = '';
   userLabel: string = 'if we are satisfied with our present, we have no future.';
 
   message: string = '\<b>Error\</b>\<br>Someone was not going. This option is not available.';
@@ -35,13 +36,16 @@ export class UserComponent implements OnInit {
   constructor(
     // private userService: UserService,
     // public authService: AuthService,
+    private userData: UserService,
     public router: Router,
     public ngZone: NgZone) {
+
     // this.user["name"] = `${this.userService.user.firstName} ${this.userService.user.lastName}`;
 
   }
 
   ngOnInit() {
+    console.log(this.userData.getUserInformations().field_firstname)
     // this.users = [this.userService.user];
   }
 

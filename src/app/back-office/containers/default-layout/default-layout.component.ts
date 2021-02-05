@@ -10,9 +10,9 @@ import { navItems } from '../../../_nav';
 export class DefaultLayoutComponent {
   public sidebarMinimized = false;
   public navItems = navItems;
-  public userName: string = 'Flambel SANOU';
-  private balence: number = 50000;
-  private currency: string = 'FCFA';
+  public userName: string = this.userService.getUserInformations().field_lastname + ' ' + this.userService.getUserInformations().field_lastname;
+  private balence: string = ' 000 ';
+  private currency: string = 'XOF';
 
   today: number = Date.now();
 

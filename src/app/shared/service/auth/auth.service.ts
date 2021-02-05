@@ -111,15 +111,14 @@ export class AuthService {
       this.api.post('auth/requester', JSON.stringify(params), headers)
         .subscribe((response: any) => {
           if (response) {
-            if (response.json().resultCode === 0) {
+            if (response.resultCode === 0) {
               this.registResult = true;
-              resolve(response.json());
-              console.log('succes');
+              resolve(response);
               this.router.navigate(['login']);
               return;
             }
-            reject(response.json());
-            console.log('teste de la consol 2 ' + response.json());
+            reject(response);
+            console.log('teste de la consol 2 ' + response);
             return 0;
           }
         }, (error: any) => {

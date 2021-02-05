@@ -44,18 +44,22 @@ export class UserService {
  *  get the user informations.
  */
 getUserInformations() {
+  console.log(JSON.parse(localStorage.getItem('user-data')));
   // tslint:disable-next-line:prefer-const
-  let data: any;
+  const data: any = {
+  // console.log(JSON.parse(localStorage.getItem('user-data')).result._id);
+  field_id: JSON.parse(localStorage.getItem('user-data')).result._id,
+  field_email : JSON.parse(localStorage.getItem('user-data')).result.adresse.email,
+  field_country : JSON.parse(localStorage.getItem('user-data')).result.adresse.country,
+  field_city : JSON.parse(localStorage.getItem('user-data')).result.adresse.city,
+  field_mobilePhone : JSON.parse(localStorage.getItem('user-data')).result.adresse.mobilePhone,
+  field_phone : JSON.parse(localStorage.getItem('user-data')).result.adresse.phone,
+  field_firstname : JSON.parse(localStorage.getItem('user-data')).result.firstname,
+  field_lastname : JSON.parse(localStorage.getItem('user-data')).result.lastname,
+  field_zip : JSON.parse(localStorage.getItem('user-data')).result.adresse.zip,
 
-  data['id'] = JSON.parse(localStorage.getItem('user-data')).result._id;
-  data['email'] = JSON.parse(localStorage.getItem('user-data')).result.address.email;
-  data['country'] = JSON.parse(localStorage.getItem('user-data')).result.address.country;
-  data['city'] = JSON.parse(localStorage.getItem('user-data')).result.address.city;
-  data['mobilePhone'] = JSON.parse(localStorage.getItem('user-data')).result.address.mobilePhone;
-  data['phone'] = JSON.parse(localStorage.getItem('user-data')).result.address.phone;
-  data['firstname'] = JSON.parse(localStorage.getItem('user-data')).result.skypeNumber;
-  data['lastname'] = JSON.parse(localStorage.getItem('user-data')).result.lastname;
-  console.log(data);
+};
+  // console.log(data);
   return data;
 }
 
@@ -79,17 +83,18 @@ getUserInformations() {
   */
   resetPassword() {
     this.toastr.success('Email Sent');
-    this.router.navigate(['/login']);
+    this.router.navigate(['login']);
   }
 
   /*
   * logOut function is used to sign out .
   */
   logOut() {
+    this.router.navigate(['login']);
     localStorage.removeItem('user-data');
     //this.login.isLoggedIn = false;
     this.toastr.success('You have been successfully logged out!');
-    this.router.navigate(['/login']);
+    this.router.navigate(['login']);
   }
 
   // permet denvoyer le code au user par mail pour reset son password
@@ -480,31 +485,31 @@ getUserInformations() {
 
   //recuperer les informations d'un utilisateur
   getUserById(id:String):Promise<any>
-  { 
+  {
     return new Promise<any>((resolve,reject)=>{
       let user:User=this.listUser.find((u)=>u.field_id==id);
       if(user!=undefined) resolve(user);
       else{
         this.api.get(`user/profil/${id}`,{
           'Authorization': 'Bearer ' + this.api.getAccessToken(),
-   
+
         }).subscribe(success => {
           if(success)
           {
-            console.log("Success ",success)
+            // console.log("Success ",success)
             if(success.resultCode==0)
             {
               resolve(this.parseDataFromApi(success.result));
             }
             else reject(success)
-             
-          }          
+
+          }
           else reject(success)
         }, error => {
           reject(error);
         })
       }
-    })    
+    })
   }
 
 }

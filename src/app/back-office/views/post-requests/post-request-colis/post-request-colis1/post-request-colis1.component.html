@@ -1,44 +1,58 @@
-<br>
-<h4 class="mb-2 text-left title-form">Carriers List available for your request.</h4>
-<br>
-<table class="table table-bordered table-striped table-sm">
-    <thead>
-        <tr>
-            <th>Driver</th>
-            <th>Location</th>
-            <th>Vehicles</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let provider of providerList" (click)="showProviderDetail(provider.provider)">
-            <td>{{provider.provider.name}}</td>
-            <td>{{provider.locationString}}</td>
-            <td>{{provider.vehiculeString}}</td>
-            <td class="">
-                <div class="row">
-                    <div class="col-4"> <i class="fa fa-eye"></i></div>
-                    <div class="col-4"><input type="checkbox" (click)="selectProvider($event,provider.provider)"> </div>
-                </div>
-            </td>
-        </tr>
-        
-    </tbody>
-</table>
-<div class="row" *ngIf="selectedProvider!=null">
-  Selected driver: {{selectedProvider.name}}
+<div *ngIf="!waitingProviderInfos">
+  <div class="row">
+    <br>
+    <h4 class="mb-2 text-left title-form ">Carriers List available for your request.</h4>
+    <br>
+  </div>
+  <div class="row" *ngIf="selectedProvider!=null">
+      <span class="col-12">Selected driver: {{selectedProvider.name}}</span>
+  </div>
+
+  <div class="row" >
+    <table class="table table-bordered table-striped table-sm">
+        <thead>
+            <tr>
+                <th>Driver</th>
+                <th>Location</th>
+                <th>Vehicles</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let provider of providerList" >
+                <td>{{provider.provider.name}}</td>
+                <td>{{provider.locationString}}</td>
+                <td>{{provider.vehiculeString}}</td>
+                <td class="">
+                    <div class="row">
+                        <div class="col-4"> <i (click)="showProviderDetail(provider.provider)" class="fa fa-external-link"></i></div>
+                        <div class="col-4"><input type="checkbox" (click)="selectProvider($event,provider.provider)"> </div>
+                    </div>
+                </td>
+            </tr>
+            
+        </tbody>
+    </table>  
+    <nav>
+        <ul class="pagination pull-right">
+            <li class="page-item"><a class="page-link">Prev</a></li>
+            <li class="page-item active">
+                <a class="page-link">1</a>
+            </li>
+            <li class="page-item"><a class="page-link">2</a></li>
+            <li class="page-item"><a class="page-link">3</a></li>
+            <li class="page-item"><a class="page-link">Next</a></li>
+        </ul>
+    </nav>
+  </div>
+
+  <div class="footer-registration text-right">
+    <button type="button" (click)="myModal.show()" [disabled]="selectedProvider==null" class="btn next-button btn-w">
+      Submit
+    </button>
+  </div>
 </div>
-<nav>
-    <ul class="pagination pull-right">
-        <li class="page-item"><a class="page-link">Prev</a></li>
-        <li class="page-item active">
-            <a class="page-link">1</a>
-        </li>
-        <li class="page-item"><a class="page-link">2</a></li>
-        <li class="page-item"><a class="page-link">3</a></li>
-        <li class="page-item"><a class="page-link">Next</a></li>
-    </ul>
-</nav>
+ <app-progress-indeterminate *ngIf="waitingProviderInfos"></app-progress-indeterminate>
 
 <div bsModal #myModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -50,15 +64,12 @@
         </button>
       </div>
       <div class="modal-body">
-        <div *ngIf="!waitingProviderInfos">
-        Message: {{findProviderInfosMessage}}
-          Username: {{selectedUserInfos.field_firstName}}
-        </div>
-         <app-progress-indeterminate *ngIf="waitingProviderInfos"></app-progress-indeterminate>
+        Do you want to confirm your choice?
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" (click)="cancelModel()">Ok</button>
+        <button type="button" class="btn btn-danger" (click)="cancelModel()">Cancel</button>
+        <button type="button" class="btn btn-success" (click)="myModal.hide();confirmAction()">Confirm</button>
       </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+    </div>
+  </div>
+</div>

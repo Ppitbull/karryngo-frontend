@@ -1,7 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { ServiceOfProvider } from '../../../../../shared/entity/provider';
 import { User } from '../../../../../shared/entity/user';
 import { PackageService } from '../../../../../shared/service/back-office/package.service';
+import { ProviderService } from '../../../../../shared/service/back-office/provider.service';
+import { TransactionService } from '../../../../../shared/service/back-office/transaction.service';
 import { UserService } from '../../../../../shared/service/user/user.service';
 
 @Component({
@@ -15,12 +18,17 @@ export class PostRequestColis1Component implements OnInit {
   selectedProvider:ServiceOfProvider=null;
   selectedUserInfos:User=null;
   viewedProvider:ServiceOfProvider=null;
-  waitingProviderInfos:boolean=true;
+  waitingProviderInfos:boolean=false;
   findProviderInfosMessage:String="";
 
   @ViewChild('myModal') modal;
 
-  constructor(private packageService:PackageService, private userService:UserService) { }
+  constructor(
+    private packageService:PackageService, 
+    private userService:UserService,
+    private providerService:ProviderService,
+    private router:Router,
+    private transactionService:TransactionService) { }
 
   ngOnInit() {
     this.providerList=this.packageService.getPackageInformations().providers.map(provider=>{
@@ -59,5 +67,21 @@ export class PostRequestColis1Component implements OnInit {
     if(event.target.checked) this.selectedProvider=provider;
     else this.selectedProvider=null;
   }
-
+  confirmAction()
+  {
+    this.waitingProviderInfos=true;
+    // this.providerService.setCurrentSelectedProvider(this.selectedProvider);
+    // this.router.navigate(['']);
+    this.transactionService.startTransaction(
+      this.selectedProvider.providerId,
+      this.userService.getUserInformations()._id,
+      this.userService.getUserInformations()._id,
+      this.packageService.getPackageInformations().idService)
+      .then((result)=>{
+        this.waitingProviderInfos=false;
+        
+      }).catch((error)=>{
+        this.waitingProviderInfos=false;
+      })
+  }
 }

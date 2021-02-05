@@ -87,21 +87,16 @@ export const routes: Routes = [
   //   component: RegisterCarrierShipperTransporterComponent
   // },
   {
-    path: 'profie-carrier',
+    path: 'profil-carrier',
     component: ProfileCarrierComponent
   },
   {
-    path: 'profie-carrier-business',
+    path: 'profil-carrier-business',
     component: ProfileCarrierBusinessComponent
   },
-  {
-    path: 'profie-normal-user',
+  {                    
+    path: 'profil-normal-user',
     component: ProfileNormalUserComponent
-  },
-  {
-    path: 'trips',
-    loadChildren: () => import('./back-office/users/trips/trips.module')
-      .then(mod => mod.TripsModule)
   },
   {
     path: 'requests',
