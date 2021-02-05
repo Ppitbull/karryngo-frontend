@@ -1,0 +1,44 @@
+
+        <div class="sidebar-wrapper" style="background-color: #242121">
+            <div class="logo">
+                <a href="#" class="simple-text">
+                    <div class="">
+                        <img src="/assets/img/karryNgologo.png" />
+                    </div>
+                    <!-- KarryNgo -->
+                </a>
+            </div>
+            <ul class="nav responsive-nav">
+                <li class="dropdown" *ngIf="isMobileMenu()">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-globe"></i>
+                        <b class="caret hidden-sm hidden-xs"></b>
+                        <span class="notification hidden-sm hidden-xs">5</span>
+                        <p class="hidden-lg hidden-md">
+                            5 Notifications
+                            <b class="caret"></b>
+                        </p>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Request was approuved</a></li>
+                        <li><a href="#">Your package has arrived<br />at its destination.</a></li>
+                        <li><a href="#">New message from Landry</a></li>
+                        <li><a href="#">New message from <br /><b>General</b> / Christian</a></li>
+                        <li><a href="#"><i Class="fa fa-angle-double-down"></i>See more</a></li>
+                    </ul>
+                </li>
+                <li *ngIf="isMobileMenu()">
+                    <a (click)="authService.SignOut()">
+                        <i class="fa fa-sign-out"></i>
+                        <p>Log out</p>
+                    </a>
+                </li>
+                <li class="separator hidden-lg hidden-md" *ngIf="isMobileMenu()"></li>
+                <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}}">
+                    <a [routerLink]="[menuItem.path]">
+                        <i class="{{menuItem.icon}}"></i>
+                        <p>{{menuItem.title}}</p>
+                    </a>
+                </li>
+            </ul>
+        </div>

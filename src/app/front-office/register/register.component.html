@@ -1,0 +1,112 @@
+<app-nav-bar></app-nav-bar>
+
+<div class="imag">
+    <div class="container" style="margin-top: 70px;">
+        <div class="row">
+            <div class="col-md-7 bg-white my-5" style="margin-right: auto; margin-left: auto; border-radius: 15px; color: white; background-color: rgba(10, 10, 10, 0.82) !important;">
+                <div class="p-4" style="margin-bottom: 20px; margin-top: 20px; text-align: center; border-bottom: 1px solid gray;">
+                    <h3 style="font-size:20px;"><b>Registration</b></h3>
+                </div>
+
+                <div class="row p-1" style="font-size:15px;">
+                    <div class="col-md-12">
+                        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                            <div class="form-group row mx-2">
+                                <div class="mb-4 col-md-6">
+                                    <label for="field_firstname">First name</label>
+                                    <input type="text" id="field_firstname" formControlName="field_firstname" placeholder="Enter you First name" class="form-control">
+                                    <div *ngIf="submitted && f.field_firstname.errors" class="invalid-feedback text-danger">
+                                        <div *ngIf="f.field_firstname.errors.required">Field is required</div>
+                                    </div>
+                                </div>
+                                <div class="mb-4 col-md-6">
+                                    <label for="field_surname">Surname</label>
+                                    <input type="text" id="field_surname" formControlName="field_surname" placeholder="Enter you Last name" class="form-control">
+                                    <div *ngIf="submitted && f.field_surname.errors" class="invalid-feedback text-danger">
+                                        <div *ngIf="f.field_surname.errors.required">Field is required</div>
+                                    </div>
+                                </div>
+                                <div class="mb-4 col-md-6">
+                                    <label for="field_username">User name</label>
+                                    <input type="text" id="field_username" formControlName="field_username" placeholder="Enter you User name" class="form-control">
+                                    <div *ngIf="submitted && f.field_username.errors" class="invalid-feedback text-danger">
+                                        <div *ngIf="f.field_username.errors.required">Field is required</div>
+                                    </div>
+                                </div>
+                                <div class="mb-4 col-md-6">
+                                    <label for="field_email">Email</label>
+                                    <input type="text" id="field_email" formControlName="field_email" placeholder="Enter you Email" class="form-control">
+                                    <div *ngIf="submitted && f.field_email.errors" class="invalid-feedback text-danger">
+                                        <div *ngIf="f.field_email.errors.required">Field is required</div>
+                                    </div>
+                                </div>
+                                <div class="mb-4 col-md-6">
+                                    <label for="field_password">Password</label>
+                                    <input type="password" id="field_password" formControlName="field_password" placeholder="Enter your password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.field_password.errors }">
+
+                                    <div *ngIf="submitted && f.field_password.errors" class="invalid-feedback text-danger">
+                                        <div *ngIf="f.field_password.errors.required">Field is required</div>
+                                    </div>
+                                </div>
+                                <div class="mb-4 col-md-6">
+                                    <label for="field_password2">Confirm password</label>
+                                    <input type="password" id="field_password2" formControlName="field_password2" placeholder="Confirm your password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.field_password2.errors }">
+
+                                    <div *ngIf="submitted && f.field_password2.errors" class="invalid-feedback text-danger">
+                                        <div *ngIf="f.field_password2.errors.required">Field is required</div>
+                                    </div>
+                                </div>
+                                <div class="form-row col-md-12">
+                                  <div class="form-group col-md-4">
+                                    <label for="field_language">Language</label>
+                                    <select id="field_language"  formControlName="field_language" class="form-control">
+                                      <option selected value="English">English</option>
+                                      <option value="French">French</option>
+                                    </select>
+                                  </div>
+                                  <div class="form-group col-md-4">
+                                    <label for="field_country">Country</label>
+                                    <select id="field_country"  formControlName="field_country" class="form-control">
+                                      <option selected value="Cameroon">Cameroon</option>
+                                      <option value="Nigeria">Nigeria</option>
+                                    </select>
+                                  </div>
+                                  <div class="form-group col-md-4">
+                                    <label for="field_accontType">Account type</label>
+                                    <select id="field_accontType" formControlName="field_accontType" class="form-control">
+                                      <option selected value="Shipper">User</option>
+                                      <option value="Carrier">Carrier</option>
+                                    </select>
+                                  </div>
+                                </div>
+                            </div>
+                            <div class="form-group row mx-2">
+                                <div class="mb-4 col-md-12">
+                                    <span class="pull-left" style="margin-top: -15px;">
+                                       <input id="user_agree" formControlName="user_agree" class="checkbox-custom" name="checkbox-1" type="checkbox">
+                                       <label for="user_agree" class="checkbox-custom-label"> I accept the Terms and Conditions Policy.</label>
+                                     </span>
+
+                                 <div *ngIf="submitted && f.user_agree.errors" class="invalid-feedback text-danger">
+                                    <div *ngIf="f.user_agree.errors.required">Agree is required</div>
+                                </div></div>
+                            </div>
+                        <span class="pull-right">
+                            <button type="submit" class="Register registermodal-submit btn btn-warning" value="Register" (click)="onSubmit()">Register</button>
+                        </span><br><br>
+                    </form>
+                </div>
+                <div class="d-flex justify-content-end social_icon"> 
+                    <span><i class="fab fa-google-plus-square"></i></span>
+                    <span><i class="fab fa-facebook-square"></i></span>
+                    <span><i class="fab fa-twitter-square"></i></span>
+                </div>
+            </div>
+                <br><br>
+                <p style="color: white; font-size:15px;">Already have an account? <a href="javascript:void(0)" (click)="navigateToLogin()"> Login.</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-front-footer></app-front-footer>

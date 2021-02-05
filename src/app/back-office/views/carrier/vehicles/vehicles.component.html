@@ -1,0 +1,173 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-sm-6 col-md-7">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="jaune text-left mx-4 mb-4">
+            Add vehicle for packages transport</h3>
+        </div>
+        <div class="card-body">
+          <div class="container cont2">
+            <form class="text-center p-2">
+              <div class="form-row mb-3">
+                <div class="col">
+                  <input type="text" id="defaultRegisterFormLastName" class="form-control field-form1 field"
+                    placeholder="Brand">
+                  <p class="title-form sub-indication text-left">Vehicle Brand</p>
+                </div>
+                <div class="col">
+
+                  <div class="form-row mb-3">
+                    <div class="col">
+                      <select class="form-control field-form1 field">
+                        <option selected>Vehicle Type</option>
+                        <option value="Bike">Bike</option>
+                        <option value="Car">Car</option>
+                        <option value="Truck">Truck</option>
+                        <option value="Bus">Bus</option>
+                      </select>
+                    </div>
+                    <div class="col">
+                      <select class="form-control field-form1 field">
+                        <option selected>Number of seats</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                        <option value="30">30</option>
+                        <option value="70">70</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- row-item-->
+              <div class="form-row mb-3">
+                <div class="col">
+                  <input type="text" id="defaultRegisterFormLastName" class="form-control field-form1 field"
+                    placeholder="Departure city">
+                  <p class="title-form sub-indication text-left">Departure city</p>
+                </div>
+                <div class="col">
+                  <!-- Last name -->
+                  <input type="text" id="defaultRegisterFormLastName" class="form-control field-form1 field"
+                    placeholder="To">
+                  <p class="title-form sub-indication text-left">Arrival city</p>
+                </div>
+              </div>
+              <!-- row-item-->
+
+              <!-- row-item-->
+              <div class="form-row mb-4">
+                <div class="form-group row">
+                  <label class="col-md-6 col-form-label" for="file-multiple-input">Add one or multiple vehicle File</label>
+                  <div class="col-md-9">
+                    <input type="file" id="file-multiple-input" name="file-multiple-input" multiple>
+                  </div>
+                </div>
+              </div>
+              <!-- row-item-->
+
+
+              <!-- row-item-->
+              <div class="form-row form-group shadow-textarea m2">
+                <label for="exampleFormControlTextarea6">More description</label>
+                <textarea class="form-control field-form2 z-depth-1" id="exampleFormControlTextarea6" rows="3"
+                  placeholder="Tell us a little bit more about your vehicle."></textarea>
+              </div>
+              <!-- row-item-->
+
+            </form>
+            <!-- Default form register -->
+            <button type="button" class="btn next-button btn-weith">GO</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-md-5">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="jaune text-left mx-4 mb-4">
+            Vehicles list</h3>
+        </div>
+        <div class="card-body">
+          <table class="table table-bordered table-striped table-sm" (click)="showNotification('top','center', 'danger', 'pe-7s-close-circle', '\<b>Sorry\</b>\<br>This service was not available now. Tray later.')">
+            <thead>
+              <tr>
+                <th>Status</th>
+                <th>Type</th>
+                <th>Brand</th>
+                <th>Registration date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <span class="badge badge-success">Active</span>
+                </td>
+                <td>Car</td>
+                <td>Kia</td>
+                <td>2021/02/05</td>
+              </tr>
+              <tr>
+                <td>
+                  <span class="badge badge-danger">Inactive</span>
+                </td>
+                <td>Bus</td>
+                <td>Mercedes</td>
+                <td>2021/02/01</td>
+              </tr>
+              <tr>
+                <td>
+                  <span class="badge badge-danger">Inactive</span>
+                </td>
+                <td>Car</td>
+                <td>Ford</td>
+                <td>2021/01/15</td>
+              </tr>
+              <tr>
+                <td>
+                  <span class="badge badge-success">Active</span>
+                </td>
+                <td>Truck</td>
+                <td>Toyota</td>
+                <td>2021/01/02</td>
+              </tr>
+              <tr>
+                <td>
+                  <span class="badge badge-success">Active</span>
+                </td>
+                <td>Coaster</td>
+                <td>Mercedes</td>
+                <td>2020/12/21</td>
+              </tr>
+            </tbody>
+          </table>
+          <nav>
+            <ul class="pagination pull-right">
+              <li class="page-item"><a class="page-link">Prev</a></li>
+              <li class="page-item active">
+                <a class="page-link">1</a>
+              </li>
+              <li class="page-item"><a class="page-link">2</a></li>
+              <li class="page-item"><a class="page-link">3</a></li>
+              <li class="page-item"><a class="page-link">Next</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>

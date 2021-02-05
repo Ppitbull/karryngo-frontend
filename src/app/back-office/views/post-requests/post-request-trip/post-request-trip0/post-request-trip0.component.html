@@ -1,0 +1,161 @@
+<form [formGroup]="packageForm" (ngSubmit)="onSubmit()" class="text-center p-1">
+
+  <!-- Package Details-->
+  <h4 class="mb-2 text-left title-form">Details</h4>
+  <!-- row-item-->
+  <br>
+  <div class="form-row mb-3">
+    Start :
+    <div class="col">
+      <div class="form-row mb-3">
+        <div class="col-md-5">
+          <input type="text" id="field_countryStart" formControlName="field_countryStart"
+            class="form-control field-form1 field" placeholder="Country">
+          <p class="title-form sub-indication text-left">Departure country</p>
+
+        </div>
+        <div class="col-md-5">
+          <input type="text" id="field_cityStart" formControlName="field_cityStart" class="form-control field-form1 field"
+            placeholder="City">
+          <p class="title-form sub-indication text-left">Departure city</p>
+        </div>
+      </div>
+    </div>
+
+    to :
+    <div class="col">
+      <div class="form-row mb-3">
+        <div class="col-md-5">
+          <input type="text" id="field_countryArrived" formControlName="field_countryArrived"
+            class="form-control field-form1 field" placeholder="Country">
+          <p class="title-form sub-indication text-left">Arrival country</p>
+        </div>
+        <div class="col-md-5">
+          <input type="text" id="field_cityArrived" formControlName="field_cityArrived" class="form-control field-form1 field"
+            placeholder="City">
+          <p class="title-form sub-indication text-left">Arrival city</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- row-item-->
+  <!-- row-item-->
+  <div class="form-row mb-4">
+    <div class="col-md-3">
+      <input type="text" id="field_recipientName" formControlName="field_recipientName" class="form-control field-form1 field"
+        placeholder="Recipient Name">
+      <p class="title-form sub-indication text-left">If it's you, leave blank</p>
+    </div>
+    <div class="col-md-3">
+      <input type="text" id="field_recipientContact" formControlName="field_recipientContact"
+        class="form-control field-form1 field" placeholder="Recipient contact">
+      <p class="title-form sub-indication text-left">If it's you, leave blank</p>
+    </div>
+    <div class="col">
+      <div class="form-row mb-3">
+        <div class="col">
+          <select id="field_typeof" formControlName="field_typeof" class="form-control field-form1 field">
+            <option value="documents">Documents</option>
+            <option value="smallPackage">Small Package</option>
+            <option value="bigPackage">Big Package</option>
+          </select>
+          <p class="title-form sub-indication text-left">Type</p>
+        </div>
+        <div class="col-md-5">
+          <select id="field_vehicleType" formControlName="field_vehicleType" class="form-control field-form1 field">
+            <option value="bike">Bike</option>
+            <option value="car">car</option>
+            <option value="truck">Truck</option>
+          </select>
+          <p class="title-form sub-indication text-left">Vehicle Type</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- row-item-->
+  <div class="form-row mb-3">
+    <div class="col">
+      <div class="form-row mb-5">
+        <div class="col-md-3">
+          <label for="isWeak">is weak</label>
+          <input type="checkbox" id="field_isWeak" formControlName="field_isWeak">
+        </div>
+        <div class="col-md-3">
+          <label for="isUrgent">is urgent</label>
+          <input type="checkbox" id="field_isUrgent" formControlName="field_isUrgent">
+        </div>
+        <div class="col-md-5">
+          <input type="date" id="field_delayDate" formControlName="field_delayDate" class="form-control field-form1 field">
+          <p class="title-form sub-indication text-left">Delay Date</p>
+        </div>
+      </div>
+
+      <div class="form-row mb-4">
+        <div class="col">
+          <input type="text" id="field_name" formControlName="field_name" class="form-control field-form1 field" placeholder="Package Name">
+        </div>
+        <div class="col-md-5">
+          <input type="text" id="field_price" formControlName="field_price" class="form-control field-form1 field" placeholder="Price">
+          <p class="title-form sub-indication text-left">Shipping costs</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <!-- row-item-->
+
+  <!-- row-item-->
+  <!-- Package Details-->
+
+  <!-- package image-->
+  <p class="text-left pack-img"><strong>PACKAGE IMAGES</strong></p>
+  <div class="form-row mb-4">
+    <i class="fas fa-plus-square fa-6x img-plus"></i>
+    <i class="ml-2 fas fa-plus-square fa-6x img-plus"></i>
+    <i class="ml-2 fas fa-plus-square fa-6x img-plus"></i>
+    <i class="ml-2 fas fa-plus-square fa-6x img-plus"></i>
+  </div>
+  <!-- package image-->
+
+
+  <!-- row-item-->
+  <div class="form-row">
+    <div class="col-md-2">
+      <input type="number" id="weightPackage" formControlName="field_weightPackage"
+        class="form-control field-form1 field" placeholder="Weight">
+      <p class="title-form sub-indication text-left">weight (kg)</p>
+    </div>
+    <div class="col-md-2">
+      <input type="number" id="field_heightPackages" formControlName="field_heightPackages"
+        class="form-control field-form1 field" placeholder="Height">
+      <p class="title-form sub-indication text-left">Height (cm)</p>
+    </div>
+    <div class="col-md-2">
+      <input type="number" id="field_widhtPackage" formControlName="field_widhtPackage" class="form-control field-form1 field"
+        placeholder="Widht">
+      <p class="title-form sub-indication text-left">Widht (cm)</p>
+    </div>
+    <div class="col-md-2">
+      <input type="number" id="field_lengthPackage" formControlName="field_lengthPackage"
+        class="form-control field-form1 field" placeholder="Length">
+      <p class="title-form sub-indication text-left">Length (cm)</p>
+    </div>
+    <div class="col-md-2">
+      <input type="number" id="field_numberPackage" formControlName="field_numberPackage"
+        class="form-control field-form1 field" placeholder="Number">
+      <p class="title-form sub-indication text-left">Piece number</p>
+    </div>
+  </div>
+  <!-- row-item-->
+
+  <!-- row-item-->
+  <div class="form-row mb-4 form-group shadow-textarea">
+    <label for="descriptionPackage">Description</label>
+    <textarea class="form-control field-form2 z-depth-1" id="field_descriptionPackage"
+      formControlName="field_descriptionPackage" rows="3"
+      placeholder="Tell us a little bit more about your package."></textarea>
+  </div>
+  <!-- row-item-->
+
+</form>

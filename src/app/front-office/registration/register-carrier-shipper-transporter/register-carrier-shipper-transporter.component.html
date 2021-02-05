@@ -1,0 +1,26 @@
+<app-nav-bar></app-nav-bar>
+
+<!-- Start your project here-->
+<div class="container container-global cont-margin text-center">
+  <h4 class="jaune title-style">{{titleUser}}</h4>
+  <div class="cont">
+    <div *ngIf="user1">
+      <app-user-registration1></app-user-registration1>
+    </div>
+    <div *ngIf="user2">
+      <app-user-registration2></app-user-registration2>
+    </div>
+    <div *ngIf="user3">
+      <app-user-registration3></app-user-registration3>
+    </div>
+  </div>
+  <div class="footer-registration text-right">
+    <button *ngIf="visible" type="button" class="btn next-button btn-w" (click)="next()">NEXT</button>
+    <button *ngIf="visible" type="button" class="btn skip-btn btn-w2 mx-4" (click)="skip()">SKIP</button>
+  </div>
+  <button *ngIf="!visible" type="button" class="btn next-button b-mag" (click)="createAccount()">CREATE YOUR
+    ACCOUNT</button>
+</div>
+<!-- Start your project here-->
+
+<app-front-footer></app-front-footer>
