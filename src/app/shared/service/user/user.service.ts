@@ -47,14 +47,14 @@ getUserInformations() {
   // tslint:disable-next-line:prefer-const
   let data: any;
 
-  data['id'] = JSON.parse(localStorage.getItem('user-data')).result._id;
-  data['email'] = JSON.parse(localStorage.getItem('user-data')).result.address.email;
-  data['country'] = JSON.parse(localStorage.getItem('user-data')).result.address.country;
-  data['city'] = JSON.parse(localStorage.getItem('user-data')).result.address.city;
-  data['mobilePhone'] = JSON.parse(localStorage.getItem('user-data')).result.address.mobilePhone;
-  data['phone'] = JSON.parse(localStorage.getItem('user-data')).result.address.phone;
-  data['firstname'] = JSON.parse(localStorage.getItem('user-data')).result.skypeNumber;
-  data['lastname'] = JSON.parse(localStorage.getItem('user-data')).result.lastname;
+  data['field_id'] = JSON.parse(localStorage.getItem('user-data')).result._id;
+  data['field_email'] = JSON.parse(localStorage.getItem('user-data')).result.address.email;
+  data['field_country'] = JSON.parse(localStorage.getItem('user-data')).result.address.country;
+  data['field_city'] = JSON.parse(localStorage.getItem('user-data')).result.address.city;
+  data['field_mobilePhone'] = JSON.parse(localStorage.getItem('user-data')).result.address.mobilePhone;
+  data['field_phone'] = JSON.parse(localStorage.getItem('user-data')).result.address.phone;
+  data['field_firstname'] = JSON.parse(localStorage.getItem('user-data')).result.skypeNumber;
+  data['field_lastname'] = JSON.parse(localStorage.getItem('user-data')).result.lastname;
   console.log(data);
   return data;
 }
@@ -491,7 +491,7 @@ getUserInformations() {
         }).subscribe(success => {
           if(success)
           {
-            console.log("Success ",success)
+            // console.log("Success ",success)
             if(success.resultCode==0)
             {
               resolve(this.parseDataFromApi(success.result));
