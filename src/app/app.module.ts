@@ -115,6 +115,7 @@ import { TestPagesComponent } from './test-pages/test-pages.component';
 import { MapsComponent } from './back-office/users/maps/maps.component';
 import { VerifyEmailComponent } from './front-office/verify-email/verify-email.component';
 import { ProgressIndeterminateComponent } from './shared/components/progress-indeterminate/progress-indeterminate.component';
+import { ChatModule } from './shared/components/chat/chat.module';
 
 @NgModule({
   imports: [
@@ -133,6 +134,7 @@ import { ProgressIndeterminateComponent } from './shared/components/progress-ind
     BrowserAnimationsModule,
     NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=MY_GOOGLE_API_KEY'}),
 
+    ChatModule,
 
     ToastrModule.forRoot({
       timeOut: 2000,
@@ -212,7 +214,7 @@ import { ProgressIndeterminateComponent } from './shared/components/progress-ind
     HowDoesItWorkComponent,
     RequestsComponent,
     BlankPageComponent,
-    MapsComponent
+    MapsComponent,
   ],
   providers: [{
     provide: LocationStrategy,
