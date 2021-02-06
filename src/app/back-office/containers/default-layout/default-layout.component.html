@@ -188,15 +188,18 @@
           <div
             class="list-group-item list-group-item-accent-secondary bg-light text-center font-weight-bold text-muted text-uppercase small">
             Unread ({{unreadMessageList.length}})</div>
-          <div *ngFor="let msg of unreadMessageList" class="list-group-item list-group-item-accent-primary list-group-item-divider">
-            <div><strong> {{msg.content.title}} </strong> <small>{{msg.content.text}}</small></div>
+          <div *ngFor="let msg of unreadMessageList"
+            class="list-group-item list-group-item-accent-primary list-group-item-divider">
+            <div (click)="open(content)">
+              <strong> {{msg.content.title}} </strong> <small>{{msg.content.text}}</small>
+            </div>
             <div>
               <font style="color:#20a8d8 !important;">{{msg.content.from_city}} </font><strong> - </strong>
               <font style="color: green !important;">{{msg.content.to_city}}</font>
             </div>
           </div>
-         
-          
+
+
         </div>
       </tab>
     </tabset>
@@ -207,3 +210,152 @@
   <span class="ml-auto">Powered by <a _blank href="https://sdkgames.com" style="color: #b48f30;"><strong>SDK Games
         Africa</strong></a></span>
 </app-footer>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Package details</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+
+    <br>
+    <div class="form-row mb-3">
+      <strong>Start : </strong>
+      <div class="col">
+        <div class="form-row mb-3">
+          <div class="col-md-5">
+            <div id="field_countryStart" name="field_countryStart" class="field">
+              Cameroon
+            </div>
+          </div>
+          <div class="col-md-5">
+            <div type="text" id="field_cityStart" name="field_cityStart" class="field" placeholder="City">Yaoundé
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <strong> to : </strong>
+      <div class="col">
+        <div class="form-row mb-3">
+          <div class="col-md-5">
+            <div id="field_countryArrived" name="field_countryArrived" class="field">
+              Cameroon
+            </div>
+          </div>
+          <div class="col-md-5">
+            <div type="text" id="field_cityArrived" name="field_cityArrived" class="field">Bangangté
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- row-item-->
+    <!-- row-item-->
+    <div class="form-row mb-4">
+      <div class="col">
+        <div class="form-row mb-3">
+          <div class="col"><strong>Package type : </strong>
+            <div id="field_typeof" name="field_typeof" class="field">
+              Documents
+            </div>
+          </div>
+          <div class="col-md-5"><strong>Vehicle type : </strong>
+            <div id="field_vehicleType" name="field_vehicleType" class="field">
+              Car
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- row-item-->
+    <div class="form-row mb-3">
+      <div class="col">
+        <div class="form-row mb-5">
+          <div class="col-md-3">
+            <strong>is weak : </strong><i class="fa fa-check" style="color: green !important;"></i>
+          </div>
+          <div class="col-md-3">
+            <strong>is urgent : </strong>
+            <input type="checkbox" id="field_isUrgent" name="field_isUrgent">
+          </div>
+          <div class="col-md-5">
+            <strong>Delay : </strong>
+            <div type="date" id="field_delayDate" name="field_delayDate" class="field"> 20/02/2021
+          </div>
+        </div>
+      </div>
+
+        <div class="form-row mb-4">
+          <div class="col">
+            <strong>Package Name : </strong>
+            <div type="text" id="field_name" name="field_name" class="field"> Tomatos bag
+            </div>
+          </div>
+          <div class="col-md-5">
+            <strong>Transaction Amount : </strong>
+            <div type="text" id="field_price" name="field_price" class="field"> 5 000 XOF
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- row-item-->
+
+    <!-- row-item-->
+    <!-- Package Details-->
+
+    <!-- package image-->
+    <p class="text-left pack-img"><strong>PACKAGE IMAGES</strong></p>
+    <div class="form-row mb-4">
+      <i class="fas fa-plus-square fa-6x img-plus"></i>
+      <i class="ml-2 fas fa-plus-square fa-6x img-plus"></i>
+      <i class="ml-2 fas fa-plus-square fa-6x img-plus"></i>
+      <i class="ml-2 fas fa-plus-square fa-6x img-plus"></i>
+    </div>
+    <!-- package image-->
+
+
+    <!-- row-item-->
+    <div class="form-row">
+      <div class="col-md-3">
+        <label  id="weightPackage" name="field_weightPackage" class="field" placeholder="Weight">50</label>
+        kg (weight)
+      </div>
+      <div class="col-md-3">
+        <label id="field_heightPackages" name="field_heightPackages" class="field" placeholder="Height">65</label>
+        cm (Height)
+      </div>
+      <div class="col-md-3">
+        <label id="field_widhtPackage" name="field_widhtPackage" class="field" placeholder="Widht">90</label>
+        cm (Widht)
+      </div>
+      <div class="col-md-3">
+        <label id="field_lengthPackage" name="field_lengthPackage" class="field" placeholder="Length">12</label>
+        cm (Length)
+      </div>
+    </div><br><br>
+
+    <!-- row-item-->
+
+    <!-- row-item-->
+    <div class="form-row mb-4 form-group shadow-textarea">
+      <strong>Description:</strong>
+      <div class="form-control field-form2 z-depth-1" id="field_descriptionPackage" name="field_descriptionPackage"
+        rows="3" placeholder="">A little bit more about your package.
+      </div>
+    </div>
+    <!-- row-item-->
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger" (click)="modal.dismiss('Cross click')">Refuse</button>
+    <button type="button" class="btn btn-success"
+      (click)="modal.close('Save click');showNotification('top','center', 'danger', 'pe-7s-close-circle', '\<b>Sorry\</b>\<br>This service was not available now. Tray later.')">Confirm</button>
+  </div>
+</ng-template>
