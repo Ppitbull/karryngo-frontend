@@ -140,7 +140,7 @@ saveAllPackagesUser(packageList: any) {
   }
 
 
-    // permet d'enregistrer un package en creant son compte
+    // permet d'enregistrer un package
     packageCreation(data: Package): Promise<any> {
         return new Promise((resolve, reject) => {
 
