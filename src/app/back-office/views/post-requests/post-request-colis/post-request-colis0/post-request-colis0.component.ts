@@ -72,8 +72,8 @@ export class PostRequestColis0Component implements OnInit {
     //console.log(this.packageForm.value);
     //if(this.packageForm.invalid) return;
     let p:Package=Package.hydrate(this.packageForm.value);
-    if(this.noPackageLoaded)
-    {      
+    //if(this.noPackageLoaded)
+    //{      
       PackageService.currentPackage=p;
       this.submitted=true;
       this.packageService.packageCreation(p)
@@ -89,8 +89,8 @@ export class PostRequestColis0Component implements OnInit {
         this.showNotification('top','center', 'danger', 'pe-7s-close-circle', '\<b>Sorry\</b>\<br>'+error.message)
         this.submitted=false;
       })
-    }
-    else
+   /* }
+   else
     {
       //mise a jour
       this.submitted=true;
@@ -107,7 +107,7 @@ export class PostRequestColis0Component implements OnInit {
         this.showNotification('top','center', 'danger', 'pe-7s-close-circle', '\<b>Sorry\</b>\<br>'+error.message)
         this.submitted=false;
       })
-    }
+    }*/
 
   }
   showNotification(from, align, colortype, icon, text) {

@@ -37,63 +37,22 @@
         <div class="container cont2">
           <table class="table table-bordered table-striped table-sm">
             <thead>
-              <!-- <tr *ngFor="let package of posts">
-                <td>
-                  <span class="badge badge-secondary">{{package.status}}</span>
-                </td>
-                <td>{{package.date}} {{package.time}}</td>
-                <td>{{package.address.from.cityStart}}</td>
-                <td>{{package.address.to.cityArrived}}</td>
-              </tr> -->
-              <tr>
               <tr>
                 <th>Status</th>
-                <th>Name</th>
-                <th>Delay date</th>
+                <th>From</th>
+                <th>To</th>
                 <th>Type</th>
               </tr>
             </thead>
             <tbody
               (click)="showNotification('top','center', 'danger', 'pe-7s-close-circle', '\<b>Sorry\</b>\<br>This service was not available now. Tray later.')">
-              <tr>
+              <tr *ngFor="let package of posts">
                 <td>
-                  <span class="badge badge-secondary">Stand by</span>
+                  <span class="badge badge-secondary">New</span>
                 </td>
-                <td>Phone</td>
-                <td>2021/02/05</td>
-                <td>Small Package</td>
-              </tr>
-              <tr>
-                <td>
-                  <span class="badge badge-danger">Canceled</span>
-                </td>
-                <td>Beds</td>
-                <td>2021/02/02</td>
-                <td>Big package</td>
-              </tr>
-              <tr>
-                <td>
-                  <span class="badge badge-warning">Started</span>
-                </td>
-                <td>PC DELL</td>
-                <td>2021/01/20</td>
-                <td>Small package</td>
-              </tr>
-              <tr>
-                <td>
-                  <span class="badge badge-warning">Started</span>
-                </td>
-                <td>Tomato Bag</td>
-                <td>2021/01/15</td>
-                <td>Big package</td>
-              </tr>
-              <tr>
-                <td>
-                  <span class="badge badge-success">Finished</span>
-                </td>
-                <td>Traditionnal dress</td>
-                <td>2020/12/30</td>
-                <td>small package</td>
+                <td>{{package.address.from.country}}, {{package.address.from.city}}</td>
+                <td>{{package.address.to.country}},  {{package.address.to.city}}</td>
+                <td>{{package.options.typeof}}</td>
               </tr>
             </tbody>
           </table>

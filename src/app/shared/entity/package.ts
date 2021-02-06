@@ -1,6 +1,7 @@
 // package representation
 export class Package {
     field_owner: string;
+    field_id: string;
     field_status: string;
     field_name: string;
     field_price: string;

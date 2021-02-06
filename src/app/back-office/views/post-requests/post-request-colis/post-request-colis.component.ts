@@ -32,11 +32,12 @@ export class PostRequestColisComponent implements OnInit {
 
   ngOnInit() {
 
-    this.posts = this.packageService.getPackageList();
-    console.log(this.posts);
+    // this.posts = this.packageService.getPackageList();
+    // console.log(this.posts);
     // this.packageService.getPackages();
     // this.initPage();
     this.packageService.getAllPackagesUser();
+    this.posts = JSON.parse(localStorage.getItem('packages-list'));
     console.log('poste variable', this.posts);
   }
 

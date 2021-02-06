@@ -15,6 +15,7 @@ export class PackageService {
     
     packages: Map<String,Package>=new Map<String,Package>();
     packageData: any;
+    posts: any[];
 
     constructor(
         private api: ApiService,
@@ -112,8 +113,11 @@ export class PackageService {
               console.log("Response ",response)
             if (response) {
               resolve(response);
+              this.posts = response.result;
+              localStorage.setItem('packages-list', JSON.stringify(this.posts));
               this.saveAllPackagesUser(response);
             }
+            return response;
 
           }, (error: any) => {
 

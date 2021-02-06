@@ -8,6 +8,7 @@ import { ApiService } from '../api/api.service';
 import { User } from '../../entity/user';
 import { UserService } from '../user/user.service';
 import { async } from '@angular/core/testing';
+import { PackageService } from '../back-office/package.service';
 
 
 @Injectable({
@@ -29,6 +30,7 @@ export class AuthService {
     private router: Router,
     private api: ApiService,
     private toastr: ToastrService,
+    public packageService: PackageService,
     private user: UserService
   ) {
 
@@ -157,6 +159,7 @@ export class AuthService {
       this.api.post('auth/login', param, header)
         .subscribe(response => {
           this.api.setAccessToken(response.result.token);
+          this.packageService.getAllPackagesUser();
           this.user.userConnectedInformations()
           .then((data) => {
             // this.router.navigate(['dashboard']);
