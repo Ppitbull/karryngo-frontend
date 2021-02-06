@@ -9,6 +9,7 @@ export class Message
     title:String="";
     content:String="";
     read:number=0;
+    idDiscussion:String="";
 
     toString():any
     {
@@ -58,7 +59,10 @@ export class Discussion
         for(const key in entity)
         {
             if(key=="chats") d.chats=purgeAttribute(d,entity,"chats")
-                ?purgeAttribute(d,entity,"chats").map((chat:Record<string,any>)=> Message.hydrate(chat))
+                ?purgeAttribute(d,entity,"chats").map((chat:Record<string,any>)=> {
+                    let m:Message=Message.hydrate(chat);
+                    m.idDiscussion=entity._id;
+                })
                 :[];
             else Reflect.set(d,key,purgeAttribute(d,entity,key)); 
         }

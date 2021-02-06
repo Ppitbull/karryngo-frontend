@@ -22,7 +22,12 @@ export class ChatService {
           this.getUnReadDiscussion()
           .then((result)=>{
             this.listDiscusion=result.map((r)=>Discussion.hydrate(r));
+            this.listDiscusion.forEach((discuss:Discussion) =>  
+                this.listUnreadMessage=this.listUnreadMessage.concat(discuss.chats.filter((msg:Message)=> msg.read==0)) 
+            );
             this.emitDiscussion();
+            this.emitUnReadMessage();
+            
           })
     }
 
@@ -65,10 +70,14 @@ export class ChatService {
     {
         this.listMessageUnreadSubject.next(this.listUnreadMessage.slice());
     }
-    markAsRead(): Promise<any>
+    markAsRead(idMessage:String,idDiscussion:String): Promise<any>
     {
         return new Promise((resolve, reject)=>{
-
+            this.api.post('chat/mark_as_read',{ idMessage,idDiscussion},this.headers)
+            .subscribe((success)=>{
+                if(success && success.resultCode==0) resolve(success);
+                else reject(success);
+            }, (error: any)=>reject(error))
         })
     }
 }

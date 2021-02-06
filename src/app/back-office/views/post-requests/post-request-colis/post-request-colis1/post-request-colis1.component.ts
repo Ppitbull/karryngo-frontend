@@ -72,6 +72,7 @@ export class PostRequestColis1Component implements OnInit {
     this.modal.show();
     this.userService.getUserById(provider.providerId)
     .then((result)=>{
+      this.selectedProvider=provider;
       this.viewedProvider=provider;
       this.selectedUserInfos=result;
       this.waitingProviderInfos=false;
