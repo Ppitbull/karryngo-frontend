@@ -1,6 +1,6 @@
 // Angular
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
 import { VehiclesComponent } from './vehicles/vehicles.component';
@@ -15,6 +15,7 @@ import { CarrierRoutingModule } from './carrier-routing.module';
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     CarrierRoutingModule
   ],
   declarations: [
