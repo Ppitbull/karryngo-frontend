@@ -27,6 +27,27 @@ export class PackageService {
         if(this.packages.has(id)) return this.packages.get(id);
         return null;
     }
+    findPackageById(id:String):Promise<Package>
+    {
+        return new Promise((resolve, reject) => {
+            let localPackage:Package=this.findLocalPackagesById(id);
+            if(localPackage) resolve(localPackage);
+            else{
+                this.api.get(`requester/service/${id}`, {
+                    'Authorization': 'Bearer ' + this.api.getAccessToken(),
+                    'Content-Type': 'application/json',
+                    // 'Accept': 'application/json'
+                  }).subscribe(success=>{
+                      if(success && success.resultCode==0)
+                      {
+                          console.log(success.result)
+                        resolve(this.parsePackageFromApi(success.result));
+                      }
+                      else reject(null);
+                  }, (error: any)=> reject(null))
+            }
+        })
+    }
 
     // Set the package informations.
     setPackageInformations(currentPackage: any) {
@@ -98,6 +119,42 @@ export class PackageService {
             },
             "suggestedPrice":data.field_price
         };
+    }
+    parsePackageFromApi(result:Record<string,any>):Package
+    {
+        
+        let data:Package=new Package();
+
+        data.field_id=result._id;
+        data.field_countryStart=result.address.from.country;
+        data.field_cityStart=result.address.from.city;
+        data.field_latStart=result.address.from.lat;
+        data.field_longStart=result.address.from.lg;
+
+        data.field_countryArrived=result.address.to.country;
+        data.field_cityArrived=result.address.to.country;
+        data.field_latArrived=result.address.to.country;
+        data.field_longArrived=result.address.to.country;
+
+        data.field_isUrgent=result.options.is_urgent;
+        data.field_isWeak=result.options.is_weak;
+        data.field_typeof=result.options.typeof;
+        data.field_delayDate=result.deadline.arrival;
+
+        data.field_vehicleType=result.options.vehicle.map(v=>v.type).reduce((prev:any,next:any)=>prev+","+next,"");
+
+        data.field_heightPackages=result.options.size.height;
+        data.field_lengthPackage=result.options.size.depth;
+        data.field_widhtPackage=result.options.size.width;
+        // data.field_weightPackage=;
+        data.field_numberPackage=result.options.size.piece_nber;
+
+        data.field_descriptionPackage=result.options.description;
+        data.field_image=result.options.images;
+        data.field_price=result.suggestedPrice;
+        data.field_name=result.options.package_name;
+
+        return data;
     }
 
     getAllPackagesUser(): Promise<any> {
@@ -201,5 +258,22 @@ saveAllPackagesUser(packageList: any) {
             });
         });
     }
+
+    acceptPackagePrice(pack:Package,idProvider:String,idTransaction:String)
+    {
+        this.api.post("requester/service/transaction/valid_price",
+        {
+            idService:pack.field_id,
+            idProvider,
+            idTransaction,
+            price:pack.field_price
+        },
+        {
+            'Authorization': 'Bearer ' + + localStorage.getItem('access-token'),
+            'Content-Type': 'application/json'
+        }
+        )
+    }
+    
 
 }

@@ -47,6 +47,10 @@ export class ChatService {
             }, (error: any)=> reject(error))
         })
     }
+    getLocalDiscutionById(idDiscussion:String):Discussion
+    {
+        return this.listDiscusion.find((discuss:Discussion)=>discuss._id==idDiscussion);
+    }
     getUnReadDiscussion(): Promise<any>
     {
         return new Promise((resolve, reject) => {
