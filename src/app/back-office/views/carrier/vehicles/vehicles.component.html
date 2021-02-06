@@ -8,28 +8,33 @@
         </div>
         <div class="card-body">
           <div class="container cont2">
-            <form class="text-center p-2">
-              <div class="form-row mb-3">
+            <form  [formGroup]="vehicleForm" (ngSubmit)="submit()" class="text-center p-2">
+              <div class="form-row mb-4">
                 <div class="col">
-                  <input type="text" id="defaultRegisterFormLastName" class="form-control field-form1 field"
+                  <input type="text" id="field_brand" formControlName="field_brand" class="form-control field-form1 field"
                     placeholder="Brand">
                   <p class="title-form sub-indication text-left">Vehicle Brand</p>
                 </div>
                 <div class="col">
-
+                  <input type="text" id="field_model" formControlName="field_model" class="form-control field-form1 field"
+                    placeholder="Model">
+                  <p class="title-form sub-indication text-left">Vehicle Model</p>
+                </div>
+                <div class="col">
                   <div class="form-row mb-3">
                     <div class="col">
-                      <select class="form-control field-form1 field">
-                        <option selected>Vehicle Type</option>
+                      <select id="field_type" formControlName="field_type" class="form-control field-form1 field">
+                        <option selected>Type</option>
                         <option value="Bike">Bike</option>
                         <option value="Car">Car</option>
                         <option value="Truck">Truck</option>
                         <option value="Bus">Bus</option>
                       </select>
+                      <p class="title-form sub-indication text-left">Vehicle Type</p>
                     </div>
                     <div class="col">
-                      <select class="form-control field-form1 field">
-                        <option selected>Number of seats</option>
+                      <select id="field_numberSeat" formControlName="field_numberSeat" class="form-control field-form1 field">
+                        <option selected>Number</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -45,6 +50,7 @@
                         <option value="30">30</option>
                         <option value="70">70</option>
                       </select>
+                      <p class="title-form sub-indication text-left">Number of seats</p>
                     </div>
                   </div>
                 </div>
@@ -54,10 +60,18 @@
               <!-- row-item-->
               <div class="form-row mb-4">
                 <div class="form-group row">
-                  <label class="col-md-6 col-form-label" for="file-multiple-input">Add one or multiple vehicle File</label>
                   <div class="col-md-9">
-                    <input type="file" id="file-multiple-input" name="file-multiple-input" multiple>
+                    <input type="file" id="field_fieles" formControlName="field_fieles" name="file-multiple-input" multiple>
+                    <p class="title-form sub-indication text-left">Add one or multiple vehicle Fil</p>
                   </div>
+                </div>
+                <div class="col">
+                  <div class="form-row mb-4">
+                    <i class="ml-2 fas fa-plus-square fa-6x img-plus"></i>
+                    <i class="ml-2 fas fa-plus-square fa-6x img-plus"></i>
+                    <i class="ml-2 fas fa-plus-square fa-6x img-plus"></i>
+                  </div>
+                  <p class="title-form sub-indication text-left">Add images of vehicle</p>
                 </div>
               </div>
               <!-- row-item-->
@@ -66,14 +80,14 @@
               <!-- row-item-->
               <div class="form-row form-group shadow-textarea m2">
                 <label for="exampleFormControlTextarea6">More description</label>
-                <textarea class="form-control field-form2 z-depth-1" id="exampleFormControlTextarea6" rows="3"
+                <textarea class="form-control field-form2 z-depth-1" id="field_description" formControlName="field_description" rows="3"
                   placeholder="Tell us a little bit more about your vehicle."></textarea>
               </div>
               <!-- row-item-->
 
             </form>
             <!-- Default form register -->
-            <button type="button" class="btn next-button btn-weith">GO</button>
+            <button type="button" class="btn next-button btn-weith">Submit</button>
           </div>
 
         </div>

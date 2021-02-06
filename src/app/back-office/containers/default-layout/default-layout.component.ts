@@ -15,7 +15,7 @@ export class DefaultLayoutComponent implements OnInit{
   public navItems = navItems;
   unreadMessageList:Message[]=[];
   // tslint:disable-next-line:max-line-length
-  public userName: string = this.userService.getUserInformations().field_lastname + ' ' + this.userService.getUserInformations().field_lastname;
+  public userName: string = this.userService.getUserInformations().field_firstname + ' ' + this.userService.getUserInformations().field_lastname;
   private balence: string = ' 000 ';
   private currency: string = 'XOF';
 
