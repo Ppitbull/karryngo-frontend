@@ -11,6 +11,7 @@ import { navItems } from '../../../_nav';
 export class DefaultLayoutComponent {
   public sidebarMinimized = false;
   public navItems = navItems;
+  unreadMessageList
   // tslint:disable-next-line:max-line-length
   public userName: string = this.userService.getUserInformations().field_lastname + ' ' + this.userService.getUserInformations().field_lastname;
   private balence: string = ' 000 ';

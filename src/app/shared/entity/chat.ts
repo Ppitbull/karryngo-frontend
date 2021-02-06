@@ -1,3 +1,5 @@
+import { purgeAttribute } from './entity';
+
 export class Message
 {
     _id:String="";
@@ -21,15 +23,46 @@ export class Message
         };
     }
 
-    hydrate(entity: any): void
+    static hydrate(entity: any): Message
     {
-        // super.hydrate(entity);
-        // this.from.setId(this.purgeAttribute(entity,"from"));
-        // this.to.setId(this.purgeAttribute(entity,"to"));
-        // this.date=this.purgeAttribute(entity,"date");
-        // this.title=this.purgeAttribute(entity,"title");
-        // this.content=this.purgeAttribute(entity,"content");
-        // this.read=this.purgeAttribute(entity,"read");
+        let m:Message=new Message();
+        for(const key in entity)
+        {
+            Reflect.set(m,key,purgeAttribute(m,entity,key)); 
+        }
+        return m;
+    }
+}
+
+export class Discussion
+{
+    _id:String="";
+    inter1:String="";
+    inter2:String="";
+    idProject:String="";
+    chats:Message[]=[];
+
+    toString()
+    {
+        return {
+            _id:this._id,
+            inter1:this.inter1,
+            inter2:this.inter2,
+            chats:this.chats.map((chat)=>chat.toString()),
+            idProject:this.idProject
+        }; 
+    }
+    static hydrate(entity: any): Discussion
+    {
+        let d:Discussion=new Discussion();
+        for(const key in entity)
+        {
+            if(key=="chats") this.chats=purgeAttribute(d,entity,"chats")
+                ?purgeAttribute(d,entity,"chats").map((chat:Record<string,any>)=> Message.hydrate(chat))
+                :[];
+            else Reflect.set(d,key,purgeAttribute(d,entity,key)); 
+        }
+        return d;        
     }
 
 
