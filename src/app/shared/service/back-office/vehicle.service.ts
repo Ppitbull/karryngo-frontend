@@ -30,6 +30,7 @@ export class VehicleService {
     // Set the vehicle informations.
     setVehicleInformations(currentVehicle: any) {
         localStorage.setItem('vehicle-data', JSON.stringify(currentVehicle));
+        console.log('response vehicle',currentVehicle)
     }
 
     /*
@@ -115,7 +116,6 @@ export class VehicleService {
                 // 'X-CSRF-Token': 'FWjJkOClVTMzyhEPEhz_OPR3PulweXUqi-NePcofKU8' || JSON.parse(localStorage.getItem('app-token')),
                 // 'Accept': 'application/json',
             };
-            console.log("Header ", headers);
             this.params = this.parseVehicleToApi(data);
 
             this.api.post('provider/service/vehicle/add', this.params, headers)

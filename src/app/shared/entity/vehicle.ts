@@ -8,5 +8,14 @@ export class Vehicle {
     field_placeNumber: string;
     field_description: string;
   
+    static hydrate(entity:Record<string,any>):Vehicle
+    {
+        let pac:Vehicle=new Vehicle();
+        for(const key in entity)
+        {
+            Reflect.set(pac,key,entity[key]);
+        }
+        return pac;
+    }
   }
   
