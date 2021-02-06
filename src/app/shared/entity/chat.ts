@@ -62,6 +62,7 @@ export class Discussion
                 ?purgeAttribute(d,entity,"chats").map((chat:Record<string,any>)=> {
                     let m:Message=Message.hydrate(chat);
                     m.idDiscussion=entity._id;
+                    return m;
                 })
                 :[];
             else Reflect.set(d,key,purgeAttribute(d,entity,key)); 

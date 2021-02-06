@@ -23,7 +23,10 @@ export class ChatService {
           .then((result)=>{
             this.listDiscusion=result.map((r)=>Discussion.hydrate(r));
             this.listDiscusion.forEach((discuss:Discussion) =>  
-                this.listUnreadMessage=this.listUnreadMessage.concat(discuss.chats.filter((msg:Message)=> msg.read==0)) 
+                {
+                    console.log("Discussion ",discuss)
+                    this.listUnreadMessage=this.listUnreadMessage.concat(discuss.chats.filter((msg:Message)=> msg.read==0)) 
+                }
             );
             this.emitDiscussion();
             this.emitUnReadMessage();
