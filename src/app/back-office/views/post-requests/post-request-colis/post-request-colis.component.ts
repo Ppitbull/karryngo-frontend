@@ -31,75 +31,13 @@ export class PostRequestColisComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.packageService.getPackages();
-    this.initPage();
+
     this.posts = this.packageService.getPackageList();
     console.log(this.posts);
     // this.packageService.getPackages();
     // this.initPage();
     this.packageService.getAllPackagesUser();
     console.log('poste variable', this.posts);
-  }
-
-  // init the interface package
-  initPage() {
-    if (this.interface1) {
-      this.titleInterface = this.title + '1/3';
-      this.visible = true;
-      this.visiblePrev = false;
-    } else if (this.interface2) {
-      this.titleInterface = this.title + '2/3';
-      this.visible = true;
-      this.visiblePrev = true;
-    } else if (this.interface3) {
-      this.titleInterface = this.title + '3/3';
-      this.visible = false;
-      this.visiblePrev = true;
-    }
-  }
-
-  next() {
-    if (this.interface1) {
-      this.pushPackageForm();
-      this.interface1 = false;
-      this.interface2 = true;
-      this.interface3 = false;
-    } else if (this.interface2) {
-      this.interface1 = false;
-      this.interface2 = false;
-      this.interface3 = true;
-    }
-    this.initPage();
-  }
-
-
-  prevPage() {
-    if (this.interface1) {
-      this.titleInterface = this.title + '1/3';
-      this.visible = true;
-      this.visiblePrev = false;
-    } else if (this.interface2) {
-      this.titleInterface = this.title + '2/3';
-      this.visible = true;
-      this.visiblePrev = true;
-    } else if (this.interface3) {
-      this.titleInterface = this.title + '3/3';
-      this.visible = false;
-      this.visiblePrev = true;
-    }
-  }
-
-  prev() {
-    if (this.interface2) {
-      this.interface1 = true;
-      this.interface2 = false;
-      this.interface3 = false;
-    } else if (this.interface3) {
-      this.interface1 = false;
-      this.interface2 = true;
-      this.interface3 = false;
-    }
-    this.prevPage();
   }
 
   pushPackageForm() {

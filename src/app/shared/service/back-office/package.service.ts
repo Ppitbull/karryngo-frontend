@@ -21,25 +21,6 @@ export class PackageService {
         private toastr: ToastrService
     ) { }
 
-    // Get all packages.
-    getPackages() {
-        const headers = {
-            'Content-Type': 'application/hal+json',
-            // 'X-CSRF-Token': 'FWjJkOClVTMzyhEPEhz_OPR3PulweXUqi-NePcofKU8' || JSON.parse(localStorage.getItem('app-token')),
-            // 'Accept': 'application/json',
-        };
-
-        // Id à utiliser dans pour avoir les packages correspondant
-        // const id = JSON.parse(localStorage.getItem('package-data')).id;
-
-        this.api.get('user/packages', headers)
-        .subscribe(response => {
-            this.packages = response.json();
-        }, error => {
-            this.toastr.success(error.message);
-            console.log('Several error: ', error);
-        });
-    }
     findLocalPackagesById(id:String):Package
     {
         if(this.packages.has(id)) return this.packages.get(id);
@@ -74,6 +55,7 @@ export class PackageService {
         }
         return list;
     }
+    
     parsePackageToApi(data:Package):Record<string,any>
     {
         return {
@@ -125,9 +107,9 @@ export class PackageService {
             'Content-Type': 'application/json',
             // 'Accept': 'application/json'
           };
-
           this.api.get('requester/service/list', headers)
           .subscribe((response: any) => {
+              console.log("Response ",response)
             if (response) {
               resolve(response);
               this.saveAllPackagesUser(response);
@@ -150,7 +132,7 @@ export class PackageService {
 */
 saveAllPackagesUser(packageList: any) {
     localStorage.setItem('package-list', JSON.stringify(packageList));
-    console.log(localStorage.getItem('package-list'));
+    // console.log(localStorage.getItem('package-list'));
   }
 
 
