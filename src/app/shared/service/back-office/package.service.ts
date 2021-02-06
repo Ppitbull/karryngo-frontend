@@ -12,7 +12,8 @@ export class PackageService {
 
     public static currentPackage: Package = new Package();
     params: any;
-    packages: any[];
+    
+    packages: Map<String,Package>=new Map<String,Package>();
     packageData: any;
 
     constructor(
@@ -39,6 +40,11 @@ export class PackageService {
             console.log('Several error: ', error);
         });
     }
+    findLocalPackagesById(id:String):Package
+    {
+        if(this.packages.has(id)) return this.packages.get(id);
+        return null;
+    }
 
     // Set the package informations.
     setPackageInformations(currentPackage: any) {
@@ -59,7 +65,57 @@ export class PackageService {
     getLocalStoragePackage() {
         this.packageData = JSON.parse(localStorage.getItem('package-data'));
     }
-
+    getPackageList()
+    {
+        let list:Package[]=[];
+        for(const key in this.packages)
+        {
+            list.push(this.packages.get(key));
+        }
+        return list;
+    }
+    parsePackageToApi(data:Package):Record<string,any>
+    {
+        return {
+            'address':
+            {
+                'from':
+                {
+                    'country': data.field_countryStart,
+                    'city': data.field_cityStart,
+                    'lat': data.field_latStart,
+                    'lg': data.field_longStart
+                },
+                'to':
+                {
+                    'country': data.field_countryArrived,
+                    'city': data.field_cityArrived,
+                    'lat': data.field_latArrived,
+                    'lg': data.field_longArrived
+                },
+            },
+            'options':
+            {
+                'is_urgent': data.field_isUrgent,
+                'is_weak': data.field_isWeak,
+                'typeof': data.field_typeof,
+                'date': data.field_delayDate,
+                'car_type': data.field_vehicleType,
+                'size':
+                {
+                    'height': data.field_heightPackages,
+                    'depth': data.field_lengthPackage,
+                    'width': data.field_widhtPackage,
+                    'wight': data.field_weightPackage,
+                    'piece_nber': data.field_numberPackage,
+                },
+                'description': data.field_descriptionPackage,
+                'images': data.field_image,
+                // 'price': data.field_price
+            },
+            "suggestedPrice":data.field_price
+        };
+    }
     // permet d'enregistrer un package en creant son compte
     packageCreation(data: Package): Promise<any> {
         return new Promise((resolve, reject) => {
@@ -70,49 +126,14 @@ export class PackageService {
                 // 'X-CSRF-Token': 'FWjJkOClVTMzyhEPEhz_OPR3PulweXUqi-NePcofKU8' || JSON.parse(localStorage.getItem('app-token')),
                 // 'Accept': 'application/json',
             };
-            this.params = {
-                'address':
-                {
-                    'from':
-                    {
-                        'country': data.field_countryStart,
-                        'city': data.field_cityStart,
-                        'lat': data.field_latStart,
-                        'lg': data.field_longStart
-                    },
-                    'to':
-                    {
-                        'country': data.field_countryArrived,
-                        'city': data.field_cityArrived,
-                        'lat': data.field_latArrived,
-                        'lg': data.field_longArrived
-                    },
-                },
-                'options':
-                {
-                    'is_urgent': data.field_isUrgent,
-                    'is_weak': data.field_isWeak,
-                    'typeof': data.field_typeof,
-                    'date': data.field_delayDate,
-                    'car_type': data.field_vehicleType,
-                    'size':
-                    {
-                        'height': data.field_heightPackages,
-                        'depth': data.field_lengthPackage,
-                        'width': data.field_widhtPackage,
-                        'wight': data.field_weightPackage,
-                        'piece_nber': data.field_numberPackage,
-                    },
-                    'description': data.field_descriptionPackage,
-                    'images': data.field_image,
-                    // 'price': data.field_price
-                }
+            console.log("Header ",headers);
+            this.params = this.parsePackageToApi(data);
 
-            };
             this.api.post('requester/service/add', this.params, headers)
             .subscribe(success => {
                 if(success.resultCode === 0)
                 {
+                    this.packages.set(success.result.idService,data);
                     console.log(success.result)
                     this.setPackageInformations(success.result);
                     //this.toastr.success('You have been successfully Register your package!');
@@ -132,68 +153,25 @@ export class PackageService {
 
 
     // permet d'update les infos d'un package
-    UpdatePackage(nid: string, token: string, data: any): Promise<any> {
+    updatePackage(nid: string, data: Package): Promise<any> {
 
         return new Promise((resolve, reject) => {
 
             const headers = {
-                'Authorization': 'Bearer ' + token,
-                'Content-Type': 'application/hal+json',
-                // 'Accept': 'application/json',
-                // 'X-CSRF-Token': 'FWjJkOClVTMzyhEPEhz_OPR3PulweXUqi-NePcofKU8' || JSON.parse(localStorage.getItem('app-token'))
+                'Authorization': 'Bearer ' + + localStorage.getItem('access-token'),
+                'Content-Type': 'application/json'
             };
-
-            // const cheminUrl = `${this.api.url}/rest/type/package/package`;
-            this.params = {
-                // '_links': {
-                //     'type': {
-                //         'href': cheminUrl
-                //     }
-                // },
-                'address': [
-                    {
-                        'from': [
-                            {
-                                'country': data.field_countryStart,
-                                'city': data.field_cityStart,
-                                'lat': data.field_latStart,
-                                'lg': data.field_longStart
-                            }
-                        ],
-                        'to': [
-                            {
-                                'country': data.field_countryArrived,
-                                'city': data.field_cityArrived,
-                                'lat': data.field_latArrived,
-                                'lg': data.field_longArrived
-                            }
-                        ],
-                    }
-                ],
-                'options': [
-                    {
-                        'is_urgent': data.field_isUrgent,
-                        'is_fragile': data.field_isWeak,
-                        'typeof': data.field_typeof,
-                        'date': data.field_delayDate,
-                        'car_type': data.field_vehicleType,
-                        'size': [
-                            {
-                                'height': data.field_heightPackages,
-                                'depth': data.field_lengthPackage,
-                                'width': data.field_widhtPackage,
-                                'wight': data.field_weightPackage,
-                                'piece_nber': data.field_numberPackage,
-                            }
-                        ],
-                        'detail': data.field_descriptionPackage,
-                        'images': data.field_image,
-                        // 'price': data.field_price
-                    }
-                ]
-            };
-            this.api.patch(`package/${nid}`, JSON.stringify(this.params), headers).subscribe(success => {
-                resolve(success);
+            console.log("Header ",headers);
+            this.api.post(`requester/service/${nid}`, this.parsePackageToApi(data), headers)
+            .subscribe(success => {
+                if(success && success.resultCode==0)
+                {
+                    this.packages.set(success.result.idService,data);
+                    this.setPackageInformations(success.result);
+                    //this.toastr.success('You have been successfully Register your package!');
+                    resolve(success);
+                }
+                else reject(success);
             }, error => {
                 reject(error);
             });

@@ -33,7 +33,7 @@ export class PostRequestColisComponent implements OnInit {
   ngOnInit() {
     this.packageService.getPackages();
     this.initPage();
-    this.posts = this.packageService.packages;
+    this.posts = this.packageService.getPackageList();
     console.log(this.posts);
   }
 

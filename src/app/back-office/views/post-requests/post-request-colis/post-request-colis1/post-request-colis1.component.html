@@ -45,8 +45,14 @@
         </ul>
     </nav>
   </div>
-
+<div class="footer-registration text-right">
+   
+  </div>
   <div class="footer-registration text-right">
+   <a [routerLink]="['/post-requests/packages/add']" class="btn next-button btn-w">
+      Previous
+    </a>
+
     <button type="button" (click)="myModal.show()" [disabled]="selectedProvider==null" class="btn next-button btn-w">
       Submit
     </button>

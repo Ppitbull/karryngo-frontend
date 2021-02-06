@@ -13,6 +13,9 @@ declare var $: any;
 })
 export class PostRequestColis0Component implements OnInit {
 
+  packageLoaded:Package=PackageService.currentPackage ;
+  noPackageLoaded:boolean=false;
+ 
   submitted: boolean;
   packageForm: FormGroup;
   owner: string = 'Flambel SANOU';
@@ -29,29 +32,32 @@ export class PostRequestColis0Component implements OnInit {
     private packageService:PackageService) { }
 
   ngOnInit(): void {
+    if(this.packageLoaded==null) this.packageLoaded=new Package();
+    else this.noPackageLoaded=false;
+
     this.packageForm = this.formBuilder.group({
       'field_owner': [this.owner, ],
       'field_status': [this.status, ],
-      'field_name': ['', Validators.required],
-      'field_price': ['', Validators.required],
-      'field_countryStart': ['', Validators.required],
-      'field_cityStart': ['', Validators.required],
-      'field_countryArrived': ['', Validators.required],
-      'field_cityArrived': ['', Validators.required],
-      'field_isWeak': ['', Validators.required],
-      'field_isUrgent': ['', Validators.required],
-      'field_delayDate': ['', Validators.required],
-      'field_recipientName': ['', Validators.required],
-      'field_recipientContact': ['', Validators.required],
-      'field_typePartSupply': ['', Validators.required],
-      'field_typeof': ['', Validators.required],
-      'field_numberPackage': ['', Validators.required],
-      'field_vehicleType': ['', ],
-      'field_heightPackages': ['', ],
-      'field_widhtPackage': ['', ],
-      'field_weightPackage': ['', ],
-      'field_lengthPackage': ['', ],
-      'field_descriptionPackage': ['', ]
+      'field_name': [this.packageLoaded.field_name, Validators.required],
+      'field_price': [this.packageLoaded.field_price, Validators.required],
+      'field_countryStart': [this.packageLoaded.field_countryStart, Validators.required],
+      'field_cityStart': [this.packageLoaded.field_cityStart, Validators.required],
+      'field_countryArrived': [this.packageLoaded.field_countryArrived, Validators.required],
+      'field_cityArrived': [this.packageLoaded.field_cityArrived, Validators.required],
+      'field_isWeak': [this.packageLoaded.field_isWeak, Validators.required],
+      'field_isUrgent': [this.packageLoaded.field_isUrgent, Validators.required],
+      'field_delayDate': [this.packageLoaded.field_delayDate, Validators.required],
+      'field_recipientName': [this.packageLoaded.field_recipientName, Validators.required],
+      'field_recipientContact': [this.packageLoaded.field_recipientContact, Validators.required],
+      'field_typePartSupply': [this.packageLoaded.field_typePartSupply, Validators.required],
+      'field_typeof': [this.packageLoaded.field_typeof, Validators.required],
+      'field_numberPackage': [this.packageLoaded.field_numberPackage, Validators.required],
+      'field_vehicleType': [this.packageLoaded.field_vehicleType, ],
+      'field_heightPackages': [this.packageLoaded.field_heightPackages],
+      'field_widhtPackage': [this.packageLoaded.field_widhtPackage, ],
+      'field_weightPackage': [this.packageLoaded.field_weightPackage, ],
+      'field_lengthPackage': [this.packageLoaded.field_lengthPackage, ],
+      'field_descriptionPackage': [this.packageLoaded.field_descriptionPackage, ]
     });
 
   }
@@ -65,20 +71,43 @@ export class PostRequestColis0Component implements OnInit {
   {
     //console.log(this.packageForm.value);
     //if(this.packageForm.invalid) return;
-    this.submitted=true;
-    this.packageService.packageCreation(Package.hydrate(this.packageForm.value))
-    .then((result:any)=>{
-      this.submitted=false;
-      this.showNotification('top','center', 'success', 'pe-7s-close-circle', '\<b>Success\</b>\<br>Service was created successfully')
-      setTimeout(() => {
-        this.router.navigate(['/post-requests/packages/list-providers'])
-      }, 1000);
-    })
-    .catch((error)=>{
-      console.log(error)
-      this.showNotification('top','center', 'danger', 'pe-7s-close-circle', '\<b>Sorry\</b>\<br>'+error.message)
-      this.submitted=false;
-    })
+    let p:Package=Package.hydrate(this.packageForm.value);
+    if(this.noPackageLoaded)
+    {      
+      PackageService.currentPackage=p;
+      this.submitted=true;
+      this.packageService.packageCreation(p)
+      .then((result:any)=>{
+        this.submitted=false;
+        this.showNotification('top','center', 'success', 'pe-7s-close-circle', '\<b>Success\</b>\<br>Service was created successfully')
+        setTimeout(() => {
+          this.router.navigate(['/post-requests/packages/list-providers'])
+        }, 600);
+      })
+      .catch((error)=>{
+        console.log(error)
+        this.showNotification('top','center', 'danger', 'pe-7s-close-circle', '\<b>Sorry\</b>\<br>'+error.message)
+        this.submitted=false;
+      })
+    }
+    else
+    {
+      //mise a jour
+      this.submitted=true;
+      this.packageService.updatePackage(this.packageService.getPackageInformations().idService,p)
+      .then((result:any)=>{
+        this.submitted=false;
+        this.showNotification('top','center', 'success', 'pe-7s-close-circle', '\<b>Success\</b>\<br>Service was updated successfully')
+        setTimeout(() => {
+          this.router.navigate(['/post-requests/packages/list-providers'])
+        }, 600);
+      })
+      .catch((error)=>{
+        console.log(error)
+        this.showNotification('top','center', 'danger', 'pe-7s-close-circle', '\<b>Sorry\</b>\<br>'+error.message)
+        this.submitted=false;
+      })
+    }
 
   }
   showNotification(from, align, colortype, icon, text) {
@@ -88,7 +117,7 @@ export class PostRequestColis0Component implements OnInit {
       message: text
     }, {
       type: colortype,
-      timer: 1000,
+      timer: 500,
       placement: {
         from: from,
         align: align
