@@ -8,6 +8,7 @@ declare var $: any;
   styleUrls: ['./withdrawal.component.scss']
 })
 export class WithdrawalComponent {
+  balence: string = '000';
 
   @ViewChild('myModal') public myModal: ModalDirective;
 

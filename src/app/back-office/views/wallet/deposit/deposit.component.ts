@@ -8,7 +8,7 @@ declare var $: any;
 })
 
 export class DepositComponent implements OnInit {
-  balence: number = 50000;
+  balence: string = '000';
 
   constructor() {}
 
