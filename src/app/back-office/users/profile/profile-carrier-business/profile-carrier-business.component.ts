@@ -55,6 +55,7 @@ export interface Vehicule {
 export class ProfileCarrierBusinessComponent implements OnInit {
 // user: any[];
   // users: any[];
+  
 
   firstName: string = 'Flambel';
   lastName: string = 'SANOU';
