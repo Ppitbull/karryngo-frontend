@@ -31,10 +31,11 @@ export class PostRequestColisComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.packageService.getPackages();
-    this.initPage();
+    // this.packageService.getPackages();
+    // this.initPage();
+    this.packageService.getAllPackagesUser();
     this.posts = this.packageService.packages;
-    console.log(this.posts);
+    console.log('poste variable', this.posts);
   }
 
   // init the interface package

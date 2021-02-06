@@ -21,24 +21,25 @@ export class PackageService {
     ) { }
 
     // Get all packages.
-    getPackages() {
-        const headers = {
-            'Content-Type': 'application/hal+json',
-            // 'X-CSRF-Token': 'FWjJkOClVTMzyhEPEhz_OPR3PulweXUqi-NePcofKU8' || JSON.parse(localStorage.getItem('app-token')),
-            // 'Accept': 'application/json',
-        };
+    // getPackages() {
+    //     const headers = {
+    //         'Authorization': 'Bearer ' + this.api.getAccessToken(),
+    //         'Content-Type': 'application/json',
+    //         // 'Accept': 'application/json'
+    //     };
 
-        // Id à utiliser dans pour avoir les packages correspondant
-        // const id = JSON.parse(localStorage.getItem('package-data')).id;
+    //     // Id à utiliser dans pour avoir les packages correspondant
+    //     // const id = JSON.parse(localStorage.getItem('package-data')).id;
 
-        this.api.get('user/packages', headers)
-        .subscribe(response => {
-            this.packages = response.json();
-        }, error => {
-            this.toastr.success(error.message);
-            console.log('Several error: ', error);
-        });
-    }
+    //     this.api.get('requester/service/list', headers)
+    //     .subscribe(response => {
+    //         console.log(response);
+    //         this.packages = JSON.parse(response);
+    //     }, error => {
+    //         this.toastr.success(error.message);
+    //         console.log('Several error 2: ', error);
+    //     });
+    // }
 
     // Set the package informations.
     setPackageInformations(currentPackage: any) {
@@ -59,6 +60,43 @@ export class PackageService {
     getLocalStoragePackage() {
         this.packageData = JSON.parse(localStorage.getItem('package-data'));
     }
+
+    getAllPackagesUser(): Promise<any> {
+
+        return new Promise((resolve, reject) => {
+          const headers = {
+            'Authorization': 'Bearer ' + this.api.getAccessToken(),
+            'Content-Type': 'application/json',
+            // 'Accept': 'application/json'
+          };
+
+          this.api.get('requester/service/list', headers)
+          .subscribe((response: any) => {
+            if (response) {
+              resolve(response);
+              this.saveAllPackagesUser(response);
+            }
+
+          }, (error: any) => {
+
+            if (error) {
+              console.log(error);
+              this.toastr.success(error.message);
+              reject(error);
+            }
+          });
+        });
+      }
+
+
+  /*
+*  save to local the packages list object of user.
+*/
+saveAllPackagesUser(packageList: any) {
+    localStorage.setItem('package-list', JSON.stringify(packageList));
+    console.log(localStorage.getItem('package-list'));
+  }
+
 
     // permet d'enregistrer un package en creant son compte
     packageCreation(data: Package): Promise<any> {

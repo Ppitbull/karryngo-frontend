@@ -14,12 +14,12 @@
     top: 0;
     left: 0;
     bottom: 0;
-    background-color: #ff4081;
+    background-color: #f5d546;
     transition: width .3s linear;
   }
   
   .progress .indeterminate {
-    background-color: #ff4081;
+    background-color: #f5d546;
   }
   
   .progress .indeterminate:before {

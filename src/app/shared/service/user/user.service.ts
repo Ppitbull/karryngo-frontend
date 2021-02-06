@@ -147,7 +147,7 @@ getUserInformations() {
   userConnectedInformations(): Promise<any> {
 
     return new Promise((resolve, reject) => {
-      console.log('de nimporte quoi');
+      // console.log('de nimporte quoi');
       const headers = {
         'Authorization': 'Bearer ' + this.api.getAccessToken(),
         'Content-Type': 'application/json',

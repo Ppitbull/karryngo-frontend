@@ -94,7 +94,7 @@ export const routes: Routes = [
     path: 'profil-carrier-business',
     component: ProfileCarrierBusinessComponent
   },
-  {                    
+  {
     path: 'profil-normal-user',
     component: ProfileNormalUserComponent
   },

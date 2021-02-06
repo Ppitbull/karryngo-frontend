@@ -67,7 +67,7 @@ export class AuthService {
     localStorage.removeItem('user-data');
     this.isLoggedIn = false;
     this.toastr.success('You have been successfully logged out!');
-    this.router.navigate(['/login']);
+    this.router.navigate(['login']);
   }
 
 

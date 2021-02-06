@@ -10,14 +10,16 @@
       <div class="col">
         <div class="form-row mb-3">
           <div class="col-md-5">
-            <input type="text" id="field_countryStart" formControlName="field_countryStart"
-              class="form-control field-form1 field" placeholder="Country">
+            <select id="field_countryStart" formControlName="field_countryStart" class="form-control field-form1 field">
+              <option value="Cameroun">Cameroon</option>
+              <option value="Nigeria">Nigeria</option>
+              <option value="South Africa">South Africa</option>
+            </select>
             <p class="title-form sub-indication text-left">Departure country</p>
-
           </div>
           <div class="col-md-5">
-            <input type="text" id="field_cityStart" formControlName="field_cityStart" class="form-control field-form1 field"
-              placeholder="City">
+            <input type="text" id="field_cityStart" formControlName="field_cityStart"
+              class="form-control field-form1 field" placeholder="City">
             <p class="title-form sub-indication text-left">Departure city</p>
           </div>
         </div>
@@ -27,13 +29,17 @@
       <div class="col">
         <div class="form-row mb-3">
           <div class="col-md-5">
-            <input type="text" id="field_countryArrived" formControlName="field_countryArrived"
-              class="form-control field-form1 field" placeholder="Country">
+            <select id="field_countryArrived" formControlName="field_countryArrived"
+              class="form-control field-form1 field">
+              <option value="Cameroun">Cameroon</option>
+              <option value="Nigeria">Nigeria</option>
+              <option value="South Africa">South Africa</option>
+            </select>
             <p class="title-form sub-indication text-left">Arrival country</p>
           </div>
           <div class="col-md-5">
-            <input type="text" id="field_cityArrived" formControlName="field_cityArrived" class="form-control field-form1 field"
-              placeholder="City">
+            <input type="text" id="field_cityArrived" formControlName="field_cityArrived"
+              class="form-control field-form1 field" placeholder="City">
             <p class="title-form sub-indication text-left">Arrival city</p>
           </div>
         </div>
@@ -43,8 +49,8 @@
     <!-- row-item-->
     <div class="form-row mb-4">
       <div class="col-md-3">
-        <input type="text" id="field_recipientName" formControlName="field_recipientName" class="form-control field-form1 field"
-          placeholder="Recipient Name">
+        <input type="text" id="field_recipientName" formControlName="field_recipientName"
+          class="form-control field-form1 field" placeholder="Recipient Name">
         <p class="title-form sub-indication text-left">If it's you, leave blank</p>
       </div>
       <div class="col-md-3">
@@ -87,17 +93,20 @@
             <input type="checkbox" id="field_isUrgent" formControlName="field_isUrgent">
           </div>
           <div class="col-md-5">
-            <input type="date" id="field_delayDate" formControlName="field_delayDate" class="form-control field-form1 field">
+            <input type="date" id="field_delayDate" formControlName="field_delayDate"
+              class="form-control field-form1 field">
             <p class="title-form sub-indication text-left">Delay Date</p>
           </div>
         </div>
-    
+
         <div class="form-row mb-4">
           <div class="col">
-            <input type="text" id="field_name" formControlName="field_name" class="form-control field-form1 field" placeholder="Package Name">
+            <input type="text" id="field_name" formControlName="field_name" class="form-control field-form1 field"
+              placeholder="Package Name">
           </div>
           <div class="col-md-5">
-            <input type="text" id="field_price" formControlName="field_price" class="form-control field-form1 field" placeholder="Price">
+            <input type="text" id="field_price" formControlName="field_price" class="form-control field-form1 field"
+              placeholder="Price">
             <p class="title-form sub-indication text-left">Shipping costs</p>
           </div>
         </div>
@@ -133,8 +142,8 @@
         <p class="title-form sub-indication text-left">Height (cm)</p>
       </div>
       <div class="col-md-2">
-        <input type="number" id="field_widhtPackage" formControlName="field_widhtPackage" class="form-control field-form1 field"
-          placeholder="Widht">
+        <input type="number" id="field_widhtPackage" formControlName="field_widhtPackage"
+          class="form-control field-form1 field" placeholder="Widht">
         <p class="title-form sub-indication text-left">Widht (cm)</p>
       </div>
       <div class="col-md-2">
@@ -148,7 +157,7 @@
         <p class="title-form sub-indication text-left">Piece number</p>
       </div>
     </div>
-    
+
     <!-- row-item-->
 
     <!-- row-item-->
@@ -167,5 +176,3 @@
   </div>
   <app-progress-indeterminate *ngIf="submitted"></app-progress-indeterminate>
 </form>
-
-
