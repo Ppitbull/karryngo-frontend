@@ -7,6 +7,8 @@ import { ProviderService } from '../../../../../shared/service/back-office/provi
 import { TransactionService } from '../../../../../shared/service/back-office/transaction.service';
 import { UserService } from '../../../../../shared/service/user/user.service';
 
+declare var $: any;
+
 @Component({
   selector: 'app-post-request-colis1',
   templateUrl: './post-request-colis1.component.html',
@@ -67,21 +69,39 @@ export class PostRequestColis1Component implements OnInit {
     if(event.target.checked) this.selectedProvider=provider;
     else this.selectedProvider=null;
   }
+  showNotification(from, align, colortype, icon, text) {
+
+    $.notify({
+      icon: icon,
+      message: text
+    }, {
+      type: colortype,
+      timer: 500,
+      placement: {
+        from: from,
+        align: align
+      }
+    });
+  }
   confirmAction()
   {
     this.waitingProviderInfos=true;
     // this.providerService.setCurrentSelectedProvider(this.selectedProvider);
-    // this.router.navigate(['']);
+    // 
+    // console.log("Provider ",this.selectedProvider,this.userService.getUserInformations())
     this.transactionService.startTransaction(
       this.selectedProvider.providerId,
-      this.userService.getUserInformations()._id,
-      this.userService.getUserInformations()._id,
-      this.packageService.getPackageInformations().idService)
+      this.userService.getUserInformations().id,
+      this.packageService.getPackageInformations().idService,
+      this.userService.getUserInformations().id)
       .then((result)=>{
         this.waitingProviderInfos=false;
-        
+        this.showNotification('top','center', 'success', 'pe-7s-close-circle', '\<b>Success\</b>\<br>Provider has been successfully notified')
+        setTimeout(() => this.router.navigate(['dashboard']), 600);
       }).catch((error)=>{
         this.waitingProviderInfos=false;
+      this.showNotification('top','center', 'danger', 'pe-7s-close-circle', '\<b>Sorry\</b>\<br>'+error.message)
+
       })
   }
 }
