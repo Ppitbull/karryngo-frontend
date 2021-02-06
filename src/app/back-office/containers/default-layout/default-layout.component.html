@@ -212,15 +212,10 @@
 </app-footer>
 
 <ng-template #content let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Package details</h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
+  <div class="card-header">
+    <h4 class="modal-title jaune text-left mb-2" id="modal-basic-title">Package details</h4>
   </div>
   <div class="modal-body">
-
-
     <br>
     <div class="form-row mb-3">
       <strong>Start : </strong>
@@ -286,9 +281,9 @@
           <div class="col-md-5">
             <strong>Delay : </strong>
             <div type="date" id="field_delayDate" name="field_delayDate" class="field"> 20/02/2021
+            </div>
           </div>
         </div>
-      </div>
 
         <div class="form-row mb-4">
           <div class="col">
@@ -324,7 +319,7 @@
     <!-- row-item-->
     <div class="form-row">
       <div class="col-md-3">
-        <label  id="weightPackage" name="field_weightPackage" class="field" placeholder="Weight">50</label>
+        <label id="weightPackage" name="field_weightPackage" class="field" placeholder="Weight">50</label>
         kg (weight)
       </div>
       <div class="col-md-3">
