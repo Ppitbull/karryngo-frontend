@@ -54,13 +54,17 @@ export class ChatService {
         this.listDiscusion.forEach((value:Discussion)=>{
             this.listUnreadMessage.concat(value.chats.filter((msg:Message)=>msg.read==0));
         })
+        this.emitUnReadMessage()
         // this.listDiscusion.filter((value:Discussion,)=>)
     }
     emitDiscussion()
     {
         this.listDiscusionSubject.next(this.listDiscusion.slice());
     }
-
+    emitUnReadMessage()
+    {
+        this.listMessageUnreadSubject.next(this.listUnreadMessage.slice());
+    }
     markAsRead(): Promise<any>
     {
         return new Promise((resolve, reject)=>{
