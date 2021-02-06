@@ -57,7 +57,7 @@ export class Discussion
         let d:Discussion=new Discussion();
         for(const key in entity)
         {
-            if(key=="chats") this.chats=purgeAttribute(d,entity,"chats")
+            if(key=="chats") d.chats=purgeAttribute(d,entity,"chats")
                 ?purgeAttribute(d,entity,"chats").map((chat:Record<string,any>)=> Message.hydrate(chat))
                 :[];
             else Reflect.set(d,key,purgeAttribute(d,entity,key)); 

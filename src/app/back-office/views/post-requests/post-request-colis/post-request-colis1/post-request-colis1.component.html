@@ -15,21 +15,13 @@
           <th>Driver</th>
           <th>Location</th>
           <th>Vehicles</th>
-          <th>Action</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let provider of providerList">
+        <tr (click)="showProviderDetail(provider.provider)" *ngFor="let provider of providerList">
           <td>{{provider.provider.name}}</td>
           <td>{{provider.locationString}}</td>
           <td>{{provider.vehiculeString}}</td>
-          <td class="">
-            <div class="row">
-              <div class="col-4"> <i (click)="showProviderDetail(provider.provider)" class="fa fa-external-link"></i>
-              </div>
-              <div class="col-4"><input type="checkbox" (click)="selectProvider($event,provider.provider)"> </div>
-            </div>
-          </td>
         </tr>
 
       </tbody>

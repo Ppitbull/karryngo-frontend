@@ -187,29 +187,16 @@
         <div class="list-group list-group-accent">
           <div
             class="list-group-item list-group-item-accent-secondary bg-light text-center font-weight-bold text-muted text-uppercase small">
-            Unread</div>
-          <div class="list-group-item list-group-item-accent-primary list-group-item-divider">
-            <div><strong> Potato bag </strong> <small>transport accepted</small></div>
+            Unread ({{unreadMessageList.length}})</div>
+          <div *ngFor="let msg of unreadMessageList" class="list-group-item list-group-item-accent-primary list-group-item-divider">
+            <div><strong> {{msg.content.title}} </strong> <small>{{msg.content.text}}</small></div>
             <div>
-              <font style="color:#20a8d8 !important;">Bangangté </font><strong> - </strong>
-              <font style="color: green !important;">Yaoundé</font>
+              <font style="color:#20a8d8 !important;">{{msg.content.from_city}} </font><strong> - </strong>
+              <font style="color: green !important;">{{msg.content.to_city}}</font>
             </div>
           </div>
          
-          <div
-            class="list-group-item list-group-item-accent-secondary bg-light text-center font-weight-bold text-muted text-uppercase small">
-            Yesterday</div>
-          <div class="list-group-item list-group-item-accent-primary list-group-item-divider">
-            <div><strong> Beds <i class="fa fa-check" style="color: green !important;"></i></strong></div>
-            <div>
-              <font style="color:#20a8d8 !important;">Ebolowa </font><strong> - </strong>
-              <font style="color: green !important;">Bafoussam</font>
-            </div>
-            <small class="text-muted mr-3" style="color:#20a8d8 !important;">
-              <i class="icon-location-pin"></i>  10 : 11 am</small>
-            <small class="text-muted" style="color: green !important;">
-              <i class="icon-location-pin"></i>  04 : 55 pm</small>
-          </div>
+          
         </div>
       </tab>
     </tabset>
