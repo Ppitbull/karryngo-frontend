@@ -6,7 +6,7 @@ import { ApiService } from '../api/api.service';
   })
 export class  TransactionService {
     headers:Record<string,string>={
-        'Authorization': 'Bearer ',
+        'Authorization': 'Bearer '+this.apiService.getAccessToken(),
         'Content-Type': 'application/json'
     }
     constructor(
@@ -14,8 +14,13 @@ export class  TransactionService {
     ){}
     startTransaction(providerId:String,requesterId:String,serviceId:String,initiatorId:String):Promise<any>
     {
-        this.headers['Authorization']+=this.apiService.getAccessToken();
-        console.log("Header ",this.headers)
+        // this.headers['Authorization']+=;
+        console.log("Header ",{
+            "idService":serviceId,
+            "idProvider":providerId,
+            "idRequester":requesterId,
+            "idInitiator":initiatorId
+        })
         return new Promise<any>((resolve,reject)=>{
             this.apiService.post("requester/service/transaction/start",{
                 "idService":serviceId,

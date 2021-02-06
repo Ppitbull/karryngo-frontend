@@ -72,6 +72,7 @@ export class PostRequestColis1Component implements OnInit {
     this.waitingProviderInfos=true;
     // this.providerService.setCurrentSelectedProvider(this.selectedProvider);
     // this.router.navigate(['']);
+    console.log("Provider ",this.selectedProvider,this.packageService.getPackageInformations())
     this.transactionService.startTransaction(
       this.selectedProvider.providerId,
       this.userService.getUserInformations()._id,
