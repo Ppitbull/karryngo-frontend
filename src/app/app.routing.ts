@@ -35,7 +35,7 @@ import { ProfileCarrierBusinessComponent } from './back-office/users/profile/pro
 import { ProfileCarrierComponent } from './back-office/users/profile/profile-carrier/profile-carrier.component';
 import { ProfileNormalUserComponent } from './back-office/users/profile/profile-normal-user/profile-normal-user.component';
 import { VerifyEmailComponent } from './front-office/verify-email/verify-email.component';
-import { ChatComponent } from './shared/components/chat/chat/chat.component';
+//import { ChatComponent } from './shared/components/chat/chat/chat.component';
 
 export const routes: Routes = [
   {
@@ -75,10 +75,10 @@ export const routes: Routes = [
     path: 'index',
     component: WelcomeComponent
   },
-  {
+  /*{
     path: 'chat',
     component: ChatComponent
-  },
+  },*/
   {
     path: 'view-trip-carrier-shipment',
     component: ViewTripCarrierShipmentComponent
