@@ -116,6 +116,44 @@ export class PackageService {
             "suggestedPrice":data.field_price
         };
     }
+
+    getAllPackagesUser(): Promise<any> {
+
+        return new Promise((resolve, reject) => {
+          const headers = {
+            'Authorization': 'Bearer ' + this.api.getAccessToken(),
+            'Content-Type': 'application/json',
+            // 'Accept': 'application/json'
+          };
+
+          this.api.get('requester/service/list', headers)
+          .subscribe((response: any) => {
+            if (response) {
+              resolve(response);
+              this.saveAllPackagesUser(response);
+            }
+
+          }, (error: any) => {
+
+            if (error) {
+              console.log(error);
+              this.toastr.success(error.message);
+              reject(error);
+            }
+          });
+        });
+      }
+
+
+  /*
+*  save to local the packages list object of user.
+*/
+saveAllPackagesUser(packageList: any) {
+    localStorage.setItem('package-list', JSON.stringify(packageList));
+    console.log(localStorage.getItem('package-list'));
+  }
+
+
     // permet d'enregistrer un package en creant son compte
     packageCreation(data: Package): Promise<any> {
         return new Promise((resolve, reject) => {

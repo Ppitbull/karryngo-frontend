@@ -35,6 +35,10 @@ export class PostRequestColisComponent implements OnInit {
     this.initPage();
     this.posts = this.packageService.getPackageList();
     console.log(this.posts);
+    // this.packageService.getPackages();
+    // this.initPage();
+    this.packageService.getAllPackagesUser();
+    console.log('poste variable', this.posts);
   }
 
   // init the interface package
