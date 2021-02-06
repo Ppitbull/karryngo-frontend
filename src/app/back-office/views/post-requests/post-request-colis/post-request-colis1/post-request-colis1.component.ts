@@ -23,6 +23,25 @@ export class PostRequestColis1Component implements OnInit {
   waitingProviderInfos:boolean=false;
   findProviderInfosMessage:String="";
 
+
+  
+  firstName: string = 'Provider';
+  lastName: string = 'Name';
+  name = this.firstName + ' ' + this.lastName;
+  userAddress: string = 'Mandja';
+  userCity: string = 'Bangangte';
+  userCountry: string = 'Cameroon';
+  userZip: string = '0000';
+  userPhone: string = '(+237) 691 224 472';
+  userCoverImg: string = 'assets/img/userCoverImg1.png';
+  userProfileImg: string = '../../../../assets/img/user_image.png';
+  userName: string = 'Flambel55';
+  userEmail: string = '';
+  userLabel: string = 'Trust me and your parcels will be delivered on time.';
+
+  message: string = '\<b>Error\</b>\<br>Someone was not going. This option is not available.';
+
+
   @ViewChild('myModal') modal;
 
   constructor(
@@ -56,6 +75,12 @@ export class PostRequestColis1Component implements OnInit {
       this.viewedProvider=provider;
       this.selectedUserInfos=result;
       this.waitingProviderInfos=false;
+      this.userEmail = result.field_email;
+      this.userCity = result.field_city;
+      this.userCountry = result.field_country;
+      this.userPhone = result.field_phone;
+      this.firstName = result.field_firstName;
+      this.lastName = result.field_surName;
       console.log("Result ",result)
     })
     .catch((err)=>{
