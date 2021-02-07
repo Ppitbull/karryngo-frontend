@@ -12,7 +12,7 @@ declare var $: any;
 export class VehiclesComponent implements OnInit {
   vehicleForm: FormGroup;
   submitted: boolean;
-
+  listVehicle:Vehicle[]=[];
   
   constructor(private router: Router,
     private formBuilder: FormBuilder,
@@ -27,13 +27,13 @@ export class VehiclesComponent implements OnInit {
       this.vehicleService.vehicleCreation(p)
       .then((result:any)=>{
         this.submitted=false;
-        this.showNotification('top','center', 'success', 'pe-7s-close-circle', '\<b>Success\</b>\<br>Service was created successfully')
+        this.showNotification('top','center', 'success', 'pe-7s-close-circle', '\<b>Success\</b>\<br>Vehicle was created successfully')
         setTimeout(() => {
           this.router.navigate(['/carrier/vehicles'])
         }, 600);
       })
       .catch((error)=>{
-        console.log(error)
+        // console.log(error)
         this.showNotification('top','center', 'danger', 'pe-7s-close-circle', '\<b>Sorry\</b>\<br>'+error.message)
         this.submitted=false;
       })
@@ -50,6 +50,7 @@ export class VehiclesComponent implements OnInit {
       'field_description': ['', Validators.required],
     });
 
+    this.vehicleService.vehicleSubject.subscribe((vehicleList)=>this.listVehicle=vehicleList);
   }
 
 

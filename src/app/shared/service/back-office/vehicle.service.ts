@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ApiService } from '../api/api.service';
 import { ToastrService } from 'ngx-toastr';
 import { Vehicle } from '../../entity/vehicle';
+import { Subject } from 'rxjs';
 
 
 
@@ -16,12 +17,19 @@ export class VehicleService {
     vehicles: Map<String, Vehicle> = new Map<String, Vehicle>();
     vehicleData: any;
     posts: any[];
+    vehicleSubject:Subject<Vehicle[]>=new Subject<Vehicle[]>();
 
     constructor(
         private api: ApiService,
         private toastr: ToastrService
-    ) { }
+    ) { 
+        this.getAllVehiclesUser();
+    }
 
+    emailVehicle()
+    {
+        this.vehicleSubject.next(this.getVehicleList().slice());
+    }
     findLocalVehiclesById(id: String): Vehicle {
         if (this.vehicles.has(id)) return this.vehicles.get(id);
         return null;
@@ -82,6 +90,7 @@ export class VehicleService {
                         this.posts = response.result;
                         localStorage.setItem('vehicles-list', JSON.stringify(this.posts));
                         this.saveAllVehiclesUser(response);
+                        this.emailVehicle();
                     }
                     return response;
 
@@ -121,9 +130,9 @@ export class VehicleService {
             this.api.post('provider/service/vehicle/add', this.params, headers)
                 .subscribe(success => {
                     if (success.resultCode === 0) {
-                        this.vehicles.set(success.result.idService, data);
-                        console.log(success.result)
+                        this.vehicles.set(success.result.idVehicle, data);
                         this.setVehicleInformations(success.result);
+                        this.emailVehicle();
                         //this.toastr.success('You have been successfully Register your vehicle!');
                         resolve(success);
                     }
