@@ -57,6 +57,7 @@ getUserInformations() {
   field_firstname : JSON.parse(localStorage.getItem('user-data')).result.firstname,
   field_lastname : JSON.parse(localStorage.getItem('user-data')).result.lastname,
   field_zip : JSON.parse(localStorage.getItem('user-data')).result.adresse.zip,
+  field_userName : JSON.parse(localStorage.getItem('user-data')).result.username
 
 };
   // console.log(data);
