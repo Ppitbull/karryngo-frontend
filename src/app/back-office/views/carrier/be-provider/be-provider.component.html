@@ -30,18 +30,18 @@
     <br>
     <div class="container cont2">
       <form  [formGroup]="beCarrierForm" (ngSubmit)="submit()" class="text-center p-2">
-        <div class="form-row mb-4">
-          <div class="col">
+        <div class="form-row mb-2">
+          <div class="col-7">
             <input type="text" id="field_brand" formControlName="field_brand" class="form-control field-form1 field"
-              placeholder="Brand">
-            <p class="title-form sub-indication text-left">Profile Carrier Name</p>
-          </div>
-          <div class="col">
-            <input type="text" id="field_model" formControlName="field_model" class="form-control field-form1 field"
-              placeholder="Model">
-            <p class="title-form sub-indication text-left">Vehicle Model</p>
+              placeholder="Name">
+            <p class="title-form sub-indication text-left">Profile Carrier Name</p><br><br>
           </div>
         </div>
+          <div class="col">
+            <p class="title-form text-left">Description</p>
+            <textarea type="text" id="field_model" formControlName="field_model" class="form-control field-form1 field"
+              placeholder="Description"></textarea><br><br>
+          </div>
         <!-- row-item-->
 
         <!-- row-item-->
