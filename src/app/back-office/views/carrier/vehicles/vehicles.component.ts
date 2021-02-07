@@ -27,7 +27,7 @@ export class VehiclesComponent implements OnInit {
       this.vehicleService.vehicleCreation(p)
       .then((result:any)=>{
         this.submitted=false;
-        this.showNotification('top','center', 'success', 'pe-7s-close-circle', '\<b>Success\</b>\<br>Vehicle was created successfully')
+        this.showNotification('top','center', 'success', 'pe-7s-close-circle', '\<b>Success\</b>\<br>Vehicle was added successfully')
         setTimeout(() => {
           this.router.navigate(['/carrier/vehicles'])
         }, 600);
@@ -48,6 +48,7 @@ export class VehiclesComponent implements OnInit {
       'field_numberSeat': ['', Validators.required],
       'field_fieles': ['', Validators.required],
       'field_description': ['', Validators.required],
+      'field_photos': ['',],
     });
 
     this.vehicleService.vehicleSubject.subscribe((vehicleList)=>this.listVehicle=vehicleList);

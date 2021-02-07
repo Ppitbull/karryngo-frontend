@@ -20,7 +20,7 @@ const routes: Routes = [
         path: 'packages',
         component: PostRequestColisComponent,
         data: {
-          title: 'Packages'
+          title: 'Parcel'
         },
         children:[
           {

@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { VehiclesComponent } from './vehicles/vehicles.component';
 import { SettingsComponent } from './settings/settings.component';
+import { BeProviderComponent } from './be-provider/be-provider.component';
 
 const routes: Routes = [
   {
@@ -13,7 +14,14 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'vehicles'
+        redirectTo: 'be-carrier'
+      },
+      {
+        path: 'be-carrier',
+        component: BeProviderComponent,
+        data: {
+          title: 'Become carrier'
+        }
       },
       {
         path: 'vehicles',

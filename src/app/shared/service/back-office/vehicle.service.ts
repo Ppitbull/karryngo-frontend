@@ -26,7 +26,7 @@ export class VehicleService {
         this.getAllVehiclesUser();
     }
 
-    emailVehicle()
+    emitVehicle()
     {
         this.vehicleSubject.next(this.getVehicleList().slice());
     }
@@ -67,7 +67,7 @@ export class VehicleService {
         return {
             'type': data.field_type,
             'name': data.field_name,
-            'marque': data.field_marque,
+            'marque': data.field_bran,
             'photo': data.field_photo,
             'placeNumber': data.field_placeNumber,
             'description': data.field_description,
@@ -132,8 +132,9 @@ export class VehicleService {
                     if (success.resultCode === 0) {
                         this.vehicles.set(success.result.idVehicle, data);
                         this.setVehicleInformations(success.result);
-                        this.emailVehicle();
+                        this.emitVehicle();
                         //this.toastr.success('You have been successfully Register your vehicle!');
+                        //this.toastr.success('You have been successfully add your vehicle!');
                         resolve(success);
                     }
                     else {
