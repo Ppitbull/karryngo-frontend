@@ -82,12 +82,12 @@ export class PostRequestColis1Component implements OnInit {
       this.userPhone = result.field_phone;
       this.firstName = result.field_firstName;
       this.lastName = result.field_surName;
-      console.log("Result ",result)
+      // console.log("Result ",result)
     })
     .catch((err)=>{
       this.waitingProviderInfos=false;
       this.findProviderInfosMessage=err.message;
-      console.log("Error",err)
+      // console.log("Error",err)
     })
   }
   selectProvider(event,provider)

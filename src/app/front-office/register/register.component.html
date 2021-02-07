@@ -87,9 +87,12 @@
                                     <div *ngIf="f.user_agree.errors.required">Agree is required</div>
                                 </div></div>
                             </div>
-                        <span class="pull-right">
+                        <span *ngIf="!waitingRegistration" class="pull-right">
                             <button type="submit" class="Register registermodal-submit btn btn-warning" value="Register" (click)="onSubmit()">Register</button>
-                        </span><br><br>
+                        </span>
+                        <app-progress-indeterminate *ngIf="waitingRegistration" ></app-progress-indeterminate>
+                        <div *ngIf="!waitingRegistration && submitted" class="row bg-{{messageColor}}"><span class="col-12 text-center">Connexion</span></div>
+                        <br><br>
                     </form>
                 </div>
                 <div class="d-flex justify-content-end social_icon">

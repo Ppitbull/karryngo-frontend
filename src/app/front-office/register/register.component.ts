@@ -15,6 +15,9 @@ export class RegisterComponent implements OnInit {
     public static currentUser: User = new User();
     submitted: boolean;
     registerForm: FormGroup;
+    registrationMessage:String="";
+    waitingRegistration:boolean=false;
+    messageColor:String="";
 
     constructor(private formBuilder: FormBuilder,
         private auth: AuthService,
@@ -70,13 +73,28 @@ export class RegisterComponent implements OnInit {
 
     onSubmit() {
         this.setFormData();
-        this.auth.createAccount(UserService.currentUser);
-        console.log(this.auth.registResult);
-        if (this.auth.registResult == true ){
-            console.log('You registration is OK! ');
-        } else {
-            console.log('An error, plrease check your request');
-        }
+        this.waitingRegistration=true;
+        this.auth.createAccount(UserService.currentUser)
+        .then((result)=>{
+            this.waitingRegistration=false;
+            this.messageColor="green";
+            this.registrationMessage="Success";
+            setTimeout(() => {
+                this.router.navigate(['login']);
+            }, 300);
+        })
+        .catch((error)=>
+        {
+            this.waitingRegistration=false;
+            this.messageColor="red";
+            this.registrationMessage=error.message;
+        })
+        // console.log(this.auth.registResult);
+        // if (this.auth.registResult == true ){
+        //     console.log('You registration is OK! ');
+        // } else {
+        //     console.log('An error, plrease check your request');
+        // }
     }
     get f() {
         return this.registerForm.controls;

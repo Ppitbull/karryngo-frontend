@@ -92,6 +92,7 @@ export class AuthService {
         'firstname': data.field_firstName,
         'lastname': data.field_surName,
         'password': data.field_password,
+        'username': data.field_userName,
         'address':
         {
           'email': data.field_email,
@@ -102,6 +103,7 @@ export class AuthService {
           'skypeNumber': data.field_skype,
           'phone': data.field_phone,
           'websiteLink': data.field_websiteLink,
+          'city':data.field_city
         },
         // 'userName': data.field_userName ,
         // 'country': data.field_country ,
@@ -115,12 +117,10 @@ export class AuthService {
           if (response) {
             if (response.resultCode === 0) {
               this.registResult = true;
-              resolve(response);
-              this.router.navigate(['login']);
+              resolve(response);              
               return;
             }
             reject(response);
-            console.log('teste de la consol 2 ' + response);
             return 0;
           }
         }, (error: any) => {
@@ -128,7 +128,7 @@ export class AuthService {
             this.registResult = false;
             this.toastr.error(error.message);
             // console.log('Error message: ', error.message);
-            // reject(error);
+            reject(error);
           }
         });
     });
