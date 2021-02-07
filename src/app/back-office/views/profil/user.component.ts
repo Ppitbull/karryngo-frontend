@@ -29,7 +29,7 @@ export class UserComponent implements OnInit {
   userCoverImg: string = 'assets/img/userCoverImg1.png';
   userProfileImg: string = '../../../../assets/img/user_image.png';
   userName: string = this.userData.getUserInformations().field_userName;
-  userLabel: string = 'if we are satisfied with our present, we have no future.';
+  userLabel: string;
 
   message: string = '\<b>Error\</b>\<br>Someone was not going. This option is not available.';
 
