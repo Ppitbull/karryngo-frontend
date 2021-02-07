@@ -12,7 +12,7 @@ declare var $: any;
 export class VehiclesComponent implements OnInit {
   vehicleForm: FormGroup;
   submitted: boolean;
-
+  listVehicle:Vehicle[]=[];
   
   constructor(private router: Router,
     private formBuilder: FormBuilder,
@@ -33,7 +33,7 @@ export class VehiclesComponent implements OnInit {
         }, 600);
       })
       .catch((error)=>{
-        console.log(error)
+        // console.log(error)
         this.showNotification('top','center', 'danger', 'pe-7s-close-circle', '\<b>Sorry\</b>\<br>'+error.message)
         this.submitted=false;
       })
@@ -51,6 +51,11 @@ export class VehiclesComponent implements OnInit {
       'field_photos': ['',],
     });
 
+    this.vehicleService.vehicleSubject.subscribe((vehicleList)=>{
+      this.listVehicle=vehicleList
+      console.log("Vehicule ",vehicleList)
+    });
+    this.vehicleService.emitVehicle();
   }
 
 

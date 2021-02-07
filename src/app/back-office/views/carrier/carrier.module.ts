@@ -10,6 +10,7 @@ import { SettingsComponent } from './settings/settings.component';
 
 // Components Routing
 import { CarrierRoutingModule } from './carrier-routing.module';
+import { ProgressIndeterminateModule } from '../../../shared/components/progress-indeterminate/progress-indeterminate.module';
 import { BeProviderComponent } from './be-provider/be-provider.component';
 
 @NgModule({
@@ -17,7 +18,8 @@ import { BeProviderComponent } from './be-provider/be-provider.component';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    CarrierRoutingModule
+    CarrierRoutingModule,
+    ProgressIndeterminateModule,
   ],
   declarations: [
     VehiclesComponent,

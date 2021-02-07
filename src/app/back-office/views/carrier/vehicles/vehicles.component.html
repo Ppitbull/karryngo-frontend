@@ -87,7 +87,8 @@
 
             </form>
             <!-- Default form register -->
-            <button type="button" class="btn next-button btn-weith" (click)="submit()">Submit</button>
+            <div *ngIf="!submitted" class="text-right"> <button type="button" class="btn next-button btn-weith" (click)="submit()">Submit</button></div>
+            <app-progress-indeterminate *ngIf="submitted" ></app-progress-indeterminate>
           </div>
 
         </div>
@@ -106,51 +107,20 @@
               <tr>
                 <th>Status</th>
                 <th>Type</th>
+                <th>Name</th>
                 <th>Brand</th>
-                <th>Registration date</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <tr *ngFor="let v of listVehicle">
                 <td>
                   <span class="badge badge-success">Active</span>
                 </td>
-                <td>Car</td>
-                <td>Kia</td>
-                <td>2021/02/05</td>
+                <td>{{v.field_type}}</td>
+                <td>{{v.field_name}}</td>
+                <td>{{v.field_marque}}</td>
               </tr>
-              <tr>
-                <td>
-                  <span class="badge badge-danger">Inactive</span>
-                </td>
-                <td>Bus</td>
-                <td>Mercedes</td>
-                <td>2021/02/01</td>
-              </tr>
-              <tr>
-                <td>
-                  <span class="badge badge-danger">Inactive</span>
-                </td>
-                <td>Car</td>
-                <td>Ford</td>
-                <td>2021/01/15</td>
-              </tr>
-              <tr>
-                <td>
-                  <span class="badge badge-success">Active</span>
-                </td>
-                <td>Truck</td>
-                <td>Toyota</td>
-                <td>2021/01/02</td>
-              </tr>
-              <tr>
-                <td>
-                  <span class="badge badge-success">Active</span>
-                </td>
-                <td>Coaster</td>
-                <td>Mercedes</td>
-                <td>2020/12/21</td>
-              </tr>
+             
             </tbody>
           </table>
           <nav>

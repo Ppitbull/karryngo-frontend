@@ -229,7 +229,25 @@ export class AuthService {
             reject(error);
           }
         });
+
+        // this.api.get('requester/profil', headers)
+        // .subscribe((reponse: any) => {
+        //   if (reponse) {
+        //     resolve(reponse);
+        //     this.user.setUserInformations(reponse);
+        //   }
+
+        // }, (error: any) => {
+
+        //   if (error) {
+        //     this.toastr.success(error.message);
+        //     reject(error);
+        //   }
+        // });
+
     });
+
+
 
   }
 }

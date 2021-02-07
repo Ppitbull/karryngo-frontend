@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ApiService } from '../api/api.service';
 import { ToastrService } from 'ngx-toastr';
 import { Vehicle } from '../../entity/vehicle';
+import { Subject } from 'rxjs';
 
 
 
@@ -16,12 +17,19 @@ export class VehicleService {
     vehicles: Map<String, Vehicle> = new Map<String, Vehicle>();
     vehicleData: any;
     posts: any[];
+    vehicleSubject:Subject<Vehicle[]>=new Subject<Vehicle[]>();
 
     constructor(
         private api: ApiService,
         private toastr: ToastrService
-    ) { }
+    ) { 
+        this.getAllVehiclesUser();
+    }
 
+    emitVehicle()
+    {
+        this.vehicleSubject.next(this.getVehicleList().slice());
+    }
     findLocalVehiclesById(id: String): Vehicle {
         if (this.vehicles.has(id)) return this.vehicles.get(id);
         return null;
@@ -49,9 +57,11 @@ export class VehicleService {
     }
     getVehicleList() {
         let list: Vehicle[] = [];
-        for (const key in this.vehicles) {
-            list.push(this.vehicles.get(key));
-        }
+        this.vehicles.forEach((value,key)=>list.push(value))
+        // for (const key in this.vehicles) {
+        //     list.push(this.vehicles.get(key));
+        // }
+        console.log("List ",list)
         return list;
     }
 
@@ -65,6 +75,18 @@ export class VehicleService {
             'description': data.field_description,
         }
     };
+    parseVehicleFromApi(v:Record<string,any>):Vehicle
+    {
+        let data=new Vehicle();
+        data.field_id=v._id;
+        data.field_type=v.type;
+        data.field_name=v.name;
+        data.field_bran=v.marque;
+        data.field_photo=v.photo;
+        data.field_placeNumber=v.placeNumber;
+        data.field_description=v.description;
+        return data;
+    }
 
     getAllVehiclesUser(): Promise<any> {
 
@@ -76,12 +98,15 @@ export class VehicleService {
             };
             this.api.get('provider/service/vehicle/list', headers)
                 .subscribe((response: any) => {
-                    console.log("Response ", response)
+                    console.log("Response Vehicule", response)
                     if (response) {
                         resolve(response);
-                        this.posts = response.result;
                         localStorage.setItem('vehicles-list', JSON.stringify(this.posts));
                         this.saveAllVehiclesUser(response);
+                        response.result.forEach((v)=>{
+                           this.vehicles.set(v._id,this.parseVehicleFromApi(v)) 
+                        })
+                        this.emitVehicle();
                     }
                     return response;
 
@@ -121,9 +146,10 @@ export class VehicleService {
             this.api.post('provider/service/vehicle/add', this.params, headers)
                 .subscribe(success => {
                     if (success.resultCode === 0) {
-                        this.vehicles.set(success.result.idService, data);
-                        console.log(success.result)
+                        this.vehicles.set(success.result.idVehicle, data);
                         this.setVehicleInformations(success.result);
+                        this.emitVehicle();
+                        //this.toastr.success('You have been successfully Register your vehicle!');
                         //this.toastr.success('You have been successfully add your vehicle!');
                         resolve(success);
                     }
