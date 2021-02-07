@@ -15,7 +15,7 @@ declare var $: any;
 @Injectable()
 export class PostRequestColisComponent implements OnInit {
 
-  title = 'New package request ';
+  title = 'New Parces request ';
   titleInterface: string;
   interface1 = true;
   interface2 = false;

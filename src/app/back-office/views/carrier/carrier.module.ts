@@ -10,6 +10,7 @@ import { SettingsComponent } from './settings/settings.component';
 
 // Components Routing
 import { CarrierRoutingModule } from './carrier-routing.module';
+import { BeProviderComponent } from './be-provider/be-provider.component';
 
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import { CarrierRoutingModule } from './carrier-routing.module';
   ],
   declarations: [
     VehiclesComponent,
-    SettingsComponent
+    SettingsComponent,
+    BeProviderComponent
   ]
 })
 export class CarrierModule { }
