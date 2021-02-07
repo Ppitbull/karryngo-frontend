@@ -17,13 +17,10 @@ export class BeProviderComponent {
     
   ngOnInit(): void {
     this.beCarrierForm = this.formBuilder.group({
-      'field_brand': ['', Validators.required],
-      'field_model': ['', Validators.required],
-      'field_type': ['', Validators.required],
-      'field_numberSeat': ['', Validators.required],
-      'field_fieles': ['', Validators.required],
-      'field_description': ['', Validators.required],
-      'field_photos': ['',],
+      'field_name': ['', Validators.required],
+      'field_description': ['', ],
+      'field_location': ['', ],
+      'field_fieles': ['', ],
     });
   }
 

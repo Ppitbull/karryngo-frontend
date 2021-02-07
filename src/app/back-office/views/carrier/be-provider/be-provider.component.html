@@ -22,6 +22,7 @@
 
 
 <ng-template #content let-modal>
+  <form  [formGroup]="beCarrierForm" (ngSubmit)="submit()" class="text-center p-2">
   <div class="card-header">
     <h4 class="modal-title jaune text-left mb-2" id="modal-basic-title">Become a parcel carrier</h4>
   </div>
@@ -29,17 +30,17 @@
   <div class="modal-body">
     <br>
     <div class="container cont2">
-      <form  [formGroup]="beCarrierForm" (ngSubmit)="submit()" class="text-center p-2">
         <div class="form-row mb-4">
-          <div class="col">
-            <input type="text" id="field_brand" formControlName="field_brand" class="form-control field-form1 field"
-              placeholder="Brand">
-            <p class="title-form sub-indication text-left">Profile Carrier Name</p>
-          </div>
-          <div class="col">
-            <input type="text" id="field_model" formControlName="field_model" class="form-control field-form1 field"
-              placeholder="Model">
-            <p class="title-form sub-indication text-left">Vehicle Model</p>
+          <p class="text-left"><strong>Name</strong></p>
+          <div class="col-">
+            <input type="text" id="field_name" formControlName="field_name" class="form-control field-form1 field"
+              placeholder="Profile Carrier Name">
+            <p class="title-form sub-indication text-left"></p>
+          </div><br><br><br>
+          <div class="col-12">
+            <p class="text-left"><strong>Description</strong></p>
+            <textarea rows="5" class="form-control field-form1 field" placeholder="Here can be your description" formControlName="field_description"
+              value=""></textarea>
           </div>
         </div>
         <!-- row-item-->
@@ -48,21 +49,21 @@
         <div class="form-row mb-4">
           <div class="form-group row">
             <div class="col-md-9">
-              <p class="title-form sub-indication text-left">Idencation file</p>
+              <p class="text-left"><strong>Idencation file</strong></p>
               <input type="file" id="field_fieles" formControlName="field_fieles" name="file-multiple-input" multiple>
               <p class="title-form sub-indication text-left">Add one or multiple vehicle Fil</p>
             </div>
           </div>
         </div>
         <!-- row-item-->
-      </form>
       </div>
 
 
     <br>
     <div class="modal-footer" *ngIf="!waitingPackageInformation">
       <button type="button" class="btn btn-danger" (click)="modal.dismiss('Cross click')">Cancel</button>
-      <button type="button" class="btn btn-success" (click)="modal.close('Save click');showNotification('top','center', 'success', 'pe-7s-close-circle', '\<b>congratulations !\</b>\<br>You are now a parcel carrier.')">Confirm</button>
+      <button type="button" class="btn btn-success" (click)="modal.close('Save click');showNotification('top','center', 'success', 'pe-7s-gift', '\<b>congratulations !\</b>\<br>You are now a parcel carrier.');submit()">Confirm</button>
     </div>
   </div>
+</form>
 </ng-template>
