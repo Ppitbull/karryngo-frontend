@@ -57,9 +57,11 @@ export class VehicleService {
     }
     getVehicleList() {
         let list: Vehicle[] = [];
-        for (const key in this.vehicles) {
-            list.push(this.vehicles.get(key));
-        }
+        this.vehicles.forEach((value,key)=>list.push(value))
+        // for (const key in this.vehicles) {
+        //     list.push(this.vehicles.get(key));
+        // }
+        console.log("List ",list)
         return list;
     }
 
@@ -73,6 +75,18 @@ export class VehicleService {
             'description': data.field_description,
         }
     };
+    parseVehicleFromApi(v:Record<string,any>):Vehicle
+    {
+        let data=new Vehicle();
+        data.field_id=v._id;
+        data.field_type=v.type;
+        data.field_name=v.name;
+        data.field_bran=v.marque;
+        data.field_photo=v.photo;
+        data.field_placeNumber=v.placeNumber;
+        data.field_description=v.description;
+        return data;
+    }
 
     getAllVehiclesUser(): Promise<any> {
 
@@ -84,13 +98,15 @@ export class VehicleService {
             };
             this.api.get('provider/service/vehicle/list', headers)
                 .subscribe((response: any) => {
-                    console.log("Response ", response)
+                    console.log("Response Vehicule", response)
                     if (response) {
                         resolve(response);
-                        this.posts = response.result;
                         localStorage.setItem('vehicles-list', JSON.stringify(this.posts));
                         this.saveAllVehiclesUser(response);
-                        this.emailVehicle();
+                        response.result.forEach((v)=>{
+                           this.vehicles.set(v._id,this.parseVehicleFromApi(v)) 
+                        })
+                        this.emitVehicle();
                     }
                     return response;
 

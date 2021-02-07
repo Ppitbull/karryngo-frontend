@@ -51,7 +51,11 @@ export class VehiclesComponent implements OnInit {
       'field_photos': ['',],
     });
 
-    this.vehicleService.vehicleSubject.subscribe((vehicleList)=>this.listVehicle=vehicleList);
+    this.vehicleService.vehicleSubject.subscribe((vehicleList)=>{
+      this.listVehicle=vehicleList
+      console.log("Vehicule ",vehicleList)
+    });
+    this.vehicleService.emitVehicle();
   }
 
 
