@@ -5,11 +5,11 @@
     <h4 class="mb-2 text-left title-form">Details</h4>
     <!-- row-item-->
     <br>
-    <div class="form-row mb-3">
+    <div class="form-row mb-2">
       Start :
       <div class="col">
-        <div class="form-row mb-3">
-          <div class="col-md-5">
+        <div class="form-row mb-2">
+          <div class="col-6 md-2">
             <select id="field_countryStart" formControlName="field_countryStart" class="form-control field-form1 field">
               <option value="Cameroun">Cameroon</option>
               <option value="Nigeria">Nigeria</option>
@@ -17,7 +17,7 @@
             </select>
             <p class="title-form sub-indication text-left">Departure country</p>
           </div>
-          <div class="col-md-5">
+          <div class="col-6 md-2">
             <input type="text" id="field_cityStart" formControlName="field_cityStart"
               class="form-control field-form1 field" placeholder="City">
             <p class="title-form sub-indication text-left">Departure city</p>
@@ -27,8 +27,8 @@
 
       to :
       <div class="col">
-        <div class="form-row mb-3">
-          <div class="col-md-5">
+        <div class="form-row mb-2">
+          <div class="col-6 md-5">
             <select id="field_countryArrived" formControlName="field_countryArrived"
               class="form-control field-form1 field">
               <option value="Cameroun">Cameroon</option>
@@ -37,7 +37,7 @@
             </select>
             <p class="title-form sub-indication text-left">Arrival country</p>
           </div>
-          <div class="col-md-5">
+          <div class="col-6 md-2">
             <input type="text" id="field_cityArrived" formControlName="field_cityArrived"
               class="form-control field-form1 field" placeholder="City">
             <p class="title-form sub-indication text-left">Arrival city</p>
@@ -47,20 +47,20 @@
     </div>
     <!-- row-item-->
     <!-- row-item-->
-    <div class="form-row mb-4">
-      <div class="col-md-3">
+    <div class="form-row mb-2">
+      <div class="col-3 md-2">
         <input type="text" id="field_recipientName" formControlName="field_recipientName"
           class="form-control field-form1 field" placeholder="Recipient Name">
         <p class="title-form sub-indication text-left">If it's you, leave blank</p>
       </div>
-      <div class="col-md-3">
+      <div class="col-3 md-2">
         <input type="text" id="field_recipientContact" formControlName="field_recipientContact"
           class="form-control field-form1 field" placeholder="Recipient contact">
         <p class="title-form sub-indication text-left">If it's you, leave blank</p>
       </div>
       <div class="col">
-        <div class="form-row mb-3">
-          <div class="col">
+        <div class="form-row">
+          <div class="col-6">
             <select id="field_typeof" formControlName="field_typeof" class="form-control field-form1 field">
               <option value="documents">Documents</option>
               <option value="smallPackage">Small Package</option>
@@ -68,7 +68,7 @@
             </select>
             <p class="title-form sub-indication text-left">Type</p>
           </div>
-          <div class="col-md-5">
+          <div class="col-6">
             <select id="field_vehicleType" formControlName="field_vehicleType" class="form-control field-form1 field">
               <option value="bike">Bike</option>
               <option value="car">car</option>
@@ -81,36 +81,34 @@
     </div>
 
     <!-- row-item-->
-    <div class="form-row mb-3">
-      <div class="col">
-        <div class="form-row mb-5">
-          <div class="col-md-3">
+    <div class="form-row mb-2">
+      <div class="col-6">
+        <div class="form-row mb-2">
+          <div class="col-md-2">
             <label for="isWeak">is weak</label>
             <input type="checkbox" id="field_isWeak" formControlName="field_isWeak">
           </div>
-          <div class="col-md-3">
+          <div class="col-3 md-2">
             <label for="isUrgent">is urgent</label>
             <input type="checkbox" id="field_isUrgent" formControlName="field_isUrgent">
           </div>
-          <div class="col-md-5">
+          <div class="col ml-5">
             <input type="date" id="field_delayDate" formControlName="field_delayDate"
               class="form-control field-form1 field">
             <p class="title-form sub-indication text-left">Delay Date</p>
           </div>
         </div>
-
-        <div class="form-row mb-4">
-          <div class="col">
-            <input type="text" id="field_name" formControlName="field_name" class="form-control field-form1 field"
-              placeholder="Package Name">
-          </div>
-          <div class="col-md-5">
-            <input type="text" id="field_price" formControlName="field_price" class="form-control field-form1 field"
-              placeholder="Price">
-            <p class="title-form sub-indication text-left">Shipping costs</p>
-          </div>
+      </div>
+      <div class="form-row mb-2">
+        <div class="col-8">
+          <input type="text" id="field_name" formControlName="field_name" class="form-control field-form1 field"
+            placeholder="Package Name">
         </div>
-
+        <div class="col-4">
+          <input type="text" id="field_price" formControlName="field_price" class="form-control field-form1 field"
+            placeholder="Price">
+          <p class="title-form sub-indication text-left">Shipping costs</p>
+        </div>
       </div>
     </div>
     <!-- row-item-->
