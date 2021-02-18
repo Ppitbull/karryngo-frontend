@@ -1,14 +1,17 @@
 import { Injectable } from '@angular/core';
 import { ServiceOfProvider } from '../../entity/provider';
+import { ApiService } from '../api/api.service';
 
 @Injectable({
     providedIn: 'root'
   })
 export class ProviderService
 {
-    private currentSelectedProvider:ServiceOfProvider=null;
-    setCurrentSelectedProvider(selectedProvider)
+    
+    constructor(private api: ApiService){}
+
+    getProfilProvider()
     {
-        this.currentSelectedProvider=selectedProvider;
+
     }
 }

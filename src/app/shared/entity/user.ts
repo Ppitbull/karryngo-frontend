@@ -35,5 +35,6 @@ export class User {
   langCode: string;
   name: string;
   default_langcode: string;
+  isProvider:boolean;
 
 }

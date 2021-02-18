@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { VehiclesComponent } from './vehicles/vehicles.component';
 import { SettingsComponent } from './settings/settings.component';
 import { BeProviderComponent } from './be-provider/be-provider.component';
+import  { CarrierGuard } from "./../../../shared/guard/carrier.guard";
 
 const routes: Routes = [
   {
@@ -11,11 +12,12 @@ const routes: Routes = [
     data: {
       title: 'Carrier'
     },
+    canActivateChild:[CarrierGuard],
     children: [
-      {
-        path: '',
-        redirectTo: 'be-carrier'
-      },
+      // {
+      //   path: '',
+      //   redirectTo: 'be-carrier'
+      // },
       {
         path: 'be-carrier',
         component: BeProviderComponent,
