@@ -5,15 +5,20 @@
   "author": {
     "name": "Flambel SANOU",
     "github": "https://github.com/flambel",
-    "twitter": "https://twitter.com/flambel-junior"
+    "linkedin": "https://cm.linkedin.com/in/flambel-junior-sanou-ku%C3%A9-852703175",
+    "facebook": "https://www.facebook.com/flambeljunior.kue",
+    "twitter": "https://twitter.com/flambel-junior",
+    "youtube": "https://www.youtube.com/channel/UC91YXiTmYYEWV9EXMxlrfhQ"
   },
   "contributors": [
     {
       "name": "Cedric NGUENDAP",
-      "url": "https://github.com/xidedix"
+      "gitlab": "https://gitlab.com/cednguendap",
+      "codechef": "https://www.codechef.com/users/cedric_99/teams",
+      "linkedin": "https://cm.linkedin.com/in/cedric-nguendap-143544175"
     }
   ],
-  "homepage": "https://coreui.io/angular",
+  "homepage": "https://sdkgames.com",
   "copyright": "Copyright 2020 creativeLabs Łukasz Holeczek",
   "license": "MIT",
   "scripts": {
