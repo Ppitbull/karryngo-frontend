@@ -11,8 +11,7 @@ const routes: Routes = [
     path: '',
     data: {
       title: 'Carrier'
-    },
-    canActivateChild:[CarrierGuard],
+    },    
     children: [
       // {
       //   path: '',
@@ -30,14 +29,16 @@ const routes: Routes = [
         component: VehiclesComponent,
         data: {
           title: 'Vehicles'
-        }
+        },
+        canActivate:[CarrierGuard],
       },
       {
         path: 'settings',
         component: SettingsComponent,
         data: {
           title: 'Settings'
-        }
+        },
+        canActivate:[CarrierGuard],
       },
     ]
   }
