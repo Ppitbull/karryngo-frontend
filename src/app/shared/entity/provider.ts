@@ -1,4 +1,19 @@
-export class Zone
+import { Entity } from './entity';
+
+export class Address extends Entity 
+{
+    public email:String="";
+    public mobilePhone:String="";
+    public phone:String="";
+    public websiteLink:String="";
+    public whatsAppNumber:String="";
+    public skypeNumber:String="";
+    public zip:String="";
+    public country:String="";
+    public city:String="";
+} 
+
+export class Zone extends Entity
 {
     _id:String="";
     long:String="";
@@ -6,35 +21,18 @@ export class Zone
     name:String="";
     country:String="";
     city:String="";
-    static hydrate(entity:Record<string,any>):Zone
-    {
-        let pac:Zone=new Zone();
-        for(const key in entity)
-        {
-            Reflect.set(pac,key,entity[key]);
-        }
-        return pac;
-    }
 }
-export class Vehicle
+
+export class Vehicle extends Entity
 {
     _id:String="";
     type:String="";
     name:String="";
     marque:String="";
     photo:String="";
-    static hydrate(entity:Record<string,any>):Vehicle
-    {
-        let pac:Vehicle=new Vehicle();
-        for(const key in entity)
-        {
-            Reflect.set(pac,key,entity[key]);
-        }
-        return pac;
-    }
 }
 
-export class ServiceOfProvider
+export class ServiceOfProvider extends Entity
 {
     _id:String="";
     title:String="";
@@ -43,63 +41,38 @@ export class ServiceOfProvider
     providerId:String="";
     zones:Zone[]=[];
     vehicles:Vehicle[]=[];
-    static hydrate(entity:Record<string,any>):ServiceOfProvider
+
+     hydrate(entity:Record<string,any>)
     {
-        let pac:ServiceOfProvider=new ServiceOfProvider();
         for(const key in entity)
         {
             if(key=="zones" && entity[key]!=null && entity[key]!=undefined) 
             {
-                pac.zones=entity[key].map(zone=>Zone.hydrate(zone));
+                this.zones=entity[key].map(zone=>{
+                    let z:Zone = new Zone();
+                    z.hydrate(zone)
+                    return z;
+                });
             }
             if(key=="vehicles" && entity[key]!=null && entity[key]!=undefined) 
             {
-                pac.vehicles=entity[key].map(vehilcle=>Vehicle.hydrate(vehilcle));
+                this.vehicles=entity[key].map(vehilcle=>{
+                    let v:Vehicle = new Vehicle();
+                    v.hydrate(vehilcle);
+                    return v;
+                });
             }
-            else Reflect.set(pac,key,entity[key]);
+            else Reflect.set(this,key,entity[key]);
         }
-        return pac;
     }
 }
 
-export class Provider 
+export class Provider extends Entity
 {
-    // title:String="";
-    // name:String="Provider Name";
-    // description:String="";
-    // idProvider:String="";
-    // deservedZone:Location[]=[];
-    // listVehicle:Vehicle[]=[];
-
-    // toString():Record<string,any>
-    // {
-    //     return {
-    //         ...super.toString(),
-    //         title:this.title,
-    //         name:this.name,
-    //         description:this.description,
-    //         providerId:this.idProvider,
-    //         zones:this.deservedZone.map((zone:Location)=>zone.toString()),
-    //         vehicles:this.listVehicle.map((vehicle:Vehicle)=>vehicle.toString()),
-    //     }
-    // }
-    // hydrate(entity:Record<string, any>):void
-    // {
-    //     super.hydrate(entity);
-    //     this.title=this.purgeAttribute(entity,"title");
-    //     this.name=this.purgeAttribute(entity,"name");
-    //     this.description=this.purgeAttribute(entity,"description");
-    //     this.idProvider=this.purgeAttribute(entity,"providerId");
-    //     this.deservedZone=this.purgeAttribute(entity,"zones").map((zone:Record<string, any>)=>{
-    //         let local:Location=new Location();
-    //         local.hydrate(zone);
-
-    //     });
-    //     this.listVehicle=this.purgeAttribute(entity,"vehicles").map((vehicle:Record<string, any>)=>{
-    //         let v:Vehicle=new Vehicle();
-    //         v.hydrate(vehicle);
-    //         return v;
-    //     })
-
-    // }
+    _id:String="";
+    companyName:String="";
+    registrationNumber:String="";
+    importExportCompagnyCode:String="";
+    adressForVerification:Address[]=[];
+    isAcceptedProvider:boolean=false;
 }

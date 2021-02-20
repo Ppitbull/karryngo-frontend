@@ -5,6 +5,7 @@ import { ParametersService } from '../../../shared/parameters/parameters.service
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { User } from '../../../shared/entity/user';
+import { Subject } from 'rxjs';
 // import { AuthService } from '../auth/auth.service';
 
 
@@ -14,7 +15,9 @@ import { User } from '../../../shared/entity/user';
 })
 export class UserService {
 
-  public static currentUser: User = new User();
+  public currentUser: User = new User();
+
+  currentUserSubject:Subject<User> = new Subject<User>();
   public static isUser = true;
 
   listUser:User[]=[];
@@ -35,12 +38,18 @@ export class UserService {
 *  Set the user informations.
 */
   setUserInformations(user: any) {
+    this.currentUser=user;
     localStorage.setItem('user-data', JSON.stringify(user));
+    
     //this.login.isLoggedIn = true;
   }
 
 
-  /*
+  emitUserData()
+  {
+    this.currentUserSubject.next(this.userData);
+  }
+  /*  
  *  get the user informations.
  */
 getUserInformations() {
@@ -70,6 +79,7 @@ getUserInformations() {
   */
   getLocalStorageUser() {
     this.userData = JSON.parse(localStorage.getItem('user-data'));
+    this.emitUserData();
     /*if (this.userData) {
       this.login.isLoggedIn = true;
       return true;
@@ -167,6 +177,8 @@ getUserInformations() {
           // userData['user.field_lastName'] = response.result.lastname;
 
           resolve(response);
+          this.userData = response.result;
+          this.emitUserData();
           this.setUserInformations(response);
         }
 

@@ -13,7 +13,11 @@ export class CarrierGuard implements CanActivateChild, CanActivate {
     private router: Router
   ){}
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-    if(this.userService.getUserInformations().isProvider) return true;
+    if(this.userService.getUserInformations().isProvider && this.userService.getUserInformations().isAcceptedProvider) return true;
+    if(this.userService.getUserInformations().isAcceptedProvider)
+    {
+      this.router.navigateByUrl('/carrier/wait-acceptance')
+    }
     this.router.navigateByUrl('/carrier/be-carrier')
     return false;
   }

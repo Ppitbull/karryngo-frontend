@@ -5,6 +5,7 @@ import { VehiclesComponent } from './vehicles/vehicles.component';
 import { SettingsComponent } from './settings/settings.component';
 import { BeProviderComponent } from './be-provider/be-provider.component';
 import  { CarrierGuard } from "./../../../shared/guard/carrier.guard";
+import { WaitAcceptanceComponent } from './wait-acceptance/wait-acceptance.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,13 @@ const routes: Routes = [
         component: BeProviderComponent,
         data: {
           title: 'Become carrier'
+        }
+      },
+      {
+        path: 'wait-acceptance',
+        component: WaitAcceptanceComponent,
+        data: {
+          title: 'Wait acceptance'
         }
       },
       {

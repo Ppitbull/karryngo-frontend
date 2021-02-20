@@ -12,6 +12,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { CarrierRoutingModule } from './carrier-routing.module';
 import { ProgressIndeterminateModule } from '../../../shared/components/progress-indeterminate/progress-indeterminate.module';
 import { BeProviderComponent } from './be-provider/be-provider.component';
+import { WaitAcceptanceComponent } from './wait-acceptance/wait-acceptance.component';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import { BeProviderComponent } from './be-provider/be-provider.component';
   declarations: [
     VehiclesComponent,
     SettingsComponent,
-    BeProviderComponent
+    BeProviderComponent,
+    WaitAcceptanceComponent
   ]
 })
 export class CarrierModule { }
