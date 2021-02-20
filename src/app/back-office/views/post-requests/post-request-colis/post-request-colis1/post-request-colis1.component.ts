@@ -54,10 +54,12 @@ export class PostRequestColis1Component implements OnInit {
   ngOnInit() {
     this.providerList=this.packageService.getPackageInformations().providers.map(provider=>{
       let s1="",s2="";
+      let sprovider:ServiceOfProvider = new ServiceOfProvider();
+      sprovider.hydrate(provider);
       return {
         locationString:provider.zones.map((z)=>z.name).reduce((prev,next,i,s1)=> prev+","+next),
         vehiculeString:provider.vehicles.map(p=>p.name).reduce((prev,next,i,s2)=> prev+","+next),
-        provider:ServiceOfProvider.hydrate(provider)
+        provider:sprovider
       }
     });
     console.log("ProviderList ",this.providerList);

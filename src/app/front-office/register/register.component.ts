@@ -21,6 +21,7 @@ export class RegisterComponent implements OnInit {
 
     constructor(private formBuilder: FormBuilder,
         private auth: AuthService,
+        private userService:UserService,
         private router: Router,
         private formLog: FormBuilder) { }
 
@@ -57,24 +58,24 @@ export class RegisterComponent implements OnInit {
     /////
 
     setFormData() {
-        UserService.currentUser.field_firstName = this.registerForm.controls.field_firstname?.value;
-        UserService.currentUser.field_surName = this.registerForm.controls.field_surname?.value;
-        UserService.currentUser.field_email = this.registerForm.controls.field_email?.value;
-        UserService.currentUser.field_password = this.registerForm.controls.field_password?.value;
-        UserService.currentUser.field_accountType = this.registerForm.controls.field_accontType?.value;
-        UserService.currentUser.field_language = this.registerForm.controls.field_language?.value;
-        UserService.currentUser.field_country = this.registerForm.controls.field_country?.value;
-        UserService.currentUser.field_address = this.registerForm.controls.field_address?.value;
-        UserService.currentUser.field_city = this.registerForm.controls.field_city?.value;
-        UserService.currentUser.field_userName = this.registerForm.controls.field_username?.value;
-        UserService.currentUser.field_phone = this.registerForm.controls.field_phone?.value;
+        this.userService.currentUser.field_firstName = this.registerForm.controls.field_firstname?.value;
+        this.userService.currentUser.field_surName = this.registerForm.controls.field_surname?.value;
+        this.userService.currentUser.field_email = this.registerForm.controls.field_email?.value;
+        this.userService.currentUser.field_password = this.registerForm.controls.field_password?.value;
+        this.userService.currentUser.field_accountType = this.registerForm.controls.field_accontType?.value;
+        this.userService.currentUser.field_language = this.registerForm.controls.field_language?.value;
+        this.userService.currentUser.field_country = this.registerForm.controls.field_country?.value;
+        this.userService.currentUser.field_address = this.registerForm.controls.field_address?.value;
+        this.userService.currentUser.field_city = this.registerForm.controls.field_city?.value;
+        this.userService.currentUser.field_userName = this.registerForm.controls.field_username?.value;
+        this.userService.currentUser.field_phone = this.registerForm.controls.field_phone?.value;
 
     }
 
     onSubmit() {
         this.setFormData();
         this.waitingRegistration=true;
-        this.auth.createAccount(UserService.currentUser)
+        this.auth.createAccount(this.userService.currentUser)
         .then((result)=>{
             this.waitingRegistration=false;
             this.messageColor="green";
